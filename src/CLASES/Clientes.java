@@ -1,7 +1,7 @@
 package CLASES;
 
 public class Clientes implements Entidades {
-
+	//a
 	String nombre;
 	int dni;
 	

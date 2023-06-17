@@ -20,7 +20,7 @@ public class Inventario extends JFrame {
 	private JTextField textField_3;
 
 	/**
-	 * Launch the application.
+	 * Launch the application.adasda
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
