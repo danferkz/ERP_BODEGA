@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 import java.awt.Color;
 import java.awt.Font;
 
-public class Personas extends JFrame {
+public class Personas extends JFrame {//wa
 
     private JPanel contentPane;
     private JTextField txtNombreProv;
