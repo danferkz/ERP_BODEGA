@@ -78,17 +78,17 @@ Create the frame.*/
         JButton btnBuscarCliente = new JButton("Buscar");
         btnBuscarCliente.setForeground(new Color(51, 0, 255));
         btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
-        btnBuscarCliente.setBackground(new Color(51, 102, 204));
-        btnBuscarCliente.setBounds(329, 7, 89, 23);
+        btnBuscarCliente.setBackground(new Color(255, 255, 255));
+        btnBuscarCliente.setBounds(295, 6, 89, 23);
         Clientes.add(btnBuscarCliente);
         
         JLabel lblNewLabel_2 = new JLabel("DNI:");
-        lblNewLabel_2.setBounds(183, 11, 46, 14);
+        lblNewLabel_2.setBounds(162, 11, 46, 14);
         Clientes.add(lblNewLabel_2);
         
         txtDNICliente = new JTextField();
         txtDNICliente.setColumns(10);
-        txtDNICliente.setBounds(214, 8, 86, 20);
+        txtDNICliente.setBounds(191, 8, 86, 20);
         Clientes.add(txtDNICliente);
         
         JScrollPane scrollPane = new JScrollPane();
