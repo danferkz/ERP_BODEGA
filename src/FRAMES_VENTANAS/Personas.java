@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 
+
 public class Personas extends JFrame {
 
     private JPanel contentPane;
@@ -42,7 +43,7 @@ Launch the application.*/
     /*
      
 Create the frame.*/
-  
+ 
   public Personas() {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 450, 300);
@@ -108,11 +109,11 @@ Create the frame.*/
         Clientes.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("Nombre: ");
-        lblNewLabel.setBounds(10, 11, 46, 14);
+        lblNewLabel.setBounds(10, 11, 79, 14);
         Clientes.add(lblNewLabel);
         
         txtNombreCliente = new JTextField();
-        txtNombreCliente.setBounds(66, 8, 86, 20);
+        txtNombreCliente.setBounds(85, 8, 86, 20);
         Clientes.add(txtNombreCliente);
         txtNombreCliente.setColumns(10);
         
@@ -136,4 +137,4 @@ Create the frame.*/
         scrollPane1.setBounds(20, 46, 398, 159);
         Clientes.add(scrollPane1);
     }
-}
+} 
