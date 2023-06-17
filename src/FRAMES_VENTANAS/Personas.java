@@ -9,12 +9,16 @@ import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import java.awt.Color;
+import java.awt.Font;
 
 public class Personas extends JFrame {
 
     private JPanel contentPane;
     private JTextField txtNombreProv;
-    private JTextField txtNombreClin;
+    private JTextField txtNombreCliente;
+    private JTextField txtDNICliente;
 
     /*
      
@@ -66,13 +70,29 @@ Create the frame.*/
         lblNewLabel.setBounds(10, 11, 46, 14);
         Clientes.add(lblNewLabel);
         
-        txtNombreClin = new JTextField();
-        txtNombreClin.setBounds(66, 8, 86, 20);
-        Clientes.add(txtNombreClin);
-        txtNombreClin.setColumns(10);
+        txtNombreCliente = new JTextField();
+        txtNombreCliente.setBounds(66, 8, 86, 20);
+        Clientes.add(txtNombreCliente);
+        txtNombreCliente.setColumns(10);
         
         JButton btnBuscarCliente = new JButton("Buscar");
+        btnBuscarCliente.setForeground(new Color(51, 0, 255));
+        btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
+        btnBuscarCliente.setBackground(new Color(51, 102, 204));
         btnBuscarCliente.setBounds(329, 7, 89, 23);
         Clientes.add(btnBuscarCliente);
+        
+        JLabel lblNewLabel_2 = new JLabel("DNI:");
+        lblNewLabel_2.setBounds(183, 11, 46, 14);
+        Clientes.add(lblNewLabel_2);
+        
+        txtDNICliente = new JTextField();
+        txtDNICliente.setColumns(10);
+        txtDNICliente.setBounds(214, 8, 86, 20);
+        Clientes.add(txtDNICliente);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(20, 46, 398, 159);
+        Clientes.add(scrollPane);
     }
 }
