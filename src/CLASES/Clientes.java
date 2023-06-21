@@ -1,11 +1,9 @@
 package CLASES;
 
 public class Clientes implements Entidades {
-	//a
 	String nombre;
 	int dni;
-	
-	
+		
 	public String getname() {
 		return nombre;
 	}
@@ -21,5 +19,4 @@ public class Clientes implements Entidades {
 	public void setID(int dni) {
 		this.dni = dni;
 	}
-
 }
