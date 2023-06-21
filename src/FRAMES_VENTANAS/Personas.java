@@ -15,7 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Personas extends JFrame {//waaaa
+public class Personas extends JFrame {//asdagfaghagag
 
     private JPanel contentPane;
     private JTextField txtNombreProv;
