@@ -16,13 +16,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-<<<<<<< HEAD
-public class Personas extends JFrame {//asdagfaghagag
-=======
-
-
 public class Personas extends JFrame {
->>>>>>> 1d0a6c78a4dd80785850e04e48bc8d82212660fd
 
     private JPanel contentPane;
     private JTextField txtNombreProv;
