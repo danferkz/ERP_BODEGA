@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-public class InicioSesion extends JFrame {
+public class A_InicioSesion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textUser;
@@ -26,7 +26,7 @@ public class InicioSesion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InicioSesion frame = new InicioSesion();
+					A_InicioSesion frame = new A_InicioSesion();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class InicioSesion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InicioSesion() {
+	public A_InicioSesion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 231, 285);
 		contentPane = new JPanel();
@@ -50,14 +50,14 @@ public class InicioSesion extends JFrame {
 		JButton btnInicio = new JButton("Iniciar Sesion");
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Home Cuerpo = new Home();
+				VentanaMenu Cuerpo = new VentanaMenu();
 				
-				String usuario = "BodegaGOT";
-				String contraseña = "HOLA";
+				String usuario = "0";
+				String contraseña = "0";
 				
 				if (textUser.getText().equals(usuario) && Contra.getText().equals(contraseña) ) {
 					Cuerpo.setVisible(true);
-					InicioSesion.this.dispose();
+					A_InicioSesion.this.dispose();
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Usuario o codigo incorrectos");

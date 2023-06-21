@@ -1,41 +1,43 @@
 package FRAMES_VENTANAS;
 
-import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.time.LocalDate;
 
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JTabbedPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JLayeredPane;
-import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
-import javax.swing.JDesktopPane;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.table.DefaultTableModel;
 
-
-public class Home extends JFrame {
+public class I_Ventas extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -59,7 +61,7 @@ public class Home extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Home frame = new Home();
+					I_Ventas frame = new I_Ventas();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +73,7 @@ public class Home extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Home() {
+	public I_Ventas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 396);
 		contentPane = new JPanel();
@@ -103,7 +105,7 @@ public class Home extends JFrame {
 			
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 145, 694, 139);
+			scrollPane.setBounds(10, 79, 694, 205);
 			contentPane.add(scrollPane);
 			
 			table = new JTable();
@@ -127,10 +129,18 @@ public class Home extends JFrame {
 			
 			
 			JLabel lblNew = new JLabel("Producto: ");
-			lblNew.setBounds(161, 35, 62, 14);
+			lblNew.setBounds(10, 11, 62, 14);
 			contentPane.add(lblNew);
 			
 			textProduct = new JTextField();
+			textProduct.addKeyListener(new KeyAdapter() {
+				public void keyTyped(KeyEvent e) {
+					char objt = e.getKeyChar();
+					if (Character.isDigit(objt) == true) {
+						e.consume();
+					}
+				}
+			});
 			textProduct.getDocument().addDocumentListener(new DocumentListener() {
 	            @Override
 	            public void insertUpdate(DocumentEvent e) {
@@ -150,12 +160,12 @@ public class Home extends JFrame {
 	                updateSuggestions();
 	            }
 	        });
-			textProduct.setBounds(231, 32, 115, 20);
+			textProduct.setBounds(70, 11, 115, 20);
 			contentPane.add(textProduct);
 			textProduct.setColumns(10);
 			
 			scrollSurgimiento = new JScrollPane();
-			scrollSurgimiento.setBounds(231, 52, 115, 37);
+			scrollSurgimiento.setBounds(70, 31, 115, 37);
 			contentPane.add(scrollSurgimiento);
 			
 			suggestions = new JList<>(suggestionsModel);
@@ -176,11 +186,19 @@ public class Home extends JFrame {
 	        });
 			
 			lblNew2 = new JLabel("Cantidad: ");
-			lblNew2.setBounds(161, 103, 62, 14);
+			lblNew2.setBounds(195, 11, 62, 14);
 			contentPane.add(lblNew2);
 			
 			textCant = new JTextField();
-			textCant.setBounds(231, 100, 86, 20);
+			textCant.addKeyListener(new KeyAdapter() {
+				public void keyTyped(KeyEvent e) {
+					char objt = e.getKeyChar();
+					if (Character.isAlphabetic(objt) == true) {
+						e.consume();
+					}
+				}
+			});
+			textCant.setBounds(254, 8, 86, 20);
 			contentPane.add(textCant);
 			textCant.setColumns(10);
 			
@@ -197,7 +215,7 @@ public class Home extends JFrame {
 					});
 				}
 			});
-			btnAdicionar.setBounds(583, 31, 89, 23);
+			btnAdicionar.setBounds(379, 7, 89, 23);
 			contentPane.add(btnAdicionar);
 			
 			JButton btnDelete = new JButton("Eliminar");
@@ -206,16 +224,22 @@ public class Home extends JFrame {
 					model.removeRow(changfila);
 				}
 			});
-			btnDelete.setBounds(583, 65, 89, 23);
+			btnDelete.setBounds(498, 7, 89, 23);
 			contentPane.add(btnDelete);
 			
 			JButton btnModify = new JButton("Modificar");
 			btnModify.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					String nw = textProduct.getText();
+					int nw2 = Integer.parseInt(textCant.getText());
+					model.setValueAt(5.5, changfila, 1);
+					model.setValueAt(nw, changfila, 0);
+					model.setValueAt(nw2,changfila,2);
+					double nw3 = (double)model.getValueAt(changfila, 1) * nw2 ; 
+					model.setValueAt(nw3, changfila, 3);
 				}
 			});
-			btnModify.setBounds(583, 99, 89, 23);
+			btnModify.setBounds(597, 7, 89, 23);
 			contentPane.add(btnModify);
 			
 			JLabel lblNew3 = new JLabel("ID del Cliente:");
@@ -223,6 +247,14 @@ public class Home extends JFrame {
 			contentPane.add(lblNew3);
 			
 			textID = new JTextField();
+			textID.addKeyListener(new KeyAdapter() {
+				public void keyTyped(KeyEvent e) {
+					char objt = e.getKeyChar();
+					if (Character.isAlphabetic(objt) == true) {
+						e.consume();
+					}
+				}
+			});
 			textID.setBounds(217, 316, 91, 20);
 			contentPane.add(textID);
 			textID.setColumns(10);
@@ -232,13 +264,62 @@ public class Home extends JFrame {
 			contentPane.add(lblNew4);
 			
 			textClient = new JTextField();
+			textClient.addKeyListener(new KeyAdapter() {
+				public void keyTyped(KeyEvent e) {
+					char objt = e.getKeyChar();
+					if (Character.isDigit(objt) == true) {
+						e.consume();
+					}
+				}
+			});
 			textClient.setBounds(254, 295, 131, 20);
 			contentPane.add(textClient);
 			textClient.setColumns(10);
 			
+			String filePath = "C:\\Users\\andre\\Downloads\\Icon.png";
+			ImageIcon icon = new ImageIcon(filePath);
+			
 			btnRealizar = new JButton("CONCRETAR");
-			btnRealizar.setBounds(557, 295, 115, 38);
+			btnRealizar.setHorizontalAlignment(SwingConstants.RIGHT);
+			btnRealizar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					boleta();
+				}
+			});
+			btnRealizar.setBounds(529, 295, 143, 38);
 			contentPane.add(btnRealizar);
+			
+			// Get the dimensions of the button
+			int buttonWidth = btnRealizar.getWidth();
+			int buttonHeight = btnRealizar.getHeight();
+
+			// Calculate the desired icon size (e.g., 80% of the button's size)
+			int iconWidth = (int) (buttonWidth * 0.2);
+			int iconHeight = (int) (buttonHeight * 0.4);
+
+			// Resize the icon to the desired size
+			Image resizedIcon = icon.getImage().getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+
+			// Create a new ImageIcon with the resized image
+			ImageIcon resizedImageIcon = new ImageIcon(resizedIcon);
+
+			// Set the resized icon as the button's icon
+			btnRealizar.setIcon(resizedImageIcon);
+			
+			// Position the icon at the left side of the button
+			btnRealizar.setHorizontalTextPosition(SwingConstants.RIGHT);
+			
+			
+			JButton btnRegresar = new JButton("MENU");
+			btnRegresar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					A_InicioSesion s1 = new A_InicioSesion();
+					s1.setVisible(true);
+					I_Ventas.this.dispose();
+				}
+			});
+			btnRegresar.setBounds(26, 315, 89, 23);
+			contentPane.add(btnRegresar);
 		
 			DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 			renderer.setHorizontalAlignment(SwingConstants.CENTER); 
@@ -283,4 +364,79 @@ public class Home extends JFrame {
 	        suggestions.setVisible(false);
 	        contentPane.revalidate();
 	    }
+	 private void boleta() {
+		    JFileChooser f1 = new JFileChooser(".") {
+		        private static final long serialVersionUID = 1L;
+
+		        public void approveSelection() {
+		            File f = getSelectedFile();
+		            if (f.exists() && getDialogType() == SAVE_DIALOG) {
+		                int result = JOptionPane.showConfirmDialog(this, "El archivo existe, desea sobreescribir?", "Verificar archivo", JOptionPane.YES_NO_CANCEL_OPTION);
+		                switch (result) {
+		                    case JOptionPane.YES_OPTION:
+		                        super.approveSelection();
+		                        return;
+		                    case JOptionPane.NO_OPTION:
+		                        return;
+		                    case JOptionPane.CLOSED_OPTION:
+		                        return;
+		                    case JOptionPane.CANCEL_OPTION:
+		                        cancelSelection();
+		                        return;
+		                }
+		            }
+		            super.approveSelection();
+		        }
+		    };
+			
+		    FileFilter filtrox = new FileNameExtensionFilter("Archivos de texto (.txt)","txt");
+		    f1.setFileFilter(filtrox);
+		    f1.setDialogTitle("Especifique archivo a guardar.");
+		    int selected = f1.showSaveDialog(this);
+
+		    try {
+		        if (selected == JFileChooser.APPROVE_OPTION) {
+		            File archsaved = f1.getSelectedFile();
+		            String csvFilePath = archsaved.getAbsolutePath() + ".txt";
+		            FileWriter alone = new FileWriter(csvFilePath);
+		            BufferedWriter diff = new BufferedWriter(alone);
+		            String client = textClient.getText();
+			    int id = Integer.parseInt(textID.getText());
+			    LocalDate currentDate = LocalDate.now();
+			    int filas = table.getRowCount();
+			    double total = 0;
+		            diff.write("	BODEGA 24/7	   R.U.C. 79209726509");
+			    diff.newLine();
+			    diff.write("			    BOLETA DE VENTA");
+			    diff.newLine(); 
+			    diff.write("");
+			    diff.newLine();
+		            diff.write("Cliente:" + " "+client); 
+			    diff.newLine();
+			    diff.write ("ID: "+id+"           Fecha de emision:"+currentDate);
+			    diff.newLine();
+			    diff.write("");
+			    diff.newLine();
+             	    diff.write("CANTIDAD	DESCRIPCION	   P. UNIT. 	   IMPORTE");
+             	    diff.newLine();
+			    for (int i=0; i<filas; i++){
+			    	int cant = (int)table.getValueAt(i,2);
+			    	String descrip = (String)table.getValueAt(i,0);
+			    	double unit = (double)table.getValueAt(i,1);
+			    	double importe = unit*cant;
+			    	diff.write(cant+"               "+descrip+"		   "+unit+"		    "+importe);
+			    	diff.newLine();
+				total = total + importe;
+			    };
+			    diff.write("");
+			    diff.newLine();
+			    diff.write("");
+			    diff.newLine();
+		            diff.write("					   TOTAL   "+total);
+		            diff.close();
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
 }
