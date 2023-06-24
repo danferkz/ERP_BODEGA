@@ -36,6 +36,9 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Color;
 
 public class I_Ventas extends JInternalFrame {
 
@@ -53,6 +56,12 @@ public class I_Ventas extends JInternalFrame {
 	private JButton btnRealizar;
 	private int changfila;
 	private int changcolum;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
 
 	/**
 	 * Launch the application.
@@ -74,9 +83,11 @@ public class I_Ventas extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public I_Ventas() {
+		setTitle("VENTAS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 730, 396);
+		setBounds(100, 100, 1869, 1075);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		suggestionsModel = new DefaultListModel<>();
@@ -105,7 +116,7 @@ public class I_Ventas extends JInternalFrame {
 			
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 79, 694, 205);
+			scrollPane.setBounds(88, 220, 1328, 375);
 			contentPane.add(scrollPane);
 			
 			table = new JTable();
@@ -125,14 +136,15 @@ public class I_Ventas extends JInternalFrame {
 				double d1 = (double)v1;
 				finalcount = finalcount + d1;
 			};
-			System.out.println(finalcount);
 			
 			
 			JLabel lblNew = new JLabel("Producto: ");
-			lblNew.setBounds(10, 11, 62, 14);
+			lblNew.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNew.setBounds(98, 103, 80, 14);
 			contentPane.add(lblNew);
 			
 			textProduct = new JTextField();
+			textProduct.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			textProduct.addKeyListener(new KeyAdapter() {
 				public void keyTyped(KeyEvent e) {
 					char objt = e.getKeyChar();
@@ -160,16 +172,17 @@ public class I_Ventas extends JInternalFrame {
 	                updateSuggestions();
 	            }
 	        });
-			textProduct.setBounds(70, 11, 115, 20);
+			textProduct.setBounds(184, 100, 115, 20);
 			contentPane.add(textProduct);
 			textProduct.setColumns(10);
 			
 			scrollSurgimiento = new JScrollPane();
-			scrollSurgimiento.setBounds(70, 31, 115, 37);
+			scrollSurgimiento.setBounds(184, 131, 115, 37);
 			contentPane.add(scrollSurgimiento);
 			
 			suggestions = new JList<>(suggestionsModel);
 			scrollSurgimiento.setViewportView(suggestions);
+			suggestions.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			suggestions.setVisibleRowCount(5);
 			suggestions.addListSelectionListener(new ListSelectionListener() {
 	            @Override
@@ -186,10 +199,12 @@ public class I_Ventas extends JInternalFrame {
 	        });
 			
 			lblNew2 = new JLabel("Cantidad: ");
-			lblNew2.setBounds(195, 11, 62, 14);
+			lblNew2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNew2.setBounds(323, 103, 101, 14);
 			contentPane.add(lblNew2);
 			
 			textCant = new JTextField();
+			textCant.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			textCant.addKeyListener(new KeyAdapter() {
 				public void keyTyped(KeyEvent e) {
 					char objt = e.getKeyChar();
@@ -198,11 +213,13 @@ public class I_Ventas extends JInternalFrame {
 					}
 				}
 			});
-			textCant.setBounds(254, 8, 86, 20);
+			textCant.setBounds(398, 100, 115, 20);
 			contentPane.add(textCant);
 			textCant.setColumns(10);
 			
 			JButton btnAdicionar = new JButton("Agregar");
+			btnAdicionar.setForeground(new Color(0, 0, 0));
+			btnAdicionar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			btnAdicionar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String nom = textProduct.getText();
@@ -215,19 +232,21 @@ public class I_Ventas extends JInternalFrame {
 					});
 				}
 			});
-			btnAdicionar.setBounds(379, 7, 89, 23);
+			btnAdicionar.setBounds(994, 132, 115, 23);
 			contentPane.add(btnAdicionar);
 			
 			JButton btnDelete = new JButton("Eliminar");
+			btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			btnDelete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					model.removeRow(changfila);
 				}
 			});
-			btnDelete.setBounds(498, 7, 89, 23);
+			btnDelete.setBounds(1272, 132, 115, 23);
 			contentPane.add(btnDelete);
 			
 			JButton btnModify = new JButton("Modificar");
+			btnModify.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			btnModify.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String nw = textProduct.getText();
@@ -239,14 +258,16 @@ public class I_Ventas extends JInternalFrame {
 					model.setValueAt(nw3, changfila, 3);
 				}
 			});
-			btnModify.setBounds(597, 7, 89, 23);
+			btnModify.setBounds(1133, 132, 115, 23);
 			contentPane.add(btnModify);
 			
 			JLabel lblNew3 = new JLabel("ID del Cliente:");
-			lblNew3.setBounds(137, 319, 86, 14);
+			lblNew3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNew3.setBounds(98, 689, 138, 14);
 			contentPane.add(lblNew3);
 			
 			textID = new JTextField();
+			textID.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			textID.addKeyListener(new KeyAdapter() {
 				public void keyTyped(KeyEvent e) {
 					char objt = e.getKeyChar();
@@ -255,15 +276,17 @@ public class I_Ventas extends JInternalFrame {
 					}
 				}
 			});
-			textID.setBounds(217, 316, 91, 20);
+			textID.setBounds(267, 686, 131, 20);
 			contentPane.add(textID);
 			textID.setColumns(10);
 			
 			lblNew4 = new JLabel("Nombre del Cliente:");
-			lblNew4.setBounds(137, 298, 121, 14);
+			lblNew4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblNew4.setBounds(98, 637, 193, 18);
 			contentPane.add(lblNew4);
 			
 			textClient = new JTextField();
+			textClient.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			textClient.addKeyListener(new KeyAdapter() {
 				public void keyTyped(KeyEvent e) {
 					char objt = e.getKeyChar();
@@ -272,7 +295,7 @@ public class I_Ventas extends JInternalFrame {
 					}
 				}
 			});
-			textClient.setBounds(254, 295, 131, 20);
+			textClient.setBounds(267, 636, 131, 20);
 			contentPane.add(textClient);
 			textClient.setColumns(10);
 			
@@ -280,13 +303,14 @@ public class I_Ventas extends JInternalFrame {
 			ImageIcon icon = new ImageIcon(filePath);
 			
 			btnRealizar = new JButton("CONCRETAR");
+			btnRealizar.setFont(new Font("Tahoma", Font.BOLD, 16));
 			btnRealizar.setHorizontalAlignment(SwingConstants.RIGHT);
 			btnRealizar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					boleta();
 				}
 			});
-			btnRealizar.setBounds(529, 295, 143, 38);
+			btnRealizar.setBounds(1379, 765, 166, 38);
 			contentPane.add(btnRealizar);
 			
 			// Get the dimensions of the button
@@ -311,6 +335,7 @@ public class I_Ventas extends JInternalFrame {
 			
 			
 			JButton btnRegresar = new JButton("MENU");
+			btnRegresar.setFont(new Font("Tahoma", Font.BOLD, 16));
 			btnRegresar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					A_InicioSesion s1 = new A_InicioSesion();
@@ -318,8 +343,38 @@ public class I_Ventas extends JInternalFrame {
 					I_Ventas.this.dispose();
 				}
 			});
-			btnRegresar.setBounds(26, 315, 89, 23);
+			btnRegresar.setBounds(71, 789, 143, 32);
 			contentPane.add(btnRegresar);
+			
+			lblNewLabel = new JLabel("");
+			lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
+			lblNewLabel.setBounds(88, 78, 225, 121);
+			contentPane.add(lblNewLabel);
+			
+			lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
+			lblNewLabel_1.setBounds(309, 78, 225, 121);
+			contentPane.add(lblNewLabel_1);
+			
+			lblNewLabel_2 = new JLabel("");
+			lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
+			lblNewLabel_2.setBounds(972, 103, 225, 82);
+			contentPane.add(lblNewLabel_2);
+			
+			lblNewLabel_3 = new JLabel("");
+			lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
+			lblNewLabel_3.setBounds(1191, 103, 225, 82);
+			contentPane.add(lblNewLabel_3);
+			
+			lblNewLabel_4 = new JLabel("");
+			lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
+			lblNewLabel_4.setBounds(88, 606, 225, 121);
+			contentPane.add(lblNewLabel_4);
+			
+			lblNewLabel_5 = new JLabel("");
+			lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
+			lblNewLabel_5.setBounds(199, 606, 225, 121);
+			contentPane.add(lblNewLabel_5);
 		
 			DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 			renderer.setHorizontalAlignment(SwingConstants.CENTER); 
@@ -334,7 +389,7 @@ public class I_Ventas extends JInternalFrame {
 			
 			Object v1 = table.getValueAt(0, 3);
 			double d1 = (double)v1;
-			System.out.println(d1);
+			
 	}
 	
 	private void updateSuggestions() {
