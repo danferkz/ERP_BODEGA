@@ -16,6 +16,17 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import java.awt.Font;
 
 public class I_Inventario extends JInternalFrame {
 
@@ -45,49 +56,56 @@ public class I_Inventario extends JInternalFrame {
     }
 
     public I_Inventario() {
+    	setTitle("INVENTARIO");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 650, 400);
+        setBounds(100, 100, 1869, 1075);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JLabel lblCodigo = new JLabel("Código:");
-        lblCodigo.setBounds(10, 10, 60, 20);
+        lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblCodigo.setBounds(72, 290, 78, 20);
         contentPane.add(lblCodigo);
 
         textFieldCodigo = new JTextField();
-        textFieldCodigo.setBounds(80, 10, 100, 20);
+        textFieldCodigo.setBounds(172, 278, 150, 48);
         contentPane.add(textFieldCodigo);
         textFieldCodigo.setColumns(10);
 
         JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setBounds(10, 40, 60, 20);
+        lblNombre.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblNombre.setBounds(72, 349, 116, 20);
         contentPane.add(lblNombre);
 
         textFieldNombre = new JTextField();
-        textFieldNombre.setBounds(80, 40, 100, 20);
+        textFieldNombre.setBounds(172, 337, 150, 48);
         contentPane.add(textFieldNombre);
         textFieldNombre.setColumns(10);
 
         JLabel lblCantidad = new JLabel("Cantidad:");
-        lblCantidad.setBounds(10, 70, 60, 20);
+        lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblCantidad.setBounds(72, 406, 100, 20);
         contentPane.add(lblCantidad);
 
         textFieldCantidad = new JTextField();
-        textFieldCantidad.setBounds(80, 70, 100, 20);
+        textFieldCantidad.setBounds(172, 394, 150, 48);
         contentPane.add(textFieldCantidad);
         textFieldCantidad.setColumns(10);
 
         JLabel lblPrecio = new JLabel("Precio:");
-        lblPrecio.setBounds(10, 100, 60, 20);
+        lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblPrecio.setBounds(72, 462, 100, 20);
         contentPane.add(lblPrecio);
 
         textFieldPrecio = new JTextField();
-        textFieldPrecio.setBounds(80, 100, 100, 20);
+        textFieldPrecio.setBounds(172, 450, 150, 48);
         contentPane.add(textFieldPrecio);
         textFieldPrecio.setColumns(10);
 
         JButton btnAgregar = new JButton("Agregar");
+        btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnAgregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String codigo = textFieldCodigo.getText();
@@ -105,10 +123,11 @@ public class I_Inventario extends JInternalFrame {
                 textFieldPrecio.setText("");
             }
         });
-        btnAgregar.setBounds(10, 130, 100, 23);
+        btnAgregar.setBounds(89, 512, 230, 71);
         contentPane.add(btnAgregar);
 
         JButton btnModificar = new JButton("Modificar");
+        btnModificar.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnModificar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (selectedRowIndex != -1) {
@@ -132,10 +151,11 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnModificar.setBounds(10, 160, 100, 23);
+        btnModificar.setBounds(89, 594, 230, 71);
         contentPane.add(btnModificar);
 
         JButton btnEliminar = new JButton("Eliminar");
+        btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (selectedRowIndex != -1) {
@@ -151,10 +171,11 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnEliminar.setBounds(10, 190, 100, 23);
+        btnEliminar.setBounds(92, 676, 230, 71);
         contentPane.add(btnEliminar);
 
         JButton btnListar = new JButton("Listar");
+        btnListar.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnListar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -174,7 +195,7 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnListar.setBounds(10, 220, 100, 23);
+        btnListar.setBounds(89, 758, 230, 71);
         contentPane.add(btnListar);
 
         table = new JTable();
@@ -184,8 +205,24 @@ public class I_Inventario extends JInternalFrame {
         ));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(200, 10, 420, 340);
+        scrollPane.setBounds(454, 10, 1106, 776);
         contentPane.add(scrollPane);
+
+        // Define el tamaño de fuente deseado para el encabezado de la tabla
+        Font tableHeaderFont = new Font("Tahoma", Font.BOLD, 19);
+        Font tableFont = new Font("Tahoma", Font.PLAIN, 19);
+
+        // Obtiene el renderizador de encabezado de la tabla
+        JTableHeader tableHeader = table.getTableHeader();
+        table.setFont(tableFont);
+        
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\1440500.png"));
+        lblNewLabel.setBounds(72, 17, 250, 250);
+        contentPane.add(lblNewLabel);
+
+        // Aplica el tamaño de fuente al renderizador de encabezado de la tabla
+        tableHeader.setFont(tableHeaderFont);
 
         table.getSelectionModel().addListSelectionListener(e -> {
             if (table.getSelectedRow() != -1) {

@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class A_InicioSesion extends JFrame {
 
@@ -40,7 +42,7 @@ public class A_InicioSesion extends JFrame {
 	 */
 	public A_InicioSesion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 231, 285);
+		setBounds(100, 100, 335, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -48,6 +50,7 @@ public class A_InicioSesion extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnInicio = new JButton("Iniciar Sesion");
+		btnInicio.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VentanaMenu Cuerpo = new VentanaMenu();
@@ -65,24 +68,33 @@ public class A_InicioSesion extends JFrame {
 				
 			}
 		});
-		btnInicio.setBounds(39, 169, 125, 23);
+		btnInicio.setBounds(67, 397, 173, 38);
 		contentPane.add(btnInicio);
 		
 		JLabel lblUser = new JLabel("Usuario:");
-		lblUser.setBounds(37, 59, 55, 23);
+		lblUser.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblUser.setBounds(117, 264, 80, 23);
 		contentPane.add(lblUser);
 		
 		JLabel lblCode = new JLabel("Contraseña:");
-		lblCode.setBounds(29, 122, 83, 14);
+		lblCode.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblCode.setBounds(106, 330, 110, 14);
 		contentPane.add(lblCode);
 		
 		textUser = new JTextField();
-		textUser.setBounds(102, 60, 86, 20);
+		textUser.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textUser.setBounds(84, 298, 131, 20);
 		contentPane.add(textUser);
 		textUser.setColumns(10);
 		
 		Contra = new JPasswordField();
-		Contra.setBounds(102, 119, 86, 20);
+		Contra.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		Contra.setBounds(86, 355, 129, 20);
 		contentPane.add(Contra);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\login.png"));
+		lblNewLabel.setBounds(30, 11, 250, 250);
+		contentPane.add(lblNewLabel);
 	}
 }

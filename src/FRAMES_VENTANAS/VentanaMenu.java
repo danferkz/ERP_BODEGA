@@ -26,9 +26,12 @@ public class VentanaMenu extends JFrame {
         
         JMenu areasMenu = new JMenu("Áreas");
         
-        JMenuItem ventasItem = new JMenuItem("Ventas");
-        JMenuItem almacenItem = new JMenuItem("Almacén");
-        JMenuItem personasItem = new JMenuItem("Personas");
+        JMenuItem ventasItem = new JMenuItem("VENTAS");
+        ventasItem.setFont(new Font("Segoe UI Black", Font.BOLD, 16));
+        JMenuItem almacenItem = new JMenuItem("INVENTARIO");
+        almacenItem.setFont(new Font("Segoe UI Black", Font.BOLD, 16));
+        JMenuItem personasItem = new JMenuItem("PERSONAS");
+        personasItem.setFont(new Font("Segoe UI Black", Font.BOLD, 16));
         
         areasMenu.add(ventasItem);
         areasMenu.add(almacenItem);
@@ -43,6 +46,7 @@ public class VentanaMenu extends JFrame {
         contentPane.setLayout(new BorderLayout(0,0));
         
         JDesktopPane descktopPane = new JDesktopPane();
+        descktopPane.setBackground(Color.LIGHT_GRAY);
         contentPane.add(descktopPane, BorderLayout.CENTER);
         
         ventasItem.addActionListener(new ActionListener() {
@@ -76,7 +80,15 @@ public class VentanaMenu extends JFrame {
         personasItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Lógica para la opción de personas
-                System.out.println("Personas seleccionado");
+               I_Personas personasItem = new I_Personas();
+               descktopPane.add(personasItem);
+               try {
+            	   personasItem.setMaximum(true);
+				} catch (PropertyVetoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+               personasItem.show();
             }
         });
 
