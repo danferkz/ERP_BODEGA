@@ -1,15 +1,15 @@
 package CLASES;
 
-public class Personas {
+public class Proveedores_BE {
 
 	String name, direction;
-	int ID,RUC;
+	int ID;
 	
-	public Personas(String name, String direction, int iD, int rUC) {
+	public Proveedores_BE(String name, String direction, int iD) {
 		this.name = name;
 		this.direction = direction;
 		ID = iD;
-		RUC = rUC;
+	
 	}
 
 	public String getName() {
@@ -24,10 +24,7 @@ public class Personas {
 		return ID;
 	}
 
-	public int getRUC() {
-		return RUC;
-	}
-	
+
 	
 	
 }

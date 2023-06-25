@@ -22,6 +22,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import CLASES.Creation;
+import CLASES.Metodo_BC;
+import CLASES.Productos_BE;
+import CLASES.Proveedores_BE;
+import CLASES.Return_DALC;
+
 public class I_Personas extends JInternalFrame {
 
 	/**
@@ -31,14 +37,23 @@ public class I_Personas extends JInternalFrame {
 	private JPanel contentPane;
     private JTextField textNombre;
     private JTextField textDireccion;
+<<<<<<< HEAD
     private JTextField textRUC;
     private JTextField txtIDCliente;
     private JTextField textID;
     private JTextField txtDNICliente;
+=======
+    private JTextField txtIDCliente;
+    private JTextField textID;
+>>>>>>> 0b9ad75e5f83519c8761d3121bc2ead2c58a4d88
     private JTextField txtNombreCliente;
     private JTable table_Proveedores;
     private int selectedRowIndex = -1;
     private JTable tableClientes;
+    private Metodo_BC modi = new Metodo_BC();
+   	private Return_DALC especific = new Return_DALC();
+   	private Creation Hash = new Creation();
+   	
 
 
     /*
@@ -58,13 +73,22 @@ Launch the application.*/
 Create the frame.*/
  
   public I_Personas() {
+	  setTitle("PERSONAS");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 1869, 1075);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+      contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        
+        modi.addToUniversalHashtable2(1, new Proveedores_BE("Juan", "Av La Molina", 43321105));
+		modi.addToUniversalHashtable2(2, new Proveedores_BE("Juan", "Av La Molina", 53327708));
+		modi.addToUniversalHashtable2(3, new Proveedores_BE("Juan", "Av La Molina", 33344105));
+		
+		
+        System.out.println(especific.accessUniversalHashtable(1).getNombre());
+        
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(0, 6, 1797, 994);
