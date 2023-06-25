@@ -22,7 +22,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import CLASES.Creation;
+import CLASES.Metodo_BC;
 import CLASES.Productos_BE;
+import CLASES.Proveedores_BE;
+import CLASES.Return_DALC;
 
 public class I_Personas extends JInternalFrame {
 
@@ -33,17 +37,16 @@ public class I_Personas extends JInternalFrame {
 	private JPanel contentPane;
     private JTextField textNombre;
     private JTextField textDireccion;
-
-    private JTextField textRUC;
     private JTextField txtIDCliente;
-
     private JTextField textID;
-    private JTextField txtDNICliente;
-
     private JTextField txtNombreCliente;
     private JTable table_Proveedores;
     private int selectedRowIndex = -1;
     private JTable tableClientes;
+    private Metodo_BC modi = new Metodo_BC();
+   	private Return_DALC especific = new Return_DALC();
+   	private Creation Hash = new Creation();
+   	
 
 
     /*
@@ -72,6 +75,12 @@ Create the frame.*/
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
+        modi.addToUniversalHashtable2(1, new Proveedores_BE("Juan", "Av La Molina", 43321105));
+		modi.addToUniversalHashtable2(2, new Proveedores_BE("Juan", "Av La Molina", 53327708));
+		modi.addToUniversalHashtable2(3, new Proveedores_BE("Juan", "Av La Molina", 33344105));
+		
+		
+        System.out.println(especific.accessUniversalHashtable(1).getNombre());
         
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
