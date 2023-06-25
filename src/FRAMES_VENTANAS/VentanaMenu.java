@@ -4,6 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import CLASES.Creation;
+import CLASES.Metodo_BC;
+import CLASES.Return_DALC;
+import CLASES.Productos_BE;
+import CLASES.Personas;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +20,10 @@ import javax.swing.JDesktopPane;
 
 public class VentanaMenu extends JFrame {
     private JPanel contentPane; // Agregamos la variable contentPane
+    private Metodo_BC modi = new Metodo_BC();
+	private Return_DALC especific = new Return_DALC();
+	private Creation Hash = new Creation();
+	
 
     public VentanaMenu() {
     	setResizable(false);
@@ -21,7 +31,14 @@ public class VentanaMenu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
         setLocationRelativeTo(null);
-
+        
+        modi.addToUniversalHashtable(1, new Productos_BE(1, 6, "Leche", 15));
+		modi.addToUniversalHashtable(2, new Productos_BE(2, 5, "Atun", 18));
+		modi.addToUniversalHashtable(3, new Productos_BE(3, 8, "Mantequilla",19));
+		
+		
+        System.out.println(especific.accessUniversalHashtable(1).getNombre());
+        
         JMenuBar menuBar = new JMenuBar();
         
         JMenu areasMenu = new JMenu("Áreas");

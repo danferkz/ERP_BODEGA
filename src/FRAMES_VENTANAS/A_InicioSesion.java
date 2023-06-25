@@ -5,6 +5,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import CLASES.Creation;
+import CLASES.Metodo_BC;
+import CLASES.Return_DALC;
+import CLASES.Productos_BE;
+import CLASES.Personas;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -20,6 +27,9 @@ public class A_InicioSesion extends JFrame {
 	private JPanel contentPane;
 	private JTextField textUser;
 	private JPasswordField Contra;
+	private Metodo_BC modi = new Metodo_BC();
+	private Return_DALC especific = new Return_DALC();
+	private Creation Hash = new Creation();
 
 	/**
 	 * Launch the application.
@@ -58,9 +68,13 @@ public class A_InicioSesion extends JFrame {
 				String usuario = "0";
 				String contraseña = "0";
 				
+				
+				
 				if (textUser.getText().equals(usuario) && Contra.getText().equals(contraseña) ) {
 					Cuerpo.setVisible(true);
 					A_InicioSesion.this.dispose();
+					
+					//modi.addToUniversalHashtable2(, new Personas());
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Usuario o codigo incorrectos");

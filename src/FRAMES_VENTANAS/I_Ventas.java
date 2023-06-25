@@ -1,5 +1,10 @@
 package FRAMES_VENTANAS;
 
+import CLASES.Creation;
+import CLASES.Metodo_BC;
+import CLASES.Return_DALC;
+import CLASES.Productos_BE;
+import CLASES.Personas;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -63,7 +68,11 @@ public class I_Ventas extends JInternalFrame {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
-	private Hashtable<Integer, Productos> listaproducts;
+	private Metodo_BC modi = new Metodo_BC();
+	private Return_DALC especific = new Return_DALC();
+	private Creation Hash = new Creation();
+	
+	
 
 	/**
 	 * Launch the application.
@@ -93,6 +102,9 @@ public class I_Ventas extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		suggestionsModel = new DefaultListModel<>();
+		
+		System.out.println(especific.accessUniversalHashtable(1).getNombre());
+		
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -389,12 +401,8 @@ public class I_Ventas extends JInternalFrame {
 			
 			scrollSurgimiento.setVisible(false);
 			
-			
-			Productos p1 = new Productos();
-			listaproducts = p1.getHashTable();
-			
-			System.out.println(listaproducts.get(1).nombre);
-			
+		
+	
 	}
 	
 	private void updateSuggestions() {
