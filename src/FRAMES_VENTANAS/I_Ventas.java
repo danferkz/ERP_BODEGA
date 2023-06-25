@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.util.Hashtable;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -62,6 +63,7 @@ public class I_Ventas extends JInternalFrame {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
+	private Hashtable<Integer, Productos> listaproducts;
 
 	/**
 	 * Launch the application.
@@ -387,8 +389,11 @@ public class I_Ventas extends JInternalFrame {
 			
 			scrollSurgimiento.setVisible(false);
 			
-			Object v1 = table.getValueAt(0, 3);
-			double d1 = (double)v1;
+			
+			Productos p1 = new Productos();
+			listaproducts = p1.getHashTable();
+			
+			System.out.println(listaproducts.get(1).nombre);
 			
 	}
 	
