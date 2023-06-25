@@ -31,7 +31,7 @@ public class I_Personas extends JInternalFrame {
 	private JPanel contentPane;
     private JTextField textNombre;
     private JTextField textDireccion;
-    private JTextField textRUC;
+    private JTextField textID;
     private JTextField txtDNICliente;
     private JTextField txtNombreCliente;
     private JTable table_Proveedores;
@@ -73,7 +73,7 @@ Create the frame.*/
         table_Proveedores = new JTable();
         table_Proveedores.setModel(new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"Nombre", "Direccion", "RUC"}
+                new String[]{"Nombre", "Direccion", "ID"}
         ));
         table_Proveedores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane_Proveedores = new JScrollPane();
@@ -85,7 +85,7 @@ Create the frame.*/
                 DefaultTableModel model = (DefaultTableModel) table_Proveedores.getModel();
                 textNombre.setText(model.getValueAt(selectedRowIndex, 0).toString());
                 textDireccion.setText(model.getValueAt(selectedRowIndex, 1).toString());
-                textRUC.setText(model.getValueAt(selectedRowIndex, 2).toString());
+                textID.setText(model.getValueAt(selectedRowIndex, 2).toString());
             }
         });
         
@@ -109,14 +109,14 @@ Create the frame.*/
         Proveedor.add(textDireccion);
         textDireccion.setColumns(10);
         
-        JLabel lblRUC = new JLabel("RUC:");
-        lblRUC.setBounds(22, 240, 61, 16);
-        Proveedor.add(lblRUC);
+        JLabel lblID = new JLabel("ID:");
+        lblID.setBounds(22, 240, 61, 16);
+        Proveedor.add(lblID);
         
-        textRUC = new JTextField();
-        textRUC.setBounds(92, 235, 116, 26);
-        Proveedor.add(textRUC);
-        textRUC.setColumns(10);
+        textID = new JTextField();
+        textID.setBounds(92, 235, 116, 26);
+        Proveedor.add(textID);
+        textID.setColumns(10);
         
         JButton btnAgregar = new JButton("Agregar");
         btnAgregar.addActionListener(new ActionListener() {
@@ -124,7 +124,7 @@ Create the frame.*/
         		
         		 String name = textNombre.getText();
         	        String direccion = textDireccion.getText();
-        	        String rucText = textRUC.getText();
+        	        String rucText = textID.getText();
 
         	        // Validación de solo letras en el nombre y dirección
         	        if (!name.matches("[a-zA-Z]+")) {
@@ -153,7 +153,7 @@ Create the frame.*/
         	        // Limpiar los campos de texto
         	        textNombre.setText("");
         	        textDireccion.setText("");
-        	        textRUC.setText("");
+        	        textID.setText("");
         	    }
         	});
 
@@ -193,7 +193,7 @@ Create the frame.*/
                     // Limpiar los campos de texto y restablecer el índice de fila seleccionado
                     textNombre.setText("");
                     textDireccion.setText("");
-                    textRUC.setText("");
+                    textID.setText("");
                     selectedRowIndex = -1;
                 }
             }
