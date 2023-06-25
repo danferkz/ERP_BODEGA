@@ -1,10 +1,10 @@
 package CLASES;
 
-public class Clientes {
+public class Clientes_BE {
 	String name;
 	int ID;
 	
-	public Clientes(String name, int iD) {
+	public Clientes_BE(String name, int iD) {
 		this.name = name;
 		ID = iD;
 	

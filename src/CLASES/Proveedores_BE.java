@@ -1,11 +1,11 @@
 package CLASES;
 
-public class Personas {
+public class Proveedores_BE {
 
 	String name, direction;
 	int ID;
 	
-	public Personas(String name, String direction, int iD) {
+	public Proveedores_BE(String name, String direction, int iD) {
 		this.name = name;
 		this.direction = direction;
 		ID = iD;
