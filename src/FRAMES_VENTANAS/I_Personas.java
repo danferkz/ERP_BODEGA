@@ -31,13 +31,10 @@ public class I_Personas extends JInternalFrame {
 	private JPanel contentPane;
     private JTextField textNombre;
     private JTextField textDireccion;
-<<<<<<< HEAD
     private JTextField textRUC;
     private JTextField txtIDCliente;
-=======
     private JTextField textID;
     private JTextField txtDNICliente;
->>>>>>> 3295e42a7223f421aa464297d07339449d2f60e1
     private JTextField txtNombreCliente;
     private JTable table_Proveedores;
     private int selectedRowIndex = -1;
