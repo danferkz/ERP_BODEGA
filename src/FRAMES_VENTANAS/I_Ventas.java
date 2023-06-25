@@ -45,6 +45,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.Color;
+import java.util.Enumeration;
 
 public class I_Ventas extends JInternalFrame {
 
@@ -103,9 +104,6 @@ public class I_Ventas extends JInternalFrame {
 		
 		suggestionsModel = new DefaultListModel<>();
 		
-		System.out.println(especific.accessUniversalHashtable(1).getNombre());
-		
-		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		DefaultTableModel model = new DefaultTableModel(
@@ -142,14 +140,6 @@ public class I_Ventas extends JInternalFrame {
 			});
 			scrollPane.setViewportView(table);
 			table.setModel(model);
-			
-			int max = model.getRowCount();
-			double finalcount = 0; 
-			for (int i = 0; i<max ; i++) {
-				Object v1 = table.getValueAt(i, 3);
-				double d1 = (double)v1;
-				finalcount = finalcount + d1;
-			};
 			
 			
 			JLabel lblNew = new JLabel("Producto: ");
@@ -191,7 +181,7 @@ public class I_Ventas extends JInternalFrame {
 			textProduct.setColumns(10);
 			
 			scrollSurgimiento = new JScrollPane();
-			scrollSurgimiento.setBounds(184, 131, 115, 37);
+			scrollSurgimiento.setBounds(184, 119, 115, 37);
 			contentPane.add(scrollSurgimiento);
 			
 			suggestions = new JList<>(suggestionsModel);
@@ -238,11 +228,31 @@ public class I_Ventas extends JInternalFrame {
 				public void actionPerformed(ActionEvent e) {
 					String nom = textProduct.getText();
 					int quant = Integer.parseInt(textCant.getText());
+					double precio=0; 
+					double totalix=0; 
+					int advertencia = 0;
+					Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+				    Enumeration<Integer> productos = hashtable.keys();
+				    while(productos.hasMoreElements()) {
+				    	int cod = productos.nextElement();
+				        Productos_BE revision = hashtable.get(cod);
+				        String set = revision.getNombre();
+				        advertencia = revision.getCant();
+				    	if (set.equals(nom)) {
+				    		nom = set; 
+				    		precio = revision.getPrice();
+				    		totalix = quant*precio;
+				    	}
+				    }
+				   
+				    if (quant>advertencia) {
+				    	
+				    }
 					model.addRow(new Object[] {
 							nom,
-							3.5,
+							precio,
 							quant,
-							(quant*3.5),
+							totalix,
 					});
 				}
 			});
@@ -321,7 +331,15 @@ public class I_Ventas extends JInternalFrame {
 			btnRealizar.setHorizontalAlignment(SwingConstants.RIGHT);
 			btnRealizar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					boleta();
+					String name = textClient.getText();
+					String id = String.valueOf(textID.getText());
+					if (name==null || id== null) {
+						JOptionPane.showConfirmDialog(null, "Falta datos en los campos de Cliente o ID");
+					}
+					else {
+						boleta();	
+						extraccion();
+					}
 				}
 			});
 			btnRealizar.setBounds(1379, 765, 166, 38);
@@ -406,26 +424,36 @@ public class I_Ventas extends JInternalFrame {
 	}
 	
 	private void updateSuggestions() {
-        String input = textProduct.getText().toLowerCase();
-        suggestionsModel.clear();
-        
-        // Add matching elements to the suggestion list
-        if (!input.isEmpty()) {
-            // Perform your logic to retrieve matching elements based on the input
-            // For simplicity, we'll use a predefined array of elements
-            String[] elements = {"Apple", "Banana", "Orange", "Grapes", "Mango"};
-            
-            for (String element : elements) {
-                if (element.toLowerCase().startsWith(input)) {
-                	suggestionsModel.addElement(element);
-                }
-            }
-        }
-        
-        boolean hasSuggestions = !suggestionsModel.isEmpty();
-        suggestions.setVisible(hasSuggestions);
-        contentPane.revalidate();
-    }
+	    String input = textProduct.getText().toLowerCase();
+	    suggestionsModel.clear();
+
+	    // Add matching elements to the suggestion list
+	    if (!input.isEmpty()) {
+	        // Perform your logic to retrieve matching elements based on the input
+	        // For simplicity, we'll use a predefined array of elements
+	        Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+	        int listado = hashtable.size();
+	        Enumeration<Integer> productos = hashtable.keys();
+	        String[] elements = new String[listado];
+	        int i = 0;
+	        while (productos.hasMoreElements()) {
+	            int cod = productos.nextElement();
+	            Productos_BE produc1 = hashtable.get(cod);
+	            String name = produc1.getNombre();
+	            elements[i] = name;
+	            i++;
+	        }
+	        for (String element : elements) {
+	            if (element.toLowerCase().startsWith(input)) {
+	                suggestionsModel.addElement(element);
+	            }
+	        }
+	    }
+
+	    boolean hasSuggestions = !suggestionsModel.isEmpty();
+	    suggestions.setVisible(hasSuggestions);
+	    contentPane.revalidate();
+	}
 	
 	 private void hideSuggestions() {
 	        suggestionsModel.clear();
@@ -507,4 +535,27 @@ public class I_Ventas extends JInternalFrame {
 		        e.printStackTrace();
 		    }
 		}
+	 
+	 private void extraccion() {
+		 
+		 Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+	     Enumeration<Integer> productos = hashtable.keys();
+		 int filas = table.getRowCount();
+		 for (int i=0; i<filas; i++){
+	    	String descrip = (String)table.getValueAt(i,0);
+		 	int cant = (int)table.getValueAt(i,2);
+		 	while(productos.hasMoreElements()) {
+		 		int cod = productos.nextElement();
+		 		Productos_BE revision = hashtable.get(productos);
+		 		String nombre = revision.getNombre();
+		 		int actual = revision.getCant();
+		 		int id = revision.getCod();
+		 		double price = revision.getPrice();
+		 		if (nombre.equals(descrip)) {
+		 			actual = actual-cant; 
+		 			modi.addToUniversalHashtable(id, new Productos_BE(id,actual,nombre,price));
+		 		}
+		 	}
+		 }
+	 }
 }
