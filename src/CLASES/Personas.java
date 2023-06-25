@@ -11,6 +11,22 @@ public class Personas {
 		ID = iD;
 		RUC = rUC;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public int getRUC() {
+		return RUC;
+	}
 	
 	
 	
