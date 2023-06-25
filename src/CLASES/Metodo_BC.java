@@ -10,12 +10,20 @@ public class Metodo_BC {
         Creation.removefromHahstable(key);
     }
 
-    public void addToUniversalHashtable2(int key, Personas new1) {
+    public void addToUniversalHashtable2(int key, Proveedores_BE new1) {
         Creation.addinHashtable2(key, new1);
      }
 
      public void removeFromUniversalHashtable2(int key) {
          Creation.removefromHahstable2(key);
+     }
+
+     public void addToUniversalHashtable3(int key, Clientes_BE new1) {
+        Creation.addinHashtable3(key, new1);
+     }
+
+     public void removeFromUniversalHashtable3(int key) {
+         Creation.removefromHahstable3(key);
      }
     
 }

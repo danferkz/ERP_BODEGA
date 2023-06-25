@@ -4,7 +4,7 @@ import CLASES.Creation;
 import CLASES.Metodo_BC;
 import CLASES.Return_DALC;
 import CLASES.Productos_BE;
-import CLASES.Personas;
+import CLASES.Proveedores_BE;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;

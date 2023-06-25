@@ -11,10 +11,16 @@ public class Return_DALC {
         return production; 
     }
 	
-	public Personas accessUniversalHashtable2(int key) {
-        Hashtable<Integer,Personas > hashtable = Creation.getHashtable2();
+	public Proveedores_BE accessUniversalHashtable2(int key) {
+        Hashtable<Integer,Proveedores_BE > hashtable = Creation.getHashtable2();
         
-        Personas production = hashtable.get(key);
+        Proveedores_BE production = hashtable.get(key);
+        return production; 
+    }
+    public Clientes_BE accessUniversalHashtable3(int key) {
+        Hashtable<Integer,Clientes_BE > hashtable = Creation.getHashtable3();
+        
+        Clientes_BE production = hashtable.get(key);
         return production; 
     }
 

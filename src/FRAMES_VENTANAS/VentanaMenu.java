@@ -8,7 +8,7 @@ import CLASES.Creation;
 import CLASES.Metodo_BC;
 import CLASES.Return_DALC;
 import CLASES.Productos_BE;
-import CLASES.Personas;
+import CLASES.Proveedores_BE;
 
 import javax.swing.*;
 import java.awt.*;

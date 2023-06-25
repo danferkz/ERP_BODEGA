@@ -22,6 +22,13 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import CLASES.Creation;
+import CLASES.Metodo_BC;
+import CLASES.Productos_BE;
+import CLASES.Proveedores_BE;
+import CLASES.Return_DALC;
+import CLASES.Clientes_BE;
+
 public class I_Personas extends JInternalFrame {
 
 	/**
@@ -31,11 +38,18 @@ public class I_Personas extends JInternalFrame {
 	private JPanel contentPane;
     private JTextField textNombre;
     private JTextField textDireccion;
+    private JTextField textRUC;
+    private JTextField txtIDCliente;
     private JTextField textID;
     private JTextField txtDNICliente;
     private JTextField txtNombreCliente;
     private JTable table_Proveedores;
     private int selectedRowIndex = -1;
+    private JTable tableClientes;
+    private Metodo_BC modi = new Metodo_BC();
+   	private Return_DALC especific = new Return_DALC();
+   	private Creation Hash = new Creation();
+   	
 
 
     /*
@@ -55,13 +69,22 @@ Launch the application.*/
 Create the frame.*/
  
   public I_Personas() {
+	  setTitle("PERSONAS");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 1869, 1075);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+      contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        
+        modi.addToUniversalHashtable2(1, new Proveedores_BE("Juan", "Av La Molina", 43321105));
+		modi.addToUniversalHashtable2(2, new Proveedores_BE("Juan", "Av La Molina", 53327708));
+		modi.addToUniversalHashtable2(3, new Proveedores_BE("Juan", "Av La Molina", 33344105));
+		
+		
+        System.out.println(especific.accessUniversalHashtable(1).getNombre());
+        
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(0, 6, 1797, 994);
@@ -214,14 +237,14 @@ Create the frame.*/
         Clientes.add(txtNombreCliente);
         txtNombreCliente.setColumns(10);
         
-        JLabel lblNewLabel_2 = new JLabel("DNI:");
+        JLabel lblNewLabel_2 = new JLabel("ID:");
         lblNewLabel_2.setBounds(202, 11, 46, 14);
         Clientes.add(lblNewLabel_2);
         
-        txtDNICliente = new JTextField();
-        txtDNICliente.setColumns(10);
-        txtDNICliente.setBounds(233, 8, 86, 20);
-        Clientes.add(txtDNICliente);
+        txtIDCliente = new JTextField();
+        txtIDCliente.setColumns(10);
+        txtIDCliente.setBounds(233, 8, 86, 20);
+        Clientes.add(txtIDCliente);
         
         JButton btnBuscarCliente = new JButton("Buscar");
         btnBuscarCliente.addActionListener(new ActionListener() {
@@ -234,21 +257,42 @@ Create the frame.*/
         btnBuscarCliente.setBackground(new Color(255, 255, 255));
         btnBuscarCliente.setBounds(329, 6, 89, 23);
         Clientes.add(btnBuscarCliente);
+           
         
-        JScrollPane scrollPane1 = new JScrollPane();
-        scrollPane1.setBounds(20, 46, 1740, 890);
-        Clientes.add(scrollPane1);      
+        tableClientes = new JTable();
+        tableClientes.setModel(new DefaultTableModel(
+        		new Object[][]{},
+        		new String[]{"Nombre", "ID"}
+        ));
+        tableClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
+        scrollPaneClientes.setBounds(20, 46, 1740, 890);
+        Clientes.add(scrollPaneClientes);      
+        
+        tableClientes.getSelectionModel().addListSelectionListener(e -> {
+        	if(tableClientes.getSelectedRow() != -1) {
+        		selectedRowIndex = tableClientes.getSelectedRow();
+        		modi.addToUniversalHashtable3(1, new Clientes_BE("Luis",  43321105));
+        		modi.addToUniversalHashtable3(2, new Clientes_BE("Marco", 53327708));
+        		modi.addToUniversalHashtable3(3, new Clientes_BE("Aroon", 33344105));
+        		modi.addToUniversalHashtable3(4, new Clientes_BE("Jairo", 15515154));
+        		modi.addToUniversalHashtable3(5, new Clientes_BE("Andres", 51451015));
+        		DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+        		txtNombreCliente.setText(model.getValueAt(selectedRowIndex, 0).toString());
+        		txtIDCliente.setText(model.getValueAt(selectedRowIndex, 1).toString());       		
+        	}
+        });
   }
   
   public void buscarCliente() {
 
  /* public void buscar() {
 	  String nombre = txtNombreCliente.getText();
-      int dni = Integer.parseInt(txtDNICliente.getText());
+      int ID = Integer.parseInt(txtDNICliente.getText());
      
       Clientes cliente = new Clientes();
       cliente.setname(nombre);
-      cliente.setID(dni);
+      cliente.setID(ID);
 
       ArrayList<Clientes> resultados = buscarCliente(cliente);
 
