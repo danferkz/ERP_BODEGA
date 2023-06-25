@@ -28,6 +28,9 @@ import java.util.Comparator;
 
 import java.awt.Font;
 
+import CLASES.Creation;
+import CLASES.Productos_BE;
+
 public class I_Inventario extends JInternalFrame {
 
 	/**
@@ -110,8 +113,11 @@ public class I_Inventario extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 String codigo = textFieldCodigo.getText();
                 String nombre = textFieldNombre.getText();
-                double cantidad = Double.parseDouble(textFieldCantidad.getText());
+                int cantidad = Integer.parseInt(textFieldCantidad.getText());
                 double precio = Double.parseDouble(textFieldPrecio.getText());
+
+                Productos_BE producto = new Productos_BE(codigo, cantidad, nombre, precio);
+                Creation.addinHashtable(codigo.hashCode(), producto);
 
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 model.addRow(new Object[]{codigo, nombre, cantidad, precio});
