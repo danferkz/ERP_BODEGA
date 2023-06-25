@@ -22,6 +22,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import CLASES.Productos_BE;
+
 public class I_Personas extends JInternalFrame {
 
 	/**
@@ -55,13 +57,16 @@ Launch the application.*/
 Create the frame.*/
  
   public I_Personas() {
+	  setTitle("PERSONAS");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 1869, 1075);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+      contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        
+        
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         tabbedPane.setBounds(0, 6, 1797, 994);
