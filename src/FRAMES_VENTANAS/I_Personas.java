@@ -27,6 +27,7 @@ import CLASES.Metodo_BC;
 import CLASES.Productos_BE;
 import CLASES.Proveedores_BE;
 import CLASES.Return_DALC;
+import CLASES.Clientes_BE;
 
 public class I_Personas extends JInternalFrame {
 
@@ -37,15 +38,10 @@ public class I_Personas extends JInternalFrame {
 	private JPanel contentPane;
     private JTextField textNombre;
     private JTextField textDireccion;
-<<<<<<< HEAD
     private JTextField textRUC;
     private JTextField txtIDCliente;
     private JTextField textID;
     private JTextField txtDNICliente;
-=======
-    private JTextField txtIDCliente;
-    private JTextField textID;
->>>>>>> 0b9ad75e5f83519c8761d3121bc2ead2c58a4d88
     private JTextField txtNombreCliente;
     private JTable table_Proveedores;
     private int selectedRowIndex = -1;
@@ -276,6 +272,11 @@ Create the frame.*/
         tableClientes.getSelectionModel().addListSelectionListener(e -> {
         	if(tableClientes.getSelectedRow() != -1) {
         		selectedRowIndex = tableClientes.getSelectedRow();
+        		modi.addToUniversalHashtable3(1, new Clientes_BE("Luis",  43321105));
+        		modi.addToUniversalHashtable3(2, new Clientes_BE("Marco", 53327708));
+        		modi.addToUniversalHashtable3(3, new Clientes_BE("Aroon", 33344105));
+        		modi.addToUniversalHashtable3(4, new Clientes_BE("Jairo", 15515154));
+        		modi.addToUniversalHashtable3(5, new Clientes_BE("Andres", 51451015));
         		DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
         		txtNombreCliente.setText(model.getValueAt(selectedRowIndex, 0).toString());
         		txtIDCliente.setText(model.getValueAt(selectedRowIndex, 1).toString());       		
