@@ -32,10 +32,11 @@ public class I_Personas extends JInternalFrame {
     private JTextField textNombre;
     private JTextField textDireccion;
     private JTextField textRUC;
-    private JTextField txtDNICliente;
+    private JTextField txtIDCliente;
     private JTextField txtNombreCliente;
     private JTable table_Proveedores;
     private int selectedRowIndex = -1;
+    private JTable tableClientes;
 
 
     /*
@@ -214,14 +215,14 @@ Create the frame.*/
         Clientes.add(txtNombreCliente);
         txtNombreCliente.setColumns(10);
         
-        JLabel lblNewLabel_2 = new JLabel("DNI:");
+        JLabel lblNewLabel_2 = new JLabel("ID:");
         lblNewLabel_2.setBounds(202, 11, 46, 14);
         Clientes.add(lblNewLabel_2);
         
-        txtDNICliente = new JTextField();
-        txtDNICliente.setColumns(10);
-        txtDNICliente.setBounds(233, 8, 86, 20);
-        Clientes.add(txtDNICliente);
+        txtIDCliente = new JTextField();
+        txtIDCliente.setColumns(10);
+        txtIDCliente.setBounds(233, 8, 86, 20);
+        Clientes.add(txtIDCliente);
         
         JButton btnBuscarCliente = new JButton("Buscar");
         btnBuscarCliente.addActionListener(new ActionListener() {
@@ -234,21 +235,37 @@ Create the frame.*/
         btnBuscarCliente.setBackground(new Color(255, 255, 255));
         btnBuscarCliente.setBounds(329, 6, 89, 23);
         Clientes.add(btnBuscarCliente);
+           
         
-        JScrollPane scrollPane1 = new JScrollPane();
-        scrollPane1.setBounds(20, 46, 1740, 890);
-        Clientes.add(scrollPane1);      
+        tableClientes = new JTable();
+        tableClientes.setModel(new DefaultTableModel(
+        		new Object[][]{},
+        		new String[]{"Nombre", "ID"}
+        ));
+        tableClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
+        scrollPaneClientes.setBounds(20, 46, 1740, 890);
+        Clientes.add(scrollPaneClientes);      
+        
+        tableClientes.getSelectionModel().addListSelectionListener(e -> {
+        	if(tableClientes.getSelectedRow() != -1) {
+        		selectedRowIndex = tableClientes.getSelectedRow();
+        		DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+        		txtNombreCliente.setText(model.getValueAt(selectedRowIndex, 0).toString());
+        		txtIDCliente.setText(model.getValueAt(selectedRowIndex, 1).toString());       		
+        	}
+        });
   }
   
   public void buscarCliente() {
 
  /* public void buscar() {
 	  String nombre = txtNombreCliente.getText();
-      int dni = Integer.parseInt(txtDNICliente.getText());
+      int ID = Integer.parseInt(txtDNICliente.getText());
      
       Clientes cliente = new Clientes();
       cliente.setname(nombre);
-      cliente.setID(dni);
+      cliente.setID(ID);
 
       ArrayList<Clientes> resultados = buscarCliente(cliente);
 
