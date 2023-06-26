@@ -110,5 +110,6 @@ public class A_InicioSesion extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\login.png"));
 		lblNewLabel.setBounds(30, 11, 250, 250);
 		contentPane.add(lblNewLabel);
+		
 	}
 }

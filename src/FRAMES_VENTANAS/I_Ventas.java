@@ -45,6 +45,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.Color;
+import java.util.Enumeration;
 
 public class I_Ventas extends JInternalFrame {
 
@@ -96,15 +97,12 @@ public class I_Ventas extends JInternalFrame {
 	public I_Ventas() {
 		setTitle("VENTAS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1869, 1075);
+		setBounds(100, 100, 1366, 768);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		suggestionsModel = new DefaultListModel<>();
-		
-		System.out.println(especific.accessUniversalHashtable(1).getNombre());
-		
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -130,7 +128,7 @@ public class I_Ventas extends JInternalFrame {
 			
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(88, 220, 1328, 375);
+			scrollPane.setBounds(98, 187, 1206, 408);
 			contentPane.add(scrollPane);
 			
 			table = new JTable();
@@ -142,14 +140,6 @@ public class I_Ventas extends JInternalFrame {
 			});
 			scrollPane.setViewportView(table);
 			table.setModel(model);
-			
-			int max = model.getRowCount();
-			double finalcount = 0; 
-			for (int i = 0; i<max ; i++) {
-				Object v1 = table.getValueAt(i, 3);
-				double d1 = (double)v1;
-				finalcount = finalcount + d1;
-			};
 			
 			
 			JLabel lblNew = new JLabel("Producto: ");
@@ -191,7 +181,7 @@ public class I_Ventas extends JInternalFrame {
 			textProduct.setColumns(10);
 			
 			scrollSurgimiento = new JScrollPane();
-			scrollSurgimiento.setBounds(184, 131, 115, 37);
+			scrollSurgimiento.setBounds(184, 119, 115, 37);
 			contentPane.add(scrollSurgimiento);
 			
 			suggestions = new JList<>(suggestionsModel);
@@ -238,15 +228,35 @@ public class I_Ventas extends JInternalFrame {
 				public void actionPerformed(ActionEvent e) {
 					String nom = textProduct.getText();
 					int quant = Integer.parseInt(textCant.getText());
+					double precio=0; 
+					double totalix=0; 
+					int advertencia = 0;
+					Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+				    Enumeration<Integer> productos = hashtable.keys();
+				    while(productos.hasMoreElements()) {
+				    	int cod = productos.nextElement();
+				        Productos_BE revision = hashtable.get(cod);
+				        String set = revision.getNombre();
+				        advertencia = revision.getCant();
+				    	if (set.equals(nom)) {
+				    		nom = set; 
+				    		precio = revision.getPrice();
+				    		totalix = quant*precio;
+				    	}
+				    }
+				   
+				    if (quant>advertencia) {
+				    	
+				    }
 					model.addRow(new Object[] {
 							nom,
-							3.5,
+							precio,
 							quant,
-							(quant*3.5),
+							totalix,
 					});
 				}
 			});
-			btnAdicionar.setBounds(994, 132, 115, 23);
+			btnAdicionar.setBounds(667, 99, 115, 23);
 			contentPane.add(btnAdicionar);
 			
 			JButton btnDelete = new JButton("Eliminar");
@@ -256,7 +266,7 @@ public class I_Ventas extends JInternalFrame {
 					model.removeRow(changfila);
 				}
 			});
-			btnDelete.setBounds(1272, 132, 115, 23);
+			btnDelete.setBounds(1068, 99, 115, 23);
 			contentPane.add(btnDelete);
 			
 			JButton btnModify = new JButton("Modificar");
@@ -272,12 +282,12 @@ public class I_Ventas extends JInternalFrame {
 					model.setValueAt(nw3, changfila, 3);
 				}
 			});
-			btnModify.setBounds(1133, 132, 115, 23);
+			btnModify.setBounds(889, 99, 115, 23);
 			contentPane.add(btnModify);
 			
 			JLabel lblNew3 = new JLabel("ID del Cliente:");
 			lblNew3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			lblNew3.setBounds(98, 689, 138, 14);
+			lblNew3.setBounds(424, 639, 138, 14);
 			contentPane.add(lblNew3);
 			
 			textID = new JTextField();
@@ -290,7 +300,7 @@ public class I_Ventas extends JInternalFrame {
 					}
 				}
 			});
-			textID.setBounds(267, 686, 131, 20);
+			textID.setBounds(566, 636, 131, 20);
 			contentPane.add(textID);
 			textID.setColumns(10);
 			
@@ -321,10 +331,18 @@ public class I_Ventas extends JInternalFrame {
 			btnRealizar.setHorizontalAlignment(SwingConstants.RIGHT);
 			btnRealizar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					boleta();
+					String name = textClient.getText();
+					String id = String.valueOf(textID.getText());
+					if (name==null || id== null) {
+						JOptionPane.showConfirmDialog(null, "Falta datos en los campos de Cliente o ID");
+					}
+					else {
+						boleta();	
+						extraccion();
+					}
 				}
 			});
-			btnRealizar.setBounds(1379, 765, 166, 38);
+			btnRealizar.setBounds(1053, 627, 166, 38);
 			contentPane.add(btnRealizar);
 			
 			// Get the dimensions of the button
@@ -357,7 +375,7 @@ public class I_Ventas extends JInternalFrame {
 					I_Ventas.this.dispose();
 				}
 			});
-			btnRegresar.setBounds(71, 789, 143, 32);
+			btnRegresar.setBounds(900, 630, 143, 32);
 			contentPane.add(btnRegresar);
 			
 			lblNewLabel = new JLabel("");
@@ -406,26 +424,36 @@ public class I_Ventas extends JInternalFrame {
 	}
 	
 	private void updateSuggestions() {
-        String input = textProduct.getText().toLowerCase();
-        suggestionsModel.clear();
-        
-        // Add matching elements to the suggestion list
-        if (!input.isEmpty()) {
-            // Perform your logic to retrieve matching elements based on the input
-            // For simplicity, we'll use a predefined array of elements
-            String[] elements = {"Apple", "Banana", "Orange", "Grapes", "Mango"};
-            
-            for (String element : elements) {
-                if (element.toLowerCase().startsWith(input)) {
-                	suggestionsModel.addElement(element);
-                }
-            }
-        }
-        
-        boolean hasSuggestions = !suggestionsModel.isEmpty();
-        suggestions.setVisible(hasSuggestions);
-        contentPane.revalidate();
-    }
+	    String input = textProduct.getText().toLowerCase();
+	    suggestionsModel.clear();
+
+	    // Add matching elements to the suggestion list
+	    if (!input.isEmpty()) {
+	        // Perform your logic to retrieve matching elements based on the input
+	        // For simplicity, we'll use a predefined array of elements
+	        Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+	        int listado = hashtable.size();
+	        Enumeration<Integer> productos = hashtable.keys();
+	        String[] elements = new String[listado];
+	        int i = 0;
+	        while (productos.hasMoreElements()) {
+	            int cod = productos.nextElement();
+	            Productos_BE produc1 = hashtable.get(cod);
+	            String name = produc1.getNombre();
+	            elements[i] = name;
+	            i++;
+	        }
+	        for (String element : elements) {
+	            if (element.toLowerCase().startsWith(input)) {
+	                suggestionsModel.addElement(element);
+	            }
+	        }
+	    }
+
+	    boolean hasSuggestions = !suggestionsModel.isEmpty();
+	    suggestions.setVisible(hasSuggestions);
+	    contentPane.revalidate();
+	}
 	
 	 private void hideSuggestions() {
 	        suggestionsModel.clear();
@@ -507,4 +535,27 @@ public class I_Ventas extends JInternalFrame {
 		        e.printStackTrace();
 		    }
 		}
+	 
+	 private void extraccion() {
+		 
+		 Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+	     Enumeration<Integer> productos = hashtable.keys();
+		 int filas = table.getRowCount();
+		 for (int i=0; i<filas; i++){
+	    	String descrip = (String)table.getValueAt(i,0);
+		 	int cant = (int)table.getValueAt(i,2);
+		 	while(productos.hasMoreElements()) {
+		 		int cod = productos.nextElement();
+		 		Productos_BE revision = hashtable.get(productos);
+		 		String nombre = revision.getNombre();
+		 		int actual = revision.getCant();
+		 		int id = revision.getCod();
+		 		double price = revision.getPrice();
+		 		if (nombre.equals(descrip)) {
+		 			actual = actual-cant; 
+		 			modi.addToUniversalHashtable(id, new Productos_BE(id,actual,nombre,price));
+		 		}
+		 	}
+		 }
+	 }
 }
