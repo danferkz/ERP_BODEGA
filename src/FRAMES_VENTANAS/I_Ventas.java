@@ -221,28 +221,30 @@ public class I_Ventas extends JInternalFrame {
 			btnAdicionar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String nom = textProduct.getText();
-					int quant = Integer.parseInt(textCant.getText());
 					String nuuma = textCant.getText();
-					if (nom==null || nuuma == null) {
-						JOptionPane.showConfirmDialog(null, "Se necesita la rellenar los espacios de Nombre y Cantidad");
-					}
+					if (nom.trim().isEmpty() || nuuma.trim().isEmpty()) {
+					    JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
+					} 
 					else {
+					int quant = Integer.parseInt(textCant.getText());
 					double precio=0; 
 					double totalix=0; 
 					int advertencia = 0;
 					Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
-				    Enumeration<Integer> productos = hashtable.keys();
-				    while(productos.hasMoreElements()) {
-				    	int cod = productos.nextElement();
-				        Productos_BE revision = hashtable.get(cod);
-				        String set = revision.getNombre();
-				        advertencia = revision.getCant();
-				    	if (set.equals(nom)) {
-				    		nom = set; 
-				    		precio = revision.getPrice();
-				    		totalix = quant*precio;
-				    	}
-				    }
+					Enumeration<Integer> productos = hashtable.keys();
+					while (productos.hasMoreElements()) {
+					    int cod = productos.nextElement();
+					    Productos_BE revision = hashtable.get(cod);
+					    if (revision != null) { // Add null check here
+					        String set = revision.getNombre();
+					        advertencia = revision.getCant();
+					        if (set.equals(nom)) {
+					            nom = set;
+					            precio = revision.getPrice();
+					            totalix = quant * precio;
+					        }
+					    }
+					}
 				   
 				    if (quant>advertencia) {
 				    	JOptionPane.showConfirmDialog(null, "No existen suficientes existencias de "+nom);
@@ -341,6 +343,7 @@ public class I_Ventas extends JInternalFrame {
 					else {
 						boleta();	
 						extraccion();
+						System.out.println(String.valueOf(especific.accessUniversalHashtable(2).getCant()));
 					}
 				}
 			});
@@ -539,25 +542,24 @@ public class I_Ventas extends JInternalFrame {
 		}
 	 
 	 private void extraccion() {
-		 
-		 Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
-	     Enumeration<Integer> productos = hashtable.keys();
-		 int filas = table.getRowCount();
-		 for (int i=0; i<filas; i++){
-	    	String descrip = (String)table.getValueAt(i,0);
-		 	int cant = (int)table.getValueAt(i,2);
-		 	while(productos.hasMoreElements()) {
-		 		int cod = productos.nextElement();
-		 		Productos_BE revision = hashtable.get(productos);
-		 		String nombre = revision.getNombre();
-		 		int actual = revision.getCant();
-		 		int id = revision.getCod();
-		 		double price = revision.getPrice();
-		 		if (nombre.equals(descrip)) {
-		 			actual = actual-cant; 
-		 			modi.addToUniversalHashtable(id, new Productos_BE(id,actual,nombre,price));
-		 		}
-		 	}
-		 }
-	 }
+		    Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+		    Enumeration<Integer> productos = hashtable.keys();
+		    int filas = table.getRowCount();
+		    for (int i = 0; i < filas; i++) {
+		        String descrip = (String) table.getValueAt(i, 0);
+		        int cant = (int) table.getValueAt(i, 2);
+		        while (productos.hasMoreElements()) {
+		            int cod = productos.nextElement();
+		            Productos_BE revision = hashtable.get(cod);
+		            String nombre = revision.getNombre();
+		            int actual = revision.getCant();
+		            int id = revision.getCod();
+		            double price = revision.getPrice();
+		            if (nombre.equals(descrip)) {
+		                actual = actual - cant;
+		                modi.addToUniversalHashtable(id, new Productos_BE(id, actual, nombre, price));
+		            }
+		        }
+		    }
+		}
 }
