@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 import CLASES.Creation;
 import CLASES.Metodo_BC;
-import CLASES.Productos_BE;
+
 import CLASES.Proveedores_BE;
 import CLASES.Return_DALC;
 import CLASES.Clientes_BE;
@@ -38,10 +38,8 @@ public class I_Personas extends JInternalFrame {
 	private JPanel contentPane;
     private JTextField textNombre;
     private JTextField textDireccion;
-    private JTextField textRUC;
     private JTextField txtIDCliente;
     private JTextField textID;
-    private JTextField txtDNICliente;
     private JTextField txtNombreCliente;
     private JTable table_Proveedores;
     private int selectedRowIndex = -1;
@@ -325,7 +323,7 @@ Create the frame.*/
 	            resultados.add(c);
 	        }
 	    }
-
+ 
 	    return resultados;
 	}*/
   }
