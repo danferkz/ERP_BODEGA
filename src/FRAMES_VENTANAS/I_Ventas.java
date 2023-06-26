@@ -97,7 +97,7 @@ public class I_Ventas extends JInternalFrame {
 	public I_Ventas() {
 		setTitle("VENTAS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1869, 1075);
+		setBounds(100, 100, 1366, 768);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -128,7 +128,7 @@ public class I_Ventas extends JInternalFrame {
 			
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(88, 220, 1328, 375);
+			scrollPane.setBounds(98, 187, 1206, 408);
 			contentPane.add(scrollPane);
 			
 			table = new JTable();
@@ -256,7 +256,7 @@ public class I_Ventas extends JInternalFrame {
 					});
 				}
 			});
-			btnAdicionar.setBounds(994, 132, 115, 23);
+			btnAdicionar.setBounds(667, 99, 115, 23);
 			contentPane.add(btnAdicionar);
 			
 			JButton btnDelete = new JButton("Eliminar");
@@ -266,7 +266,7 @@ public class I_Ventas extends JInternalFrame {
 					model.removeRow(changfila);
 				}
 			});
-			btnDelete.setBounds(1272, 132, 115, 23);
+			btnDelete.setBounds(1068, 99, 115, 23);
 			contentPane.add(btnDelete);
 			
 			JButton btnModify = new JButton("Modificar");
@@ -282,12 +282,12 @@ public class I_Ventas extends JInternalFrame {
 					model.setValueAt(nw3, changfila, 3);
 				}
 			});
-			btnModify.setBounds(1133, 132, 115, 23);
+			btnModify.setBounds(889, 99, 115, 23);
 			contentPane.add(btnModify);
 			
 			JLabel lblNew3 = new JLabel("ID del Cliente:");
 			lblNew3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			lblNew3.setBounds(98, 689, 138, 14);
+			lblNew3.setBounds(424, 639, 138, 14);
 			contentPane.add(lblNew3);
 			
 			textID = new JTextField();
@@ -300,7 +300,7 @@ public class I_Ventas extends JInternalFrame {
 					}
 				}
 			});
-			textID.setBounds(267, 686, 131, 20);
+			textID.setBounds(566, 636, 131, 20);
 			contentPane.add(textID);
 			textID.setColumns(10);
 			
@@ -342,7 +342,7 @@ public class I_Ventas extends JInternalFrame {
 					}
 				}
 			});
-			btnRealizar.setBounds(1379, 765, 166, 38);
+			btnRealizar.setBounds(1053, 627, 166, 38);
 			contentPane.add(btnRealizar);
 			
 			// Get the dimensions of the button
@@ -375,7 +375,7 @@ public class I_Ventas extends JInternalFrame {
 					I_Ventas.this.dispose();
 				}
 			});
-			btnRegresar.setBounds(71, 789, 143, 32);
+			btnRegresar.setBounds(900, 630, 143, 32);
 			contentPane.add(btnRegresar);
 			
 			lblNewLabel = new JLabel("");

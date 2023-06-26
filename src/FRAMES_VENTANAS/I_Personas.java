@@ -71,7 +71,7 @@ Create the frame.*/
   public I_Personas() {
 	  setTitle("PERSONAS");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setBounds(100, 100, 1869, 1075);
+      setBounds(100, 100, 1366, 768);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       contentPane.setBackground(Color.WHITE);
@@ -100,7 +100,7 @@ Create the frame.*/
         ));
         table_Proveedores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane_Proveedores = new JScrollPane();
-        scrollPane_Proveedores.setBounds(499, 10, 1249, 913);
+        scrollPane_Proveedores.setBounds(318, 11, 1015, 661);
         Proveedor.add(scrollPane_Proveedores);
         table_Proveedores.getSelectionModel().addListSelectionListener(e -> {
             if (table_Proveedores.getSelectedRow() != -1) {
@@ -180,7 +180,7 @@ Create the frame.*/
         	    }
         	});
 
-        btnAgregar.setBounds(29, 570, 117, 29);
+        btnAgregar.setBounds(21, 324, 117, 29);
         Proveedor.add(btnAgregar);
         
         JButton btnListar = new JButton("Listar");
@@ -203,7 +203,7 @@ Create the frame.*/
                 }
             }
         });
-        btnListar.setBounds(29, 686, 117, 29);
+        btnListar.setBounds(21, 386, 117, 29);
         Proveedor.add(btnListar);
         
         JButton btnEliminar = new JButton("Eliminar");
@@ -221,7 +221,7 @@ Create the frame.*/
                 }
             }
         });
-        btnEliminar.setBounds(29, 796, 117, 29);
+        btnEliminar.setBounds(21, 450, 117, 29);
         Proveedor.add(btnEliminar);
 
         JPanel Clientes = new JPanel();
@@ -266,7 +266,7 @@ Create the frame.*/
         ));
         tableClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
-        scrollPaneClientes.setBounds(20, 46, 1740, 890);
+        scrollPaneClientes.setBounds(10, 37, 1338, 665);
         Clientes.add(scrollPaneClientes);      
         
         tableClientes.getSelectionModel().addListSelectionListener(e -> {
