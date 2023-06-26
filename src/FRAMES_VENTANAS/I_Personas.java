@@ -76,8 +76,8 @@ Create the frame.*/
         contentPane.setLayout(null);
         
         modi.addToUniversalHashtable2(1, new Proveedores_BE("Juan", "Av La Molina", 43321105));
-		modi.addToUniversalHashtable2(2, new Proveedores_BE("Juan", "Av La Molina", 53327708));
-		modi.addToUniversalHashtable2(3, new Proveedores_BE("Juan", "Av La Molina", 33344105));
+		modi.addToUniversalHashtable2(2, new Proveedores_BE("Lola", "Av Sn Juan", 53327708));
+		modi.addToUniversalHashtable2(3, new Proveedores_BE("Tito", "Av Nicolini", 33344105));
 		
 		
         System.out.println(especific.accessUniversalHashtable(1).getNombre());
@@ -144,7 +144,8 @@ Create the frame.*/
         		
         		 String name = textNombre.getText();
         	        String direccion = textDireccion.getText();
-        	        String rucText = textID.getText();
+        	        String idText = textID.getText();
+        	        
 
         	        // Validación de solo letras en el nombre y dirección
         	        if (!name.matches("[a-zA-Z]+")) {
@@ -157,18 +158,18 @@ Create the frame.*/
         	            return;
         	        }
 
-        	        int RUC = 0;
+        	        int ID = 0;
 
         	        try {
-        	            RUC = Integer.parseInt(rucText);
+        	            ID = Integer.parseInt(idText);
         	        } catch (NumberFormatException ex) {
         	            // Manejar la excepción de formato numérico incorrecto
-        	            JOptionPane.showMessageDialog(null, "El campo RUC debe ser un número válido.");
+        	            JOptionPane.showMessageDialog(null, "El campo ID debe ser un número válido.");
         	            return; // Salir del método actionPerformed
         	        }
 
         	        DefaultTableModel model = (DefaultTableModel) table_Proveedores.getModel();
-        	        model.addRow(new Object[]{name, direccion, RUC});
+        	        model.addRow(new Object[]{name, direccion, ID});
 
         	        // Limpiar los campos de texto
         	        textNombre.setText("");
