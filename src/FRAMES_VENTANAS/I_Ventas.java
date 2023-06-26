@@ -4,7 +4,6 @@ import CLASES.Creation;
 import CLASES.Metodo_BC;
 import CLASES.Return_DALC;
 import CLASES.Productos_BE;
-import CLASES.Proveedores_BE;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -119,12 +118,7 @@ public class I_Ventas extends JInternalFrame {
 			        return columnTypes[columnIndex];
 			    }
 			};
-			model.addRow(new Object[] {
-					"Dove",
-					2.5,
-					4,
-					10.0,
-			});
+			
 			
 			
 			JScrollPane scrollPane = new JScrollPane();
@@ -228,6 +222,11 @@ public class I_Ventas extends JInternalFrame {
 				public void actionPerformed(ActionEvent e) {
 					String nom = textProduct.getText();
 					int quant = Integer.parseInt(textCant.getText());
+					String nuuma = textCant.getText();
+					if (nom==null || nuuma == null) {
+						JOptionPane.showConfirmDialog(null, "Se necesita la rellenar los espacios de Nombre y Cantidad");
+					}
+					else {
 					double precio=0; 
 					double totalix=0; 
 					int advertencia = 0;
@@ -246,14 +245,17 @@ public class I_Ventas extends JInternalFrame {
 				    }
 				   
 				    if (quant>advertencia) {
-				    	
+				    	JOptionPane.showConfirmDialog(null, "No existen suficientes existencias de "+nom);
 				    }
+				    else {
 					model.addRow(new Object[] {
 							nom,
 							precio,
 							quant,
 							totalix,
 					});
+				    }
+				 }
 				}
 			});
 			btnAdicionar.setBounds(994, 132, 115, 23);
