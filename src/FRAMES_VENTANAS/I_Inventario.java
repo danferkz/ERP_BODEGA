@@ -28,6 +28,9 @@ import java.util.Comparator;
 
 import java.awt.Font;
 
+import CLASES.Creation;
+import CLASES.Productos_BE;
+
 public class I_Inventario extends JInternalFrame {
 
 	/**
@@ -58,7 +61,7 @@ public class I_Inventario extends JInternalFrame {
     public I_Inventario() {
     	setTitle("INVENTARIO");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1869, 1075);
+        setBounds(100, 100, 1366, 768);
         contentPane = new JPanel();
         contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
@@ -66,41 +69,41 @@ public class I_Inventario extends JInternalFrame {
 
         JLabel lblCodigo = new JLabel("Código:");
         lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblCodigo.setBounds(72, 290, 78, 20);
+        lblCodigo.setBounds(71, 146, 78, 20);
         contentPane.add(lblCodigo);
 
         textFieldCodigo = new JTextField();
-        textFieldCodigo.setBounds(172, 278, 150, 48);
+        textFieldCodigo.setBounds(172, 134, 150, 48);
         contentPane.add(textFieldCodigo);
         textFieldCodigo.setColumns(10);
 
         JLabel lblNombre = new JLabel("Nombre:");
         lblNombre.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblNombre.setBounds(72, 349, 116, 20);
+        lblNombre.setBounds(71, 205, 116, 20);
         contentPane.add(lblNombre);
 
         textFieldNombre = new JTextField();
-        textFieldNombre.setBounds(172, 337, 150, 48);
+        textFieldNombre.setBounds(172, 193, 150, 48);
         contentPane.add(textFieldNombre);
         textFieldNombre.setColumns(10);
 
         JLabel lblCantidad = new JLabel("Cantidad:");
         lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblCantidad.setBounds(72, 406, 100, 20);
+        lblCantidad.setBounds(71, 278, 100, 20);
         contentPane.add(lblCantidad);
 
         textFieldCantidad = new JTextField();
-        textFieldCantidad.setBounds(172, 394, 150, 48);
+        textFieldCantidad.setBounds(172, 266, 150, 48);
         contentPane.add(textFieldCantidad);
         textFieldCantidad.setColumns(10);
 
         JLabel lblPrecio = new JLabel("Precio:");
         lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblPrecio.setBounds(72, 462, 100, 20);
+        lblPrecio.setBounds(71, 342, 100, 20);
         contentPane.add(lblPrecio);
 
         textFieldPrecio = new JTextField();
-        textFieldPrecio.setBounds(172, 450, 150, 48);
+        textFieldPrecio.setBounds(172, 330, 150, 48);
         contentPane.add(textFieldPrecio);
         textFieldPrecio.setColumns(10);
 
@@ -110,8 +113,11 @@ public class I_Inventario extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 String codigo = textFieldCodigo.getText();
                 String nombre = textFieldNombre.getText();
-                double cantidad = Double.parseDouble(textFieldCantidad.getText());
+                int cantidad = Integer.parseInt(textFieldCantidad.getText());
                 double precio = Double.parseDouble(textFieldPrecio.getText());
+
+                Productos_BE producto = new Productos_BE(codigo, cantidad, nombre, precio);
+                Creation.addinHashtable(codigo.hashCode(), producto);
 
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 model.addRow(new Object[]{codigo, nombre, cantidad, precio});
@@ -123,7 +129,7 @@ public class I_Inventario extends JInternalFrame {
                 textFieldPrecio.setText("");
             }
         });
-        btnAgregar.setBounds(89, 512, 230, 71);
+        btnAgregar.setBounds(92, 409, 230, 71);
         contentPane.add(btnAgregar);
 
         JButton btnModificar = new JButton("Modificar");
@@ -151,7 +157,7 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnModificar.setBounds(89, 594, 230, 71);
+        btnModificar.setBounds(92, 501, 230, 71);
         contentPane.add(btnModificar);
 
         JButton btnEliminar = new JButton("Eliminar");
@@ -171,7 +177,7 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnEliminar.setBounds(92, 676, 230, 71);
+        btnEliminar.setBounds(92, 594, 230, 71);
         contentPane.add(btnEliminar);
 
         JButton btnListar = new JButton("Listar");
@@ -205,7 +211,7 @@ public class I_Inventario extends JInternalFrame {
         ));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(454, 10, 1106, 776);
+        scrollPane.setBounds(390, 17, 950, 648);
         contentPane.add(scrollPane);
 
         // Define el tamaño de fuente deseado para el encabezado de la tabla
