@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -48,6 +49,8 @@ public class I_Personas extends JInternalFrame {
     private Metodo_BC modi = new Metodo_BC();
    	private Return_DALC especific = new Return_DALC();
    	private Creation Hash = new Creation();
+   	private String relativePath = "Base de datos" + File.separator + "Productos.txt";
+	private String filePath = System.getProperty("user.dir") + File.separator + relativePath;
    	
 
 
@@ -77,12 +80,7 @@ Create the frame.*/
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        modi.addToUniversalHashtable2(1, new Proveedores_BE("Juan", "Av La Molina", 43321105));
-		modi.addToUniversalHashtable2(2, new Proveedores_BE("Lola", "Av Sn Juan", 53327708));
-		modi.addToUniversalHashtable2(3, new Proveedores_BE("Tito", "Av Nicolini", 33344105));
-		
-		
-        System.out.println(especific.accessUniversalHashtable(1).getNombre());
+        
         
 
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -272,11 +270,7 @@ Create the frame.*/
         tableClientes.getSelectionModel().addListSelectionListener(e -> {
         	if(tableClientes.getSelectedRow() != -1) {
         		selectedRowIndex = tableClientes.getSelectedRow();
-        		modi.addToUniversalHashtable3(1, new Clientes_BE("Luis",  43321105));
-        		modi.addToUniversalHashtable3(2, new Clientes_BE("Marco", 53327708));
-        		modi.addToUniversalHashtable3(3, new Clientes_BE("Aroon", 33344105));
-        		modi.addToUniversalHashtable3(4, new Clientes_BE("Jairo", 15515154));
-        		modi.addToUniversalHashtable3(5, new Clientes_BE("Andres", 51451015));
+        		
         		DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
         		txtNombreCliente.setText(model.getValueAt(selectedRowIndex, 0).toString());
         		txtIDCliente.setText(model.getValueAt(selectedRowIndex, 1).toString());       		

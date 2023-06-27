@@ -15,7 +15,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Hashtable;
 
@@ -72,7 +74,8 @@ public class I_Ventas extends JInternalFrame {
 	private Metodo_BC modi = new Metodo_BC();
 	private Return_DALC especific = new Return_DALC();
 	private Creation Hash = new Creation();
-	
+	private String relativePath = "Base de datos" + File.separator + "Productos.txt";
+	private String filePath = System.getProperty("user.dir") + File.separator + relativePath;
 	
 
 	/**
@@ -346,8 +349,9 @@ public class I_Ventas extends JInternalFrame {
 						boleta();	
 						extraccion();
 						modi.addToUniversalHashtable3(id1, new Clientes_BE(name,id1));
-						System.out.println(String.valueOf(especific.accessUniversalHashtable(2).getCant()));
 					}
+					modifyFile1();
+					
 					
 				}
 			});
@@ -566,4 +570,43 @@ public class I_Ventas extends JInternalFrame {
 		        }
 		    }
 		}
+	 
+	 private void modifyFile1() {
+	        try {
+	            // Clear the contents of the file
+	            String filePath = "src/Datos/Inventario_re.txt"; // Update the file path accordingly
+
+	            // Clear the file contents
+	            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+	            fileOutputStream.close();
+
+	            Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+	            Enumeration<Integer> productos = hashtable.keys();
+
+	            // Append new text to the file
+	            FileWriter fileWriter = new FileWriter(filePath, true);
+	            BufferedWriter writer = new BufferedWriter(fileWriter);
+
+	            while (productos.hasMoreElements()) {
+	                int code = productos.nextElement();
+	                Productos_BE revision = hashtable.get(code);
+	                String nombre = revision.getNombre();
+	                int actual = revision.getCant();
+	                int id = revision.getCod();
+	                double price = revision.getPrice();
+
+	                writer.write(id + ",");
+	                writer.write(nombre + ",");
+	                writer.write(actual + ",");
+	                writer.write(price + "");
+	                writer.newLine();
+	            }
+
+	            writer.close();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	 
+	 
 }
