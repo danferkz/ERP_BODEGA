@@ -25,6 +25,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Hashtable;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import CLASES.Creation;
+import CLASES.Metodo_BC;
+import CLASES.Return_DALC;
+import CLASES.Productos_BE;
+
 
 import java.awt.Font;
 
@@ -43,7 +51,11 @@ public class I_Inventario extends JInternalFrame {
     private JTextField textFieldCantidad;
     private JTextField textFieldPrecio;
     private JTable table;
+    private DefaultListModel<String> suggestionsModel;
     private int selectedRowIndex = -1;
+    private Metodo_BC modi = new Metodo_BC();
+	private Return_DALC especific = new Return_DALC();
+	private Creation Hash = new Creation();
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -115,22 +127,43 @@ public class I_Inventario extends JInternalFrame {
                 String nombre = textFieldNombre.getText();
                 int cantidad = Integer.parseInt(textFieldCantidad.getText());
                 double precio = Double.parseDouble(textFieldPrecio.getText());
+                if (codigo.trim().isEmpty() || nombre.trim().isEmpty() || textFieldCantidad.getText().trim().isEmpty() || textFieldPrecio.getText().trim().isEmpty()) {
+                    JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
+                } else {
+                    int quant = Integer.parseInt(textFieldCantidad.getText());
+                    double totalix = 0;
+                    int advertencia = 0;
+                    Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+                    Enumeration<Integer> productos = hashtable.keys();
+                    while (productos.hasMoreElements()) {
+                        int cod = productos.nextElement();
+                        Productos_BE revision = hashtable.get(cod);
+                        if (revision != null) { // Add null check here
+                            String set = revision.getNombre();
+                            advertencia = revision.getCant();
+                            if (set.equals(nombre)) {
+                                precio = revision.getPrice();
+                                totalix = quant * precio;
+                            }
+                        }
+                    }
 
-                Productos_BE producto = new Productos_BE(codigo, cantidad, nombre, precio);
-                Creation.addinHashtable(codigo.hashCode(), producto);
-
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.addRow(new Object[]{codigo, nombre, cantidad, precio});
-
-                // Limpiar los campos de texto
-                textFieldCodigo.setText("");
-                textFieldNombre.setText("");
-                textFieldCantidad.setText("");
-                textFieldPrecio.setText("");
+                    if (quant > advertencia) {
+                        JOptionPane.showConfirmDialog(null, "No existen suficientes existencias de " + nombre);
+                    } else {
+                        model.addRow(new Object[]{
+                                nombre,
+                                precio,
+                                quant,
+                                totalix,
+                        });
+                    }
+                }
             }
         });
         btnAgregar.setBounds(92, 409, 230, 71);
         contentPane.add(btnAgregar);
+
 
         JButton btnModificar = new JButton("Modificar");
         btnModificar.setFont(new Font("Tahoma", Font.BOLD, 16));
