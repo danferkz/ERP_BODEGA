@@ -25,11 +25,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Hashtable;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import CLASES.Creation;
+import CLASES.Metodo_BC;
+import CLASES.Return_DALC;
+import CLASES.Productos_BE;
+
 
 import java.awt.Font;
 
 import CLASES.Creation;
 import CLASES.Productos_BE;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class I_Inventario extends JInternalFrame {
 
@@ -43,7 +53,11 @@ public class I_Inventario extends JInternalFrame {
     private JTextField textFieldCantidad;
     private JTextField textFieldPrecio;
     private JTable table;
-    private int selectedRowIndex = -1;
+    private DefaultListModel<String> suggestionsModel;
+    private int selectedRowIndex;
+    private Metodo_BC modi = new Metodo_BC();
+	private Return_DALC especific = new Return_DALC();
+	private Creation Hash = new Creation();
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -66,6 +80,21 @@ public class I_Inventario extends JInternalFrame {
         contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        
+        
+		DefaultTableModel model = new DefaultTableModel(
+			    new String[] {"Código", "Nombre", "Cantidad", "Precio"}, 0) {
+			    private static final long serialVersionUID = 1L;
+			    Class<?>[] columnTypes = new Class[] {
+			        String.class,
+			        String.class,
+			        Integer.class,
+			        Double.class
+			    };
+			    public Class<?> getColumnClass(int columnIndex) {
+			        return columnTypes[columnIndex];
+			    }
+			};
 
         JLabel lblCodigo = new JLabel("Código:");
         lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -113,24 +142,55 @@ public class I_Inventario extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 String codigo = textFieldCodigo.getText();
                 String nombre = textFieldNombre.getText();
-                int cantidad = Integer.parseInt(textFieldCantidad.getText());
-                double precio = Double.parseDouble(textFieldPrecio.getText());
-
-                Productos_BE producto = new Productos_BE(codigo, cantidad, nombre, precio);
-                Creation.addinHashtable(codigo.hashCode(), producto);
+                String cantidadText = textFieldCantidad.getText();
+                String precioText = textFieldPrecio.getText();
 
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.addRow(new Object[]{codigo, nombre, cantidad, precio});
 
-                // Limpiar los campos de texto
-                textFieldCodigo.setText("");
-                textFieldNombre.setText("");
-                textFieldCantidad.setText("");
-                textFieldPrecio.setText("");
+                // Verificar si algún campo está vacío
+                if (codigo.trim().isEmpty() || nombre.trim().isEmpty() || cantidadText.trim().isEmpty() || precioText.trim().isEmpty()) {
+                    JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
+                } else {
+                    // Convertir a números solo si los campos no están vacíos
+                    double cantidad = Double.parseDouble(cantidadText);
+                    double precio = Double.parseDouble(precioText);
+
+                    // Agregar la nueva fila a la tabla
+                    model.addRow(new Object[]{codigo, nombre, cantidad, precio});
+
+                    // Limpiar los campos de texto
+                    textFieldCodigo.setText("");
+                    textFieldNombre.setText("");
+                    textFieldCantidad.setText("");
+                    textFieldPrecio.setText("");
+
+                    // Realizar la acción adicional
+                    int quant = Integer.parseInt(cantidadText);
+                    double totalix = 0;
+                    int advertencia = 0;
+                    Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+                    Enumeration<Integer> productos = hashtable.keys();
+                    while (productos.hasMoreElements()) {
+                        int cod = productos.nextElement();
+                        Productos_BE revision = hashtable.get(cod);
+                        if (revision != null) { // Add null check here
+                            String set = revision.getNombre();
+                            advertencia = revision.getCant();
+                            if (set.equals(nombre)) {
+                                precio = revision.getPrice();
+                                totalix = quant * precio;
+                            }
+                        }
+                    }
+
+                  
+                }
             }
         });
+
         btnAgregar.setBounds(92, 409, 230, 71);
         contentPane.add(btnAgregar);
+
 
         JButton btnModificar = new JButton("Modificar");
         btnModificar.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -164,17 +224,15 @@ public class I_Inventario extends JInternalFrame {
         btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (selectedRowIndex != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+ 
                     model.removeRow(selectedRowIndex);
-
+                    int indez = (Integer)table.getValueAt(selectedRowIndex, 0);
+                    modi.removeFromUniversalHashtable(indez);
                     // Limpiar los campos de texto y restablecer el índice de fila seleccionado
                     textFieldCodigo.setText("");
                     textFieldNombre.setText("");
                     textFieldCantidad.setText("");
                     textFieldPrecio.setText("");
-                    selectedRowIndex = -1;
-                }
             }
         });
         btnEliminar.setBounds(92, 594, 230, 71);
@@ -205,6 +263,11 @@ public class I_Inventario extends JInternalFrame {
         contentPane.add(btnListar);
 
         table = new JTable();
+        table.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		selectedRowIndex = table.getSelectedRow();
+        	}
+        });
         table.setModel(new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"Código", "Nombre", "Cantidad", "Precio"}
@@ -233,7 +296,7 @@ public class I_Inventario extends JInternalFrame {
         table.getSelectionModel().addListSelectionListener(e -> {
             if (table.getSelectedRow() != -1) {
                 selectedRowIndex = table.getSelectedRow();
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
+               
                 textFieldCodigo.setText(model.getValueAt(selectedRowIndex, 0).toString());
                 textFieldNombre.setText(model.getValueAt(selectedRowIndex, 1).toString());
                 textFieldCantidad.setText(model.getValueAt(selectedRowIndex, 2).toString());
