@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -283,48 +284,41 @@ Create the frame.*/
         });
   }
   
-  public void buscarCliente() {
-
- /* public void buscar() {
-	  String nombre = txtNombreCliente.getText();
-      int ID = Integer.parseInt(txtDNICliente.getText());
+  public void buscar() {
+	  String name = txtNombreCliente.getText();
+      int ID = Integer.parseInt(txtIDCliente.getText());
      
-      Clientes cliente = new Clientes();
-      cliente.setname(nombre);
-      cliente.setID(ID);
+      Clientes_BE cliente = new Clientes_BE(name, ID);
 
-      ArrayList<Clientes> resultados = buscarCliente(cliente);
+      ArrayList<Clientes_BE > resultados = buscarCliente(cliente);
 
-      JTextArea txtAreaResultados = new JTextArea();
-      txtAreaResultados.setEditable(false);
-
-      for (Clientes c : resultados) {
-          txtAreaResultados.append("Nombre: " + c.getname() + "\n");
-          txtAreaResultados.append("DNI: " + c.getID() + "\n");
-          txtAreaResultados.append("------------------\n");
+      for (Clientes_BE  c : resultados) {
+          tableClientes.add("Nombre: " + c.getName() + "\n", getFocusOwner());
+          tableClientes.add("DNI: " + c.getID() + "\n", getFocusOwner());
+          tableClientes.add("------------------\n", getFocusOwner());
       }
 
-      JScrollPane scrollPane1 = new JScrollPane(txtAreaResultados);
-      scrollPane1.setBounds(20, 46, 398, 159);
-      Clientes.add(scrollPane1);
-      
-  }*/
+      //Clientes_BE.add(tableClientes);//
+     
+  }
   
-  /*public ArrayList<Clientes> buscarCliente(Clientes cliente) {
+  public ArrayList<Clientes_BE> buscarCliente(Clientes_BE cliente) {
 	  
-	    ArrayList<Clientes> resultados = new ArrayList<Clientes>();
-	    ArrayList<Clientes> listaClientes = new ArrayList<Clientes>();
-	    listaClientes.add(new Clientes());
-	    listaClientes.add(new Clientes());
-	    listaClientes.add(new Clientes());
+	  	String name = txtNombreCliente.getText();
+	    int ID = Integer.parseInt(txtIDCliente.getText());
+	    ArrayList<Clientes_BE> resultados = new ArrayList<Clientes_BE>();
+	    ArrayList<Clientes_BE> listaClientes = new ArrayList<Clientes_BE>();
+	    listaClientes.add(new Clientes_BE(name, ID));
+	    listaClientes.add(new Clientes_BE(name, ID));
+	    listaClientes.add(new Clientes_BE(name, ID));
 	   
-	    for (Clientes c : listaClientes) {
-	        if (c.getname().equals(cliente.getname()) && c.getID() == cliente.getID()) {
+	    for (Clientes_BE c : listaClientes) {
+	        if (c.getName().equals(cliente.getName()) && c.getID() == cliente.getID()) {
 	            resultados.add(c);
 	        }
 	    }
  
 	    return resultados;
-	}*/
-  }
+	}
+  
 } 
