@@ -183,7 +183,11 @@ public class I_Inventario extends JInternalFrame {
                         }
                     }
 
-                  
+      
+                    
+                    // Agregar los datos ingresados a la hashtable universal
+                    int codigoInt = Integer.parseInt(codigo);
+                    modi.addToUniversalHashtable(codigoInt, new Productos_BE(codigoInt, quant, nombre, precio));
                 }
             }
         });
