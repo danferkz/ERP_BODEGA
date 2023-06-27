@@ -237,11 +237,11 @@ public class I_Ventas extends JInternalFrame {
 					    Productos_BE revision = hashtable.get(cod);
 					    if (revision != null) { // Add null check here
 					        String set = revision.getNombre();
-					        advertencia = revision.getCant();
 					        if (set.equals(nom)) {
 					            nom = set;
 					            precio = revision.getPrice();
 					            totalix = quant * precio;
+					            advertencia = revision.getCant();
 					        }
 					    }
 					}
