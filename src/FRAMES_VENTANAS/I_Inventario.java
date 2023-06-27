@@ -142,15 +142,19 @@ public class I_Inventario extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 String codigo = textFieldCodigo.getText();
                 String nombre = textFieldNombre.getText();
-                double cantidad = Double.parseDouble(textFieldCantidad.getText());
-                double precio = Double.parseDouble(textFieldPrecio.getText());
+                String cantidadText = textFieldCantidad.getText();
+                String precioText = textFieldPrecio.getText();
 
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
 
                 // Verificar si algún campo está vacío
-                if (codigo.trim().isEmpty() || nombre.trim().isEmpty() || textFieldCantidad.getText().trim().isEmpty() || textFieldPrecio.getText().trim().isEmpty()) {
+                if (codigo.trim().isEmpty() || nombre.trim().isEmpty() || cantidadText.trim().isEmpty() || precioText.trim().isEmpty()) {
                     JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
                 } else {
+                    // Convertir a números solo si los campos no están vacíos
+                    double cantidad = Double.parseDouble(cantidadText);
+                    double precio = Double.parseDouble(precioText);
+
                     // Agregar la nueva fila a la tabla
                     model.addRow(new Object[]{codigo, nombre, cantidad, precio});
 
@@ -161,7 +165,7 @@ public class I_Inventario extends JInternalFrame {
                     textFieldPrecio.setText("");
 
                     // Realizar la acción adicional
-                    int quant = Integer.parseInt(textFieldCantidad.getText());
+                    int quant = Integer.parseInt(cantidadText);
                     double totalix = 0;
                     int advertencia = 0;
                     Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
@@ -177,8 +181,9 @@ public class I_Inventario extends JInternalFrame {
                                 totalix = quant * precio;
                             }
                         }
-                   
                     }
+
+                  
                 }
             }
         });
