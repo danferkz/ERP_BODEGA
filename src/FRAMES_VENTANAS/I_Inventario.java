@@ -38,6 +38,8 @@ import java.awt.Font;
 
 import CLASES.Creation;
 import CLASES.Productos_BE;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class I_Inventario extends JInternalFrame {
 
@@ -52,7 +54,7 @@ public class I_Inventario extends JInternalFrame {
     private JTextField textFieldPrecio;
     private JTable table;
     private DefaultListModel<String> suggestionsModel;
-    private int selectedRowIndex = -1;
+    private int selectedRowIndex;
     private Metodo_BC modi = new Metodo_BC();
 	private Return_DALC especific = new Return_DALC();
 	private Creation Hash = new Creation();
@@ -197,17 +199,15 @@ public class I_Inventario extends JInternalFrame {
         btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (selectedRowIndex != -1) {
-                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+ 
                     model.removeRow(selectedRowIndex);
-
+                    int indez = (Integer)table.getValueAt(selectedRowIndex, 0);
+                    modi.removeFromUniversalHashtable(indez);
                     // Limpiar los campos de texto y restablecer el índice de fila seleccionado
                     textFieldCodigo.setText("");
                     textFieldNombre.setText("");
                     textFieldCantidad.setText("");
                     textFieldPrecio.setText("");
-                    selectedRowIndex = -1;
-                }
             }
         });
         btnEliminar.setBounds(92, 594, 230, 71);
@@ -238,6 +238,11 @@ public class I_Inventario extends JInternalFrame {
         contentPane.add(btnListar);
 
         table = new JTable();
+        table.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		selectedRowIndex = table.getSelectedRow();
+        	}
+        });
         table.setModel(new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"Código", "Nombre", "Cantidad", "Precio"}
