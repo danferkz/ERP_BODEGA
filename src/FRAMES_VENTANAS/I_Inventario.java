@@ -80,6 +80,21 @@ public class I_Inventario extends JInternalFrame {
         contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        
+        
+		DefaultTableModel model = new DefaultTableModel(
+			    new String[] {"Código", "Nombre", "Cantidad", "Precio"}, 0) {
+			    private static final long serialVersionUID = 1L;
+			    Class<?>[] columnTypes = new Class[] {
+			        String.class,
+			        String.class,
+			        Integer.class,
+			        Double.class
+			    };
+			    public Class<?> getColumnClass(int columnIndex) {
+			        return columnTypes[columnIndex];
+			    }
+			};
 
         JLabel lblCodigo = new JLabel("Código:");
         lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -127,11 +142,25 @@ public class I_Inventario extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 String codigo = textFieldCodigo.getText();
                 String nombre = textFieldNombre.getText();
-                int cantidad = Integer.parseInt(textFieldCantidad.getText());
+                double cantidad = Double.parseDouble(textFieldCantidad.getText());
                 double precio = Double.parseDouble(textFieldPrecio.getText());
+
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+                // Verificar si algún campo está vacío
                 if (codigo.trim().isEmpty() || nombre.trim().isEmpty() || textFieldCantidad.getText().trim().isEmpty() || textFieldPrecio.getText().trim().isEmpty()) {
                     JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
                 } else {
+                    // Agregar la nueva fila a la tabla
+                    model.addRow(new Object[]{codigo, nombre, cantidad, precio});
+
+                    // Limpiar los campos de texto
+                    textFieldCodigo.setText("");
+                    textFieldNombre.setText("");
+                    textFieldCantidad.setText("");
+                    textFieldPrecio.setText("");
+
+                    // Realizar la acción adicional
                     int quant = Integer.parseInt(textFieldCantidad.getText());
                     double totalix = 0;
                     int advertencia = 0;
@@ -148,21 +177,12 @@ public class I_Inventario extends JInternalFrame {
                                 totalix = quant * precio;
                             }
                         }
-                    }
-
-                    if (quant > advertencia) {
-                        JOptionPane.showConfirmDialog(null, "No existen suficientes existencias de " + nombre);
-                    } else {
-                        model.addRow(new Object[]{
-                                nombre,
-                                precio,
-                                quant,
-                                totalix,
-                        });
+                   
                     }
                 }
             }
         });
+
         btnAgregar.setBounds(92, 409, 230, 71);
         contentPane.add(btnAgregar);
 
@@ -271,7 +291,7 @@ public class I_Inventario extends JInternalFrame {
         table.getSelectionModel().addListSelectionListener(e -> {
             if (table.getSelectedRow() != -1) {
                 selectedRowIndex = table.getSelectedRow();
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
+               
                 textFieldCodigo.setText(model.getValueAt(selectedRowIndex, 0).toString());
                 textFieldNombre.setText(model.getValueAt(selectedRowIndex, 1).toString());
                 textFieldCantidad.setText(model.getValueAt(selectedRowIndex, 2).toString());
