@@ -4,6 +4,7 @@ import CLASES.Creation;
 import CLASES.Metodo_BC;
 import CLASES.Return_DALC;
 import CLASES.Productos_BE;
+import CLASES.Clientes_BE;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -337,14 +338,17 @@ public class I_Ventas extends JInternalFrame {
 				public void actionPerformed(ActionEvent e) {
 					String name = textClient.getText();
 					String id = String.valueOf(textID.getText());
+					int id1 = Integer.parseInt(textID.getText());
 					if (name==null || id== null) {
 						JOptionPane.showConfirmDialog(null, "Falta datos en los campos de Cliente o ID");
 					}
 					else {
 						boleta();	
 						extraccion();
+						modi.addToUniversalHashtable3(id1, new Clientes_BE(name,id1));
 						System.out.println(String.valueOf(especific.accessUniversalHashtable(2).getCant()));
 					}
+					
 				}
 			});
 			btnRealizar.setBounds(1053, 627, 166, 38);
