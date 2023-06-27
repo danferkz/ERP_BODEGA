@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -236,6 +239,14 @@ Create the frame.*/
         txtNombreCliente.setBounds(106, 8, 86, 20);
         Clientes.add(txtNombreCliente);
         txtNombreCliente.setColumns(10);
+        txtNombreCliente.addKeyListener((KeyListener) new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+                    e.consume();
+                }
+            }
+        });
         
         JLabel lblNewLabel_2 = new JLabel("ID:");
         lblNewLabel_2.setBounds(202, 11, 46, 14);
@@ -245,11 +256,19 @@ Create the frame.*/
         txtIDCliente.setColumns(10);
         txtIDCliente.setBounds(233, 8, 86, 20);
         Clientes.add(txtIDCliente);
+        txtIDCliente.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) || txtIDCliente.getText().length() >= 8) {
+                    e.consume();
+                }
+            }
+        });
         
         JButton btnBuscarCliente = new JButton("Buscar");
         btnBuscarCliente.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		//buscar();
+        		buscar();
         	}
         });
         btnBuscarCliente.setForeground(new Color(51, 0, 255));
