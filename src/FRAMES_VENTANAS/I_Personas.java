@@ -304,40 +304,59 @@ Create the frame.*/
   }
   
   public void buscar() {
-	  String name = txtNombreCliente.getText();
-      int ID = Integer.parseInt(txtIDCliente.getText());
-     
-      Clientes_BE cliente = new Clientes_BE(name, ID);
-
-      ArrayList<Clientes_BE > resultados = buscarCliente(cliente);
-
-      for (Clientes_BE  c : resultados) {
-          tableClientes.add("Nombre: " + c.getName() + "\n", getFocusOwner());
-          tableClientes.add("DNI: " + c.getID() + "\n", getFocusOwner());
-          tableClientes.add("------------------\n", getFocusOwner());
-      }
-
-      //Clientes_BE.add(tableClientes);//
-     
-  }
-  
-  public ArrayList<Clientes_BE> buscarCliente(Clientes_BE cliente) {
 	  
-	  	String name = txtNombreCliente.getText();
-	    int ID = Integer.parseInt(txtIDCliente.getText());
-	    ArrayList<Clientes_BE> resultados = new ArrayList<Clientes_BE>();
-	    ArrayList<Clientes_BE> listaClientes = new ArrayList<Clientes_BE>();
-	    listaClientes.add(new Clientes_BE(name, ID));
-	    listaClientes.add(new Clientes_BE(name, ID));
-	    listaClientes.add(new Clientes_BE(name, ID));
-	   
-	    for (Clientes_BE c : listaClientes) {
-	        if (c.getName().equals(cliente.getName()) && c.getID() == cliente.getID()) {
-	            resultados.add(c);
+	  	DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+	    model.setRowCount(0); // Limpiar la tabla
+
+	    String nombre = txtNombreCliente.getText().trim();
+	    String idText = txtIDCliente.getText().trim();
+
+	    boolean buscarPorNombre = !nombre.isEmpty();
+	    boolean buscarPorID = !idText.isEmpty();
+
+	    if (!buscarPorNombre && !buscarPorID) {
+	        JOptionPane.showMessageDialog(null, "Ingrese un nombre o un ID para buscar.");
+	        return;
+	    }
+
+	    ArrayList<Clientes_BE> resultados = new ArrayList<>();
+
+	    // Buscar por nombre
+	    if (buscarPorNombre) {
+	        for (int i = 0; i < model.getRowCount(); i++) {
+	            String nombreTabla = model.getValueAt(i, 0).toString();
+	            if (nombreTabla.equalsIgnoreCase(nombre)) {
+	                resultados.add(new Clientes_BE(nombreTabla, Integer.parseInt(model.getValueAt(i, 1).toString())));
+	            }
 	        }
 	    }
- 
-	    return resultados;
-	}
+
+	    // Buscar por ID
+	    if (buscarPorID) {
+	        int id = 0;
+	        try {
+	            id = Integer.parseInt(idText);
+	        } catch (NumberFormatException ex) {
+	            JOptionPane.showMessageDialog(null, "El ID debe ser un número válido.");
+	            return;
+	        }
+
+	        for (int i = 0; i < model.getRowCount(); i++) {
+	            int idTabla = Integer.parseInt(model.getValueAt(i, 1).toString());
+	            if (id == idTabla) {
+	                String nombreTabla = model.getValueAt(i, 0).toString();
+	                Clientes_BE cliente = new Clientes_BE(nombreTabla, idTabla);
+	                if (!resultados.contains(cliente)) {
+	                    resultados.add(cliente);
+	                }
+	            }
+	        }
+	    }
+
+	    // Mostrar resultados en la tabla
+	    for (Clientes_BE cliente : resultados) {
+	        model.addRow(new Object[]{cliente.getName(), cliente.getID()});
+	    }
+  }
   
 } 
