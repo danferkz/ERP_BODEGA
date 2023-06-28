@@ -5,13 +5,13 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
+
 import java.io.File;
-=======
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
->>>>>>> 0bdaafbf2a4544bde1524f8dbf9c9475c09bccab
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
