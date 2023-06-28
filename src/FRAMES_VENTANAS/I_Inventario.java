@@ -97,8 +97,8 @@ public class I_Inventario extends JInternalFrame {
 			};
 
         JLabel lblCodigo = new JLabel("Código:");
-        lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblCodigo.setBounds(71, 146, 78, 20);
+        lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblCodigo.setBounds(32, 172, 78, 20);
         contentPane.add(lblCodigo);
 
         textFieldCodigo = new JTextField();
@@ -107,8 +107,8 @@ public class I_Inventario extends JInternalFrame {
         textFieldCodigo.setColumns(10);
 
         JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblNombre.setBounds(71, 205, 116, 20);
+        lblNombre.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblNombre.setBounds(32, 222, 116, 20);
         contentPane.add(lblNombre);
 
         textFieldNombre = new JTextField();
@@ -117,8 +117,8 @@ public class I_Inventario extends JInternalFrame {
         textFieldNombre.setColumns(10);
 
         JLabel lblCantidad = new JLabel("Cantidad:");
-        lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblCantidad.setBounds(71, 278, 100, 20);
+        lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblCantidad.setBounds(32, 266, 100, 20);
         contentPane.add(lblCantidad);
 
         textFieldCantidad = new JTextField();
@@ -127,8 +127,8 @@ public class I_Inventario extends JInternalFrame {
         textFieldCantidad.setColumns(10);
 
         JLabel lblPrecio = new JLabel("Precio:");
-        lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblPrecio.setBounds(71, 342, 100, 20);
+        lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblPrecio.setBounds(32, 311, 100, 20);
         contentPane.add(lblPrecio);
 
         textFieldPrecio = new JTextField();

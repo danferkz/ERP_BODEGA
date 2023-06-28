@@ -66,6 +66,11 @@ public class VentanaMenu extends JFrame {
         descktopPane.setBackground(Color.LIGHT_GRAY);
         contentPane.add(descktopPane, BorderLayout.CENTER);
         
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon(VentanaMenu.class.getResource("/IMAGENES/Home.jpg")));
+        lblNewLabel.setBounds(0, 0, 1350, 707);
+        descktopPane.add(lblNewLabel);
+        
         ventasItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	I_Ventas  ventasItem = new I_Ventas();
