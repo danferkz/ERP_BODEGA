@@ -5,9 +5,15 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -160,39 +166,34 @@ Create the frame.*/
         btnAgregar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
-        		 String name = textNombre.getText();
+        		 	String name = textNombre.getText();
         	        String direccion = textDireccion.getText();
         	        String idText = textID.getText();
         	        
+        	        if (name.trim().isEmpty() || direccion.trim().isEmpty() || idText.trim().isEmpty()) {
+                        JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
+                    } else {
+                       
+                    	DefaultTableModel model = (DefaultTableModel) table_Proveedores.getModel();
+                    	
+                        model.addRow(new Object[]{
+                        				name,
+                        				direccion,
+                        				idText
+                        				});
 
-        	        // Validación de solo letras en el nombre y dirección
-        	        if (!name.matches("[a-zA-Z]+")) {
-        	            JOptionPane.showMessageDialog(null, "El campo Nombre solo debe contener letras.");
-        	            return;
-        	        }
-
-        	        if (!direccion.matches("[a-zA-Z\\s]+")) {
-        	            JOptionPane.showMessageDialog(null, "El campo Dirección solo debe contener letras y espacios.");
-        	            return;
-        	        }
-
-        	        int ID = 0;
-
-        	        try {
-        	            ID = Integer.parseInt(idText);
-        	        } catch (NumberFormatException ex) {
-        	            // Manejar la excepción de formato numérico incorrecto
-        	            JOptionPane.showMessageDialog(null, "El campo ID debe ser un número válido.");
-        	            return; // Salir del método actionPerformed
-        	        }
-
-        	        DefaultTableModel model = (DefaultTableModel) table_Proveedores.getModel();
-        	        model.addRow(new Object[]{name, direccion, ID});
-
-        	        // Limpiar los campos de texto
-        	        textNombre.setText("");
-        	        textDireccion.setText("");
-        	        textID.setText("");
+                        table_Proveedores.setModel(model);
+                       
+                        textNombre.setText("");
+                        textDireccion.setText("");
+                        textID.setText("");
+                
+                        int codigoInt = Integer.parseInt(idText);
+                        modi.addToUniversalHashtable2(codigoInt, new Proveedores_BE(name, direccion, codigoInt));
+                    }
+        	        
+        	        modifyFile3();
+        	        cargarproveedor();
         	    }
         	});
 
@@ -203,21 +204,7 @@ Create the frame.*/
         btnListar.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnListar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		DefaultTableModel model = (DefaultTableModel) table_Proveedores.getModel();
-                Object[][] rowData = new Object[model.getRowCount()][model.getColumnCount()];
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        rowData[i][j] = model.getValueAt(i, j);
-                    }
-                }
-
-                Arrays.sort(rowData, Comparator.comparing(o -> o[0].toString()));
-
-                model.setRowCount(0); // Limpiar la tabla
-
-                for (Object[] row : rowData) {
-                    model.addRow(row);
-                }
+        		cargarproveedor();
             }
         });
         btnListar.setBounds(21, 584, 117, 40);
@@ -230,13 +217,18 @@ Create the frame.*/
         		if (selectedRowIndex != -1) {
                     DefaultTableModel model = (DefaultTableModel) table_Proveedores.getModel();
                     model.removeRow(selectedRowIndex);
-
-                    // Limpiar los campos de texto y restablecer el índice de fila seleccionado
+                    
+                    int key = (Integer)table_Proveedores.getValueAt(selectedRowIndex, 2);
+                    
+                    modi.removeFromUniversalHashtable2(key);
+                    
                     textNombre.setText("");
                     textDireccion.setText("");
                     textID.setText("");
                     selectedRowIndex = -1;
                 }
+        		modifyFile3();
+    	        cargarproveedor();
             }
         });
         btnEliminar.setBounds(168, 584, 117, 40);
@@ -390,7 +382,7 @@ Create the frame.*/
         
 		
 		cargar();
-		    
+		cargarproveedor();
 		
         JLabel lblNewLabel_4 = new JLabel("");
         lblNewLabel_4.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/cliente.png")));
@@ -482,4 +474,64 @@ Create the frame.*/
 	 tableClientes.setModel(model);
 			 
   }
+  
+  private void cargarproveedor() {
+	  
+		DefaultTableModel model = (DefaultTableModel) table_Proveedores.getModel();
+		
+		model.setRowCount(0);
+		  
+		table_Proveedores.setModel(model);
+	  	    
+	  			Hashtable<Integer,Proveedores_BE> hashtable = Hash.getHashtable2();
+		        Enumeration<Integer> proveedores = hashtable.keys();
+		        while (proveedores.hasMoreElements()) {
+		        	int cod = proveedores.nextElement();
+		        	Proveedores_BE proveedor1 = hashtable.get(cod);
+		        	
+		        	model.addRow(new Object[] {
+		        			proveedor1.getName(),
+		        			proveedor1.getDirection(),
+		        			proveedor1.getID(),
+		        			
+	  		  			});
+		        	}
+		        	table_Proveedores.setModel(model);
+  					}
+  
+  private void modifyFile3() {
+	    try {
+	        // Clear the contents of the file
+	        String filePath = "src/Datos/Proveedores_BE.txt"; // Update the file path accordingly
+
+	        // Clear the file contents
+	        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+	        fileOutputStream.close();
+
+	        Hashtable<Integer, Proveedores_BE> hashtable = Hash.getHashtable2();
+	        Enumeration<Integer> indic = hashtable.keys();
+
+	        // Append new text to the file
+	        FileWriter fileWriter = new FileWriter(filePath, true);
+	        BufferedWriter writer = new BufferedWriter(fileWriter);
+
+	        while (indic.hasMoreElements()) {
+	            int code = indic.nextElement();
+	            Proveedores_BE revision = hashtable.get(code);
+	            String nombre = revision.getName();
+		        String directiv = revision.getDirection();
+	            int id = revision.getID();
+	            
+	            writer.write(nombre + ",");
+		writer.write(directiv + ",");
+	            writer.write(id + "");
+	            writer.newLine();
+	        }
+
+	        writer.close();
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+  				
 } 

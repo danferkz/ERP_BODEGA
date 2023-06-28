@@ -47,6 +47,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -171,8 +172,6 @@ public class I_Inventario extends JInternalFrame {
                 String cantidadText = textFieldCantidad.getText();
                 String precioText = textFieldPrecio.getText();
 
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-
                 // Verificar si algún campo está vacío
                 if (codigo.trim().isEmpty() || nombre.trim().isEmpty() || cantidadText.trim().isEmpty() || precioText.trim().isEmpty()) {
                     JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
@@ -198,6 +197,8 @@ public class I_Inventario extends JInternalFrame {
                     int codigoInt = Integer.parseInt(codigo);
                     modi.addToUniversalHashtable(codigoInt, new Productos_BE(codigoInt, cantidad, nombre, precio));
                 }
+                modifyFile1();
+                CARGA();
             }
         });
 
@@ -241,6 +242,8 @@ public class I_Inventario extends JInternalFrame {
                     textFieldPrecio.setText("");
                     selectedRowIndex = -1;
                 }
+                modifyFile1();
+                CARGA();
             }
         });
         btnModificar.setBounds(32, 477, 116, 57);
@@ -264,6 +267,8 @@ public class I_Inventario extends JInternalFrame {
                     textFieldPrecio.setText("");
                     selectedRowIndex = -1;
                 }
+                modifyFile1();
+                CARGA();
             }
         });
         btnEliminar.setBounds(32, 545, 116, 57);
@@ -340,6 +345,7 @@ public class I_Inventario extends JInternalFrame {
         });
     }
 
+    
     private void CARGA()
     {
 
@@ -365,6 +371,43 @@ public class I_Inventario extends JInternalFrame {
     		}
     		table.setModel(model);
     		
+    }
+    
+    private void modifyFile1() {
+        try {
+            // Clear the contents of the file
+            String filePath = "src/Datos/Inventario_re.txt"; // Update the file path accordingly
+
+            // Clear the file contents
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+            fileOutputStream.close();
+
+            Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+            Enumeration<Integer> productos = hashtable.keys();
+
+            // Append new text to the file
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+
+            while (productos.hasMoreElements()) {
+                int code = productos.nextElement();
+                Productos_BE revision = hashtable.get(code);
+                String nombre = revision.getNombre();
+                int actual = revision.getCant();
+                int id = revision.getCod();
+                double price = revision.getPrice();
+
+                writer.write(id + ",");
+                writer.write(nombre + ",");
+                writer.write(actual + ",");
+                writer.write(price + "");
+                writer.newLine();
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     
