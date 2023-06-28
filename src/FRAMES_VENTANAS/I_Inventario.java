@@ -92,7 +92,7 @@ public class I_Inventario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1366, 848);
         contentPane = new JPanel();
-        contentPane.setBackground(Color.WHITE);
+        contentPane.setBackground(new Color(141, 185, 205));
         setContentPane(contentPane);
         contentPane.setLayout(null);
         table = new JTable();
@@ -125,41 +125,41 @@ public class I_Inventario extends JInternalFrame {
 
         JLabel lblCodigo = new JLabel("Código:");
         lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblCodigo.setBounds(32, 172, 78, 20);
+        lblCodigo.setBounds(88, 315, 78, 20);
         contentPane.add(lblCodigo);
 
         textFieldCodigo = new JTextField();
-        textFieldCodigo.setBounds(172, 134, 150, 48);
+        textFieldCodigo.setBounds(172, 311, 129, 32);
         contentPane.add(textFieldCodigo);
         textFieldCodigo.setColumns(10);
 
         JLabel lblNombre = new JLabel("Nombre:");
         lblNombre.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblNombre.setBounds(32, 222, 116, 20);
+        lblNombre.setBounds(88, 371, 116, 20);
         contentPane.add(lblNombre);
 
         textFieldNombre = new JTextField();
-        textFieldNombre.setBounds(172, 193, 150, 48);
+        textFieldNombre.setBounds(172, 362, 129, 32);
         contentPane.add(textFieldNombre);
         textFieldNombre.setColumns(10);
 
         JLabel lblCantidad = new JLabel("Cantidad:");
         lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblCantidad.setBounds(32, 266, 100, 20);
+        lblCantidad.setBounds(88, 422, 100, 20);
         contentPane.add(lblCantidad);
 
         textFieldCantidad = new JTextField();
-        textFieldCantidad.setBounds(172, 266, 150, 48);
+        textFieldCantidad.setBounds(172, 418, 129, 32);
         contentPane.add(textFieldCantidad);
         textFieldCantidad.setColumns(10);
 
         JLabel lblPrecio = new JLabel("Precio:");
         lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblPrecio.setBounds(32, 311, 100, 20);
+        lblPrecio.setBounds(88, 472, 100, 20);
         contentPane.add(lblPrecio);
 
         textFieldPrecio = new JTextField();
-        textFieldPrecio.setBounds(172, 330, 150, 48);
+        textFieldPrecio.setBounds(172, 468, 129, 32);
         contentPane.add(textFieldPrecio);
         textFieldPrecio.setColumns(10);
 
@@ -202,7 +202,7 @@ public class I_Inventario extends JInternalFrame {
             }
         });
 
-        btnAgregar.setBounds(32, 408, 116, 57);
+        btnAgregar.setBounds(118, 540, 116, 57);
         contentPane.add(btnAgregar);
 
 
@@ -246,7 +246,7 @@ public class I_Inventario extends JInternalFrame {
                 CARGA();
             }
         });
-        btnModificar.setBounds(32, 477, 116, 57);
+        btnModificar.setBounds(32, 608, 116, 57);
         contentPane.add(btnModificar);
 
 
@@ -271,11 +271,11 @@ public class I_Inventario extends JInternalFrame {
                 CARGA();
             }
         });
-        btnEliminar.setBounds(32, 545, 116, 57);
+        btnEliminar.setBounds(221, 608, 116, 57);
         contentPane.add(btnEliminar);
         
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(390, 17, 950, 648);
+        scrollPane.setBounds(390, 17, 950, 693);
         contentPane.add(scrollPane);
         
 
@@ -302,9 +302,14 @@ public class I_Inventario extends JInternalFrame {
         table.setFont(tableFont);
         
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon(I_Inventario.class.getResource("/IMAGENES/I_inventario.png")));
-        lblNewLabel.setBounds(64, 17, 250, 250);
+        lblNewLabel.setIcon(new ImageIcon(I_Inventario.class.getResource("/IMAGENES/inventario.png")));
+        lblNewLabel.setBounds(77, 21, 250, 250);
         contentPane.add(lblNewLabel);
+        
+        JLabel lblNewLabel_2 = new JLabel("");
+        lblNewLabel_2.setIcon(new ImageIcon(I_Inventario.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_2.setBounds(77, 293, 225, 225);
+        contentPane.add(lblNewLabel_2);
 
         // Aplica el tamaño de fuente al renderizador de encabezado de la tabla
         tableHeader.setFont(tableHeaderFont);
