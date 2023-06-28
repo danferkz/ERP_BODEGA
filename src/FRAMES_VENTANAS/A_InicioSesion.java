@@ -69,19 +69,16 @@ public class A_InicioSesion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				VentanaMenu Cuerpo = new VentanaMenu();
 				
-				String usuario = "0";
-				String contraseña = "0";
-				
-				
-				
-				if (textUser.getText().equals(usuario) && Contra.getText().equals(contraseña) ) {
-					Cuerpo.setVisible(true);
-					A_InicioSesion.this.dispose();
-					
-					//modi.addToUniversalHashtable2(, new Personas());
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Usuario o codigo incorrectos");
+				String usuario = "Paxo";
+				String contraseña = "0123";
+			
+				if (textUser.getText().equals(usuario) && Contra.getText().equals(contraseña)) {
+				    Cuerpo.setVisible(true);
+				    A_InicioSesion.this.dispose();
+				    // Additional actions if the password is correct
+				} else {
+					Cuerpo.setVisible(false);
+				    JOptionPane.showMessageDialog(null, "Usuario o codigo incorrectos");
 				}
 				
 			}
