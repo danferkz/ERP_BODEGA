@@ -292,20 +292,17 @@ Create the frame.*/
         Clientes.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("Nombres:");
-
         lblNewLabel.setBounds(171, 61, 87, 16);
         Clientes.add(lblNewLabel);
         
         txtNombreCliente = new JTextField();
         txtNombreCliente.setBounds(233, 59, 86, 20);
-
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblNewLabel.setBounds(67, 375, 87, 16);
         Clientes.add(lblNewLabel);
         
         txtNombreCliente = new JTextField();
         txtNombreCliente.setBounds(154, 365, 123, 30);
-
         Clientes.add(txtNombreCliente);
         txtNombreCliente.setColumns(10);
         txtNombreCliente.addKeyListener((KeyListener) new KeyAdapter() {
@@ -318,22 +315,16 @@ Create the frame.*/
         });
         
         JLabel lblNewLabel_2 = new JLabel("ID:");
-
         lblNewLabel_2.setBounds(372, 62, 46, 14);
-
         lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblNewLabel_2.setBounds(69, 414, 46, 14);
-
         Clientes.add(lblNewLabel_2);
         
         txtIDCliente = new JTextField();
         txtIDCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
         txtIDCliente.setColumns(10);
-
         txtIDCliente.setBounds(403, 59, 86, 20);
-
         txtIDCliente.setBounds(154, 406, 123, 30);
-
         Clientes.add(txtIDCliente);
         txtIDCliente.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -351,23 +342,13 @@ Create the frame.*/
         	}
         });
         btnBuscarCliente.setForeground(new Color(51, 0, 255));
-<<<<<<< HEAD
         btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
         btnBuscarCliente.setBackground(Color.GRAY);
         btnBuscarCliente.setBounds(329, 6, 89, 23);
-=======
         btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnBuscarCliente.setBackground(new Color(255, 255, 255));
-
         btnBuscarCliente.setBounds(517, 57, 89, 23);
-
         btnBuscarCliente.setBounds(125, 456, 123, 47);
-<<<<<<< HEAD
-
-=======
->>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
->>>>>>> 8431b46a74b5eb0e65907c1834404eba6a11b88c
->>>>>>> 2b564964b082486b9e382788e8212f9725fa2855
         Clientes.add(btnBuscarCliente);
            
 
@@ -389,7 +370,6 @@ Create the frame.*/
 		Clientes.add(scrollPaneClientes);
 		    
         tableClientes = new JTable();
-<<<<<<< HEAD
         tableClientes.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				fila = tableClientes.getSelectedRow();
@@ -413,21 +393,8 @@ Create the frame.*/
 		modi.addToUniversalHashtable3(3, new Clientes_BE("Aaron", 33344105));
 		modi.addToUniversalHashtable3(4, new Clientes_BE("Alex", 44343434));
 		cargar();
-=======
-        tableClientes.setModel(new DefaultTableModel(
-        		new Object[][]{},
-        		new String[]{"Nombre", "ID"}
-        ));
-        tableClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
-
-        scrollPaneClientes.setBounds(20, 98, 1328, 604);
-        Clientes.add(scrollPaneClientes);
-
-        scrollPaneClientes.setBounds(364, 37, 984, 665);
-        Clientes.add(scrollPaneClientes);      
-
-        
+		    
+		
         JLabel lblNewLabel_4 = new JLabel("");
         lblNewLabel_4.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/cliente.png")));
         lblNewLabel_4.setBounds(67, 77, 250, 250);
@@ -477,23 +444,7 @@ Create the frame.*/
         lblNewLabel_3_3_7.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
         lblNewLabel_3_3_7.setBounds(0, 491, 225, 225);
         Clientes.add(lblNewLabel_3_3_7);
-        
-        tableClientes.getSelectionModel().addListSelectionListener(e -> {
-        	if(tableClientes.getSelectedRow() != -1) {
-        		selectedRowIndex = tableClientes.getSelectedRow();
 
-        		modi.addToUniversalHashtable3(1, new Clientes_BE("Luis",  43321105));
-        		modi.addToUniversalHashtable3(2, new Clientes_BE("Marco", 53327708));
-        		modi.addToUniversalHashtable3(3, new Clientes_BE("Aaron", 33344105));
-        		modi.addToUniversalHashtable3(4, new Clientes_BE("Jairo", 15515154));
-        		modi.addToUniversalHashtable3(5, new Clientes_BE("Andres", 51451015));
-
-        		DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
-        		txtNombreCliente.setText(model.getValueAt(selectedRowIndex, 0).toString());
-        		txtIDCliente.setText(model.getValueAt(selectedRowIndex, 1).toString());       		
-        	}
-        });
->>>>>>> 8431b46a74b5eb0e65907c1834404eba6a11b88c
   }
   
   private void buscar() {
