@@ -45,12 +45,7 @@ public class VentanaMenu extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1366, 768);
         setLocationRelativeTo(null);
-        
-<<<<<<< HEAD
-        
-=======
-       
->>>>>>> d9e0db81cc0495fce0471297b54299895d68d2b3
+   
         						
         lectura();
         lectura2();
@@ -207,7 +202,7 @@ public class VentanaMenu extends JFrame {
             e.printStackTrace();
         }
     }
-<<<<<<< HEAD
+
     
     private void modifyFile2() {
         try {
@@ -335,10 +330,7 @@ try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("
 }
     
     
-=======
-   
->>>>>>> d9e0db81cc0495fce0471297b54299895d68d2b3
-    
+
   
     
 }
