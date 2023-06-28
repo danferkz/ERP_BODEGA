@@ -302,7 +302,7 @@ private void modifyFile3() {
 
 
 private void lectura3() {
-try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Datos/Clientes_BE.txt")) {
+try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Datos/Proveedores_BE.txt")) {
     if (inputStream != null) {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.US_ASCII);
         BufferedReader br = new BufferedReader(inputStreamReader);

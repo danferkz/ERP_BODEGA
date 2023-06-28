@@ -388,10 +388,7 @@ Create the frame.*/
 		btnCargar.setBounds(443, 7, 89, 23);
 		Clientes.add(btnCargar);
         
-		modi.addToUniversalHashtable3(1, new Clientes_BE("Luis",  43321105));
-		modi.addToUniversalHashtable3(2, new Clientes_BE("Marco", 53327708));
-		modi.addToUniversalHashtable3(3, new Clientes_BE("Aaron", 33344105));
-		modi.addToUniversalHashtable3(4, new Clientes_BE("Alex", 44343434));
+		
 		cargar();
 		    
 		

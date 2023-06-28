@@ -362,19 +362,7 @@ public class I_Inventario extends JInternalFrame {
     private void CARGA()
     {
 
-        DefaultTableModel model = new DefaultTableModel(
-        	    new String[] {"Código", "Nombre", "Cantidad", "Precio"}, 0) {
-        	    private static final long serialVersionUID = 1L;
-        	    Class<?>[] columnTypes = new Class[] {
-        	        String.class,
-        	        String.class,
-        	        Integer.class,
-        	        Double.class
-        	    };
-        	    public Class<?> getColumnClass(int columnIndex) {
-        	        return columnTypes[columnIndex];
-        	    }
-        	};
+    	DefaultTableModel model = (DefaultTableModel) table.getModel();
             
         Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
         	Enumeration<Integer> enumera = hashtable.keys();
@@ -390,7 +378,7 @@ public class I_Inventario extends JInternalFrame {
     	        		
     					});
     		}
-    		table.setModel(model);
+    		
     }
     
     
