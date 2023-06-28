@@ -11,10 +11,13 @@ import java.io.File;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
 
 import CLASES.Creation;
 import CLASES.Metodo_BC;
-
+import CLASES.Productos_BE;
 import CLASES.Proveedores_BE;
 import CLASES.Return_DALC;
 import CLASES.Clientes_BE;
@@ -58,7 +61,8 @@ public class I_Personas extends JInternalFrame {
    	private Creation Hash = new Creation();
    	private String relativePath = "Base de datos" + File.separator + "Productos.txt";
 	private String filePath = System.getProperty("user.dir") + File.separator + relativePath;
-   	
+	private int fila;
+	private int colum;
 
 
     /*
@@ -347,17 +351,69 @@ Create the frame.*/
         	}
         });
         btnBuscarCliente.setForeground(new Color(51, 0, 255));
+<<<<<<< HEAD
+        btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
+        btnBuscarCliente.setBackground(Color.GRAY);
+        btnBuscarCliente.setBounds(329, 6, 89, 23);
+=======
         btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnBuscarCliente.setBackground(new Color(255, 255, 255));
 
         btnBuscarCliente.setBounds(517, 57, 89, 23);
 
         btnBuscarCliente.setBounds(125, 456, 123, 47);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
+>>>>>>> 8431b46a74b5eb0e65907c1834404eba6a11b88c
+>>>>>>> 2b564964b082486b9e382788e8212f9725fa2855
         Clientes.add(btnBuscarCliente);
            
-        
+
+		DefaultTableModel model = new DefaultTableModel(
+			    new String[] {"Nombre", "ID"}, 0) {
+			    private static final long serialVersionUID = 1L;
+			    Class<?>[] columnTypes = new Class[] {
+			        String.class,
+			        Integer.class,
+			    };
+			    public Class<?> getColumnClass(int columnIndex) {
+			        return columnTypes[columnIndex];
+			    }
+			};
+		
+		
+		JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
+		scrollPaneClientes.setBounds(10, 37, 1338, 665);
+		Clientes.add(scrollPaneClientes);
+		    
         tableClientes = new JTable();
+<<<<<<< HEAD
+        tableClientes.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				fila = tableClientes.getSelectedRow();
+				colum = tableClientes.getSelectedColumn();
+			}
+		});
+        scrollPaneClientes.setViewportView(tableClientes);
+		tableClientes.setModel(model);
+		
+		JButton btnCargar = new JButton("Cargar");
+		btnCargar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cargar();
+			}
+		});
+		btnCargar.setBounds(443, 7, 89, 23);
+		Clientes.add(btnCargar);
+        
+		modi.addToUniversalHashtable3(1, new Clientes_BE("Luis",  43321105));
+		modi.addToUniversalHashtable3(2, new Clientes_BE("Marco", 53327708));
+		modi.addToUniversalHashtable3(3, new Clientes_BE("Aaron", 33344105));
+		modi.addToUniversalHashtable3(4, new Clientes_BE("Alex", 44343434));
+		cargar();
+=======
         tableClientes.setModel(new DefaultTableModel(
         		new Object[][]{},
         		new String[]{"Nombre", "ID"}
@@ -437,62 +493,47 @@ Create the frame.*/
         		txtIDCliente.setText(model.getValueAt(selectedRowIndex, 1).toString());       		
         	}
         });
+>>>>>>> 8431b46a74b5eb0e65907c1834404eba6a11b88c
   }
   
-  public void buscar() {
-	  
+  private void buscar() {
+
 	  	DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
-	    model.setRowCount(0); // Limpiar la tabla
-
-	    String nombre = txtNombreCliente.getText().trim();
-	    String idText = txtIDCliente.getText().trim();
-
-	    boolean buscarPorNombre = !nombre.isEmpty();
-	    boolean buscarPorID = !idText.isEmpty();
-
-	    if (!buscarPorNombre && !buscarPorID) {
-	        JOptionPane.showMessageDialog(null, "Ingrese un nombre o un ID para buscar.");
-	        return;
-	    }
-
-	    ArrayList<Clientes_BE> resultados = new ArrayList<>();
-
-	    // Buscar por nombre
-	    if (buscarPorNombre) {
-	        for (int i = 0; i < model.getRowCount(); i++) {
-	            String nombreTabla = model.getValueAt(i, 0).toString();
-	            if (nombreTabla.equalsIgnoreCase(nombre)) {
-	                resultados.add(new Clientes_BE(nombreTabla, Integer.parseInt(model.getValueAt(i, 1).toString())));
-	            }
+	  	int rowCount = model.getRowCount();
+	  	
+	  	String nameCorrect = txtNombreCliente.getText();
+	  	int idCorrect = Integer.parseInt(txtIDCliente.getText());
+	  	
+	  	for (int n = rowCount - 1; n >= 0; n--) {
+	        String determinante = (String) model.getValueAt(n, 0);
+	        if (!determinante.equals(nameCorrect)) {
+	            model.removeRow(n);
 	        }
 	    }
-
-	    // Buscar por ID
-	    if (buscarPorID) {
-	        int id = 0;
-	        try {
-	            id = Integer.parseInt(idText);
-	        } catch (NumberFormatException ex) {
-	            JOptionPane.showMessageDialog(null, "El ID debe ser un número válido.");
-	            return;
-	        }
-
-	        for (int i = 0; i < model.getRowCount(); i++) {
-	            int idTabla = Integer.parseInt(model.getValueAt(i, 1).toString());
-	            if (id == idTabla) {
-	                String nombreTabla = model.getValueAt(i, 0).toString();
-	                Clientes_BE cliente = new Clientes_BE(nombreTabla, idTabla);
-	                if (!resultados.contains(cliente)) {
-	                    resultados.add(cliente);
-	                }
-	            }
+	  	
+	  	for (int n = rowCount - 1; n >= 0; n--) {
+	        String determinante1 = (String) model.getValueAt(n, 1);
+	        if (!determinante1.equals(idCorrect)) {
+	            model.removeRow(n);
 	        }
 	    }
-
-	    // Mostrar resultados en la tabla
-	    for (Clientes_BE cliente : resultados) {
-	        model.addRow(new Object[]{cliente.getName(), cliente.getID()});
-	    }
+	  	
   }
   
+  private void cargar() {
+  
+	  DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+	    
+	  Hashtable<Integer, Clientes_BE> hashtable = Hash.getHashtable3();
+	  Enumeration<Integer> cliente = hashtable.keys();
+	  while(cliente.hasMoreElements()) {
+		  int num = cliente.nextElement();
+		  Clientes_BE c = hashtable.get(num);
+		  model.addRow(new Object[]{
+				  c.getName(),
+				  c.getID(),
+		  			});
+	 }
+			 
+  }
 } 
