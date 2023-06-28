@@ -293,7 +293,7 @@ Create the frame.*/
         		selectedRowIndex = tableClientes.getSelectedRow();
         		modi.addToUniversalHashtable3(1, new Clientes_BE("Luis",  43321105));
         		modi.addToUniversalHashtable3(2, new Clientes_BE("Marco", 53327708));
-        		modi.addToUniversalHashtable3(3, new Clientes_BE("Aroon", 33344105));
+        		modi.addToUniversalHashtable3(3, new Clientes_BE("Aaron", 33344105));
         		modi.addToUniversalHashtable3(4, new Clientes_BE("Jairo", 15515154));
         		modi.addToUniversalHashtable3(5, new Clientes_BE("Andres", 51451015));
         		DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
