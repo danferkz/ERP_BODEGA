@@ -74,6 +74,8 @@ public class I_Ventas extends JInternalFrame {
 	private String filePath = System.getProperty("user.dir") + File.separator + relativePath;
 	private JLabel lblNewLabel_6;
 	private JLabel lblNewLabel_7;
+	private JLabel lblitems;
+	private JLabel lbltotal;
 	
 
 	/**
@@ -414,6 +416,23 @@ public class I_Ventas extends JInternalFrame {
 			renderer.setHorizontalAlignment(SwingConstants.CENTER); 
 
 			
+			JLabel lblNewLabel_6 = new JLabel("TOTAL:");
+			lblNewLabel_6.setBounds(1079, 602, 46, 14);
+			contentPane.add(lblNewLabel_6);
+			
+			lbltotal = new JLabel("00");
+			lbltotal.setBounds(1161, 602, 46, 14);
+			contentPane.add(lbltotal);
+			
+			JLabel lblNewLabel_7 = new JLabel("N° de Items: ");
+			lblNewLabel_7.setBounds(132, 606, 80, 14);
+			contentPane.add(lblNewLabel_7);
+			
+			lblitems = new JLabel("00");
+			lblitems.setBounds(213, 606, 46, 14);
+			contentPane.add(lblitems);
+			
+			
 			for (int columnIndex = 0; columnIndex < table.getColumnCount(); columnIndex++) {
 			    table.getColumnModel().getColumn(columnIndex).setCellRenderer(renderer);
 			}
@@ -596,6 +615,22 @@ public class I_Ventas extends JInternalFrame {
 	            e.printStackTrace();
 	        }
 	    }
+	 
+	 private void items() {
+		 int rows = table.getRowCount();
+		 String numer = String.valueOf(rows);
+		 lblitems.setText(numer);
+	 }
+	 
+	 private void totalix() {
+		 int rows = table.getRowCount();
+		 double totalix = 0;
+		 for (int i = 0; i<rows ; i++) {
+			 totalix = totalix + (Double)table.getValueAt(i, 3);
+		 }
+		 String tota = String.valueOf(totalix);
+		 lbltotal.setText(tota);
+	 }
 	 
 	
 	 

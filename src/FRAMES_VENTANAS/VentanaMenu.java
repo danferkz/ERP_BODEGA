@@ -46,11 +46,11 @@ public class VentanaMenu extends JFrame {
         setSize(1366, 768);
         setLocationRelativeTo(null);
         
-        modi.addToUniversalHashtable(1, new Productos_BE(1, 6, "Leche", 15));
+        
         						
         lectura();
-        System.out.println(especific.accessUniversalHashtable(1).getNombre());
-        System.out.print(especific.accessUniversalHashtable(1).getCant());
+        lectura2();
+        lectura3();
         
         JMenuBar menuBar = new JMenuBar();
         
@@ -203,6 +203,132 @@ public class VentanaMenu extends JFrame {
             e.printStackTrace();
         }
     }
+    
+    private void modifyFile2() {
+        try {
+            // Clear the contents of the file
+            String filePath = "src/Datos/Clientes_BE.txt"; // Update the file path accordingly
+
+            // Clear the file contents
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+            fileOutputStream.close();
+
+            Hashtable<Integer, Clientes_BE> hashtable = Hash.getHashtable3();
+            Enumeration<Integer> indic = hashtable.keys();
+
+            // Append new text to the file
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+
+            while (indic.hasMoreElements()) {
+                int code = indic.nextElement();
+                Clientes_BE revision = hashtable.get(code);
+                String nombre = revision.getName();
+                int id = revision.getID();
+                
+                writer.write(nombre + ",");
+                writer.write(id + "");
+                writer.newLine();
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+private void lectura2() {
+    try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Datos/Clientes_BE.txt")) {
+        if (inputStream != null) {
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.US_ASCII);
+            BufferedReader br = new BufferedReader(inputStreamReader);
+            ArrayList<String[]> datos = new ArrayList<>();
+            String linea = br.readLine();
+            while (linea != null) {
+                String[] elementos = linea.split(",");
+                datos.add(elementos);
+                linea = br.readLine();
+            }
+            
+            for (String[] elementos : datos) {
+                String nom = elementos[0];
+                int ident = Integer.parseInt(elementos[1]);
+                
+                modi.addToUniversalHashtable3(ident, new Clientes_BE(nom, ident));
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo Datos/Inventario_re.txt");
+        }
+    } catch (IOException ioe) {
+        ioe.printStackTrace();
+    }
+}
+
+private void modifyFile3() {
+    try {
+        // Clear the contents of the file
+        String filePath = "src/Datos/Proveedores_BE.txt"; // Update the file path accordingly
+
+        // Clear the file contents
+        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+        fileOutputStream.close();
+
+        Hashtable<Integer, Proveedores_BE> hashtable = Hash.getHashtable2();
+        Enumeration<Integer> indic = hashtable.keys();
+
+        // Append new text to the file
+        FileWriter fileWriter = new FileWriter(filePath, true);
+        BufferedWriter writer = new BufferedWriter(fileWriter);
+
+        while (indic.hasMoreElements()) {
+            int code = indic.nextElement();
+            Proveedores_BE revision = hashtable.get(code);
+            String nombre = revision.getName();
+	        String directiv = revision.getDirection();
+            int id = revision.getID();
+            
+            writer.write(nombre + ",");
+	writer.write(directiv + ",");
+            writer.write(id + "");
+            writer.newLine();
+        }
+
+        writer.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+
+private void lectura3() {
+try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("Datos/Clientes_BE.txt")) {
+    if (inputStream != null) {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.US_ASCII);
+        BufferedReader br = new BufferedReader(inputStreamReader);
+        ArrayList<String[]> datos = new ArrayList<>();
+        String linea = br.readLine();
+        while (linea != null) {
+            String[] elementos = linea.split(",");
+            datos.add(elementos);
+            linea = br.readLine();
+        }
+        
+        for (String[] elementos : datos) {
+            String nom = elementos[0];
+            String direct = elementos[1]; 
+            int idd = Integer.parseInt(elementos[2]);
+            
+            modi.addToUniversalHashtable2(idd, new Proveedores_BE(nom, direct,idd));
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo Datos/Inventario_re.txt");
+    }
+} catch (IOException ioe) {
+    ioe.printStackTrace();
+}
+}
+    
     
     
   
