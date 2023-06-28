@@ -94,21 +94,33 @@ public class I_Inventario extends JInternalFrame {
         contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        table = new JTable();
         
         
-		DefaultTableModel model = new DefaultTableModel(
-			    new String[] {"Código", "Nombre", "Cantidad", "Precio"}, 0) {
-			    private static final long serialVersionUID = 1L;
-			    Class<?>[] columnTypes = new Class[] {
-			        String.class,
-			        String.class,
-			        Integer.class,
-			        Double.class
-			    };
-			    public Class<?> getColumnClass(int columnIndex) {
-			        return columnTypes[columnIndex];
-			    }
-			};
+        
+        
+        DefaultTableModel model = new DefaultTableModel(
+        	    new String[] {"Código", "Nombre", "Cantidad", "Precio"}, 0) {
+        	    private static final long serialVersionUID = 1L;
+        	    Class<?>[] columnTypes = new Class[] {
+        	        String.class,
+        	        String.class,
+        	        Integer.class,
+        	        Double.class
+        	    };
+        	    public Class<?> getColumnClass(int columnIndex) {
+        	        return columnTypes[columnIndex];
+        	    }
+        	};
+        	CARGA();
+
+        
+    	
+
+
+        	
+
+        	
 
         JLabel lblCodigo = new JLabel("Código:");
         lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -206,7 +218,7 @@ public class I_Inventario extends JInternalFrame {
             }
         });
 
-        btnAgregar.setBounds(92, 409, 230, 71);
+        btnAgregar.setBounds(28, 409, 120, 57);
         contentPane.add(btnAgregar);
 
 
@@ -217,14 +229,29 @@ public class I_Inventario extends JInternalFrame {
                 if (selectedRowIndex != -1) {
                     String codigo = textFieldCodigo.getText();
                     String nombre = textFieldNombre.getText();
-                    double cantidad = Double.parseDouble(textFieldCantidad.getText());
-                    double precio = Double.parseDouble(textFieldPrecio.getText());
+                    String cantidadText = textFieldCantidad.getText();
+                    String precioText = textFieldPrecio.getText();
+
+                    // Verificar si algún campo está vacío
+                    if (codigo.trim().isEmpty() || nombre.trim().isEmpty() || cantidadText.trim().isEmpty() || precioText.trim().isEmpty()) {
+                        JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
+                        return;
+                    }
+
+                    int cod = Integer.parseInt(codigo);
+                    int cant = Integer.parseInt(cantidadText);
+                    double price = Double.parseDouble(precioText);
 
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     model.setValueAt(codigo, selectedRowIndex, 0);
                     model.setValueAt(nombre, selectedRowIndex, 1);
-                    model.setValueAt(cantidad, selectedRowIndex, 2);
-                    model.setValueAt(precio, selectedRowIndex, 3);
+                    model.setValueAt(cant, selectedRowIndex, 2);
+                    model.setValueAt(price, selectedRowIndex, 3);
+
+                    // Actualizar los datos en la Hashtable
+                    int codigoInt = Integer.parseInt(codigo);
+                    Productos_BE productoActualizado = new Productos_BE(cod, cant, nombre, price);
+                    modi.addToUniversalHashtable(codigoInt, productoActualizado);
 
                     // Limpiar los campos de texto y restablecer el índice de fila seleccionado
                     textFieldCodigo.setText("");
@@ -238,19 +265,24 @@ public class I_Inventario extends JInternalFrame {
         btnModificar.setBounds(92, 501, 230, 71);
         contentPane.add(btnModificar);
 
+
         JButton btnEliminar = new JButton("Eliminar");
         btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnEliminar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
- 
+                if (selectedRowIndex != -1) {
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    int indez = (Integer) table.getValueAt(selectedRowIndex, 0);
                     model.removeRow(selectedRowIndex);
-                    int indez = (Integer)table.getValueAt(selectedRowIndex, 0);
                     modi.removeFromUniversalHashtable(indez);
+
                     // Limpiar los campos de texto y restablecer el índice de fila seleccionado
                     textFieldCodigo.setText("");
                     textFieldNombre.setText("");
                     textFieldCantidad.setText("");
                     textFieldPrecio.setText("");
+                    selectedRowIndex = -1;
+                }
             }
         });
         btnEliminar.setBounds(92, 594, 230, 71);
@@ -277,8 +309,13 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnListar.setBounds(89, 758, 230, 71);
+        btnListar.setBounds(92, 758, 230, 71);
         contentPane.add(btnListar);
+        
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(390, 17, 950, 648);
+        contentPane.add(scrollPane);
+        
 
         table = new JTable();
         table.addMouseListener(new MouseAdapter() {
@@ -286,14 +323,13 @@ public class I_Inventario extends JInternalFrame {
         		selectedRowIndex = table.getSelectedRow();
         	}
         });
-        table.setModel(new DefaultTableModel(
-                new Object[][]{},
-                new String[]{"Código", "Nombre", "Cantidad", "Precio"}
-        ));
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(390, 17, 950, 648);
-        contentPane.add(scrollPane);
+        
+        scrollPane.setViewportView(table);
+        table.setModel(model);
+        
+        
+        
+        
 
         // Define el tamaño de fuente deseado para el encabezado de la tabla
         Font tableHeaderFont = new Font("Tahoma", Font.BOLD, 19);
@@ -304,8 +340,8 @@ public class I_Inventario extends JInternalFrame {
         table.setFont(tableFont);
         
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\1440500.png"));
-        lblNewLabel.setBounds(72, 17, 250, 250);
+        lblNewLabel.setIcon(new ImageIcon(I_Inventario.class.getResource("/IMAGENES/I_inventario.png")));
+        lblNewLabel.setBounds(64, 17, 250, 250);
         contentPane.add(lblNewLabel);
 
         // Aplica el tamaño de fuente al renderizador de encabezado de la tabla
@@ -322,4 +358,42 @@ public class I_Inventario extends JInternalFrame {
             }
         });
     }
+
+    private void CARGA()
+    {
+
+        DefaultTableModel model = new DefaultTableModel(
+        	    new String[] {"Código", "Nombre", "Cantidad", "Precio"}, 0) {
+        	    private static final long serialVersionUID = 1L;
+        	    Class<?>[] columnTypes = new Class[] {
+        	        String.class,
+        	        String.class,
+        	        Integer.class,
+        	        Double.class
+        	    };
+        	    public Class<?> getColumnClass(int columnIndex) {
+        	        return columnTypes[columnIndex];
+        	    }
+        	};
+            
+        Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
+        	Enumeration<Integer> enumera = hashtable.keys();
+
+    		while(enumera.hasMoreElements()) {
+    			Integer m = enumera.nextElement();
+                Productos_BE produc1 = hashtable.get(m);
+    			model.addRow(new Object[] {
+    					produc1.getCod(),
+    	        		produc1.getCant(),
+    	        		produc1.getNombre(),
+    	        		produc1.getPrice()
+    	        		
+    					});
+    		}
+    		table.setModel(model);
+    }
+    
+    
 }
+
+

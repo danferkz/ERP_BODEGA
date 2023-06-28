@@ -44,6 +44,8 @@ public class VentanaMenu extends JFrame {
         setSize(1366, 768);
         setLocationRelativeTo(null);
         
+        modi.addToUniversalHashtable(1, new Productos_BE(1, 6, "Leche", 15));
+        						
         lectura();
         System.out.println(especific.accessUniversalHashtable(1).getNombre());
         System.out.print(especific.accessUniversalHashtable(1).getCant());

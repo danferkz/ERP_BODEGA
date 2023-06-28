@@ -36,6 +36,7 @@ import CLASES.Metodo_BC;
 import CLASES.Proveedores_BE;
 import CLASES.Return_DALC;
 import CLASES.Clientes_BE;
+import javax.swing.ImageIcon;
 
 public class I_Personas extends JInternalFrame {
 
@@ -233,11 +234,11 @@ Create the frame.*/
         Clientes.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("Nombres:");
-        lblNewLabel.setBounds(38, 10, 87, 16);
+        lblNewLabel.setBounds(171, 61, 87, 16);
         Clientes.add(lblNewLabel);
         
         txtNombreCliente = new JTextField();
-        txtNombreCliente.setBounds(106, 8, 86, 20);
+        txtNombreCliente.setBounds(233, 59, 86, 20);
         Clientes.add(txtNombreCliente);
         txtNombreCliente.setColumns(10);
         txtNombreCliente.addKeyListener((KeyListener) new KeyAdapter() {
@@ -250,12 +251,12 @@ Create the frame.*/
         });
         
         JLabel lblNewLabel_2 = new JLabel("ID:");
-        lblNewLabel_2.setBounds(202, 11, 46, 14);
+        lblNewLabel_2.setBounds(372, 62, 46, 14);
         Clientes.add(lblNewLabel_2);
         
         txtIDCliente = new JTextField();
         txtIDCliente.setColumns(10);
-        txtIDCliente.setBounds(233, 8, 86, 20);
+        txtIDCliente.setBounds(403, 59, 86, 20);
         Clientes.add(txtIDCliente);
         txtIDCliente.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -275,7 +276,7 @@ Create the frame.*/
         btnBuscarCliente.setForeground(new Color(51, 0, 255));
         btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
         btnBuscarCliente.setBackground(new Color(255, 255, 255));
-        btnBuscarCliente.setBounds(329, 6, 89, 23);
+        btnBuscarCliente.setBounds(517, 57, 89, 23);
         Clientes.add(btnBuscarCliente);
            
         
@@ -286,8 +287,8 @@ Create the frame.*/
         ));
         tableClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
-        scrollPaneClientes.setBounds(10, 37, 1338, 665);
-        Clientes.add(scrollPaneClientes);      
+        scrollPaneClientes.setBounds(20, 98, 1328, 604);
+        Clientes.add(scrollPaneClientes);
         
         tableClientes.getSelectionModel().addListSelectionListener(e -> {
         	if(tableClientes.getSelectedRow() != -1) {
