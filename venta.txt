@@ -1,0 +1,11 @@
+	BODEGA 24/7	   R.U.C. 79209726509
+			    BOLETA DE VENTA
+
+Cliente: Diego
+ID: 9999           Fecha de emision:2023-06-28
+
+CANTIDAD	DESCRIPCION	   P. UNIT. 	   IMPORTE
+1               Pollo		   69.96		    69.96
+
+
+					   TOTAL   69.96

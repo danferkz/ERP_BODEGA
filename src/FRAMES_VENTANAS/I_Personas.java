@@ -358,7 +358,7 @@ Create the frame.*/
 		
 		
 		JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
-		scrollPaneClientes.setBounds(362, 37, 986, 665);
+		scrollPaneClientes.setBounds(362, 37, 934, 665);
 		Clientes.add(scrollPaneClientes);
 		    
         tableClientes = new JTable();
