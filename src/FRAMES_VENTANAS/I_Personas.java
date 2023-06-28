@@ -119,33 +119,40 @@ Create the frame.*/
         scrollPane_Proveedores.setViewportView(table_Proveedores);
         
         JLabel lblNombre = new JLabel("Nombre: ");
-        lblNombre.setBounds(21, 170, 98, 14);
+        lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblNombre.setBounds(47, 364, 98, 14);
         Proveedor.add(lblNombre);
         
         textNombre = new JTextField();
-        textNombre.setBounds(92, 163, 116, 29);
+        textNombre.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        textNombre.setBounds(147, 359, 116, 29);
         Proveedor.add(textNombre);
         textNombre.setColumns(10);
         
         JLabel lblDirección = new JLabel("Dirección:");
-        lblDirección.setBounds(21, 208, 70, 16);
+        lblDirección.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblDirección.setBounds(47, 405, 90, 16);
         Proveedor.add(lblDirección);
         
         textDireccion = new JTextField();
-        textDireccion.setBounds(92, 198, 116, 26);
+        textDireccion.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        textDireccion.setBounds(147, 400, 116, 26);
         Proveedor.add(textDireccion);
         textDireccion.setColumns(10);
         
         JLabel lblID = new JLabel("ID:");
-        lblID.setBounds(22, 240, 61, 16);
+        lblID.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblID.setBounds(47, 442, 61, 16);
         Proveedor.add(lblID);
         
         textID = new JTextField();
-        textID.setBounds(92, 235, 116, 26);
+        textID.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        textID.setBounds(147, 437, 116, 26);
         Proveedor.add(textID);
         textID.setColumns(10);
         
         JButton btnAgregar = new JButton("Agregar");
+        btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnAgregar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
@@ -185,10 +192,11 @@ Create the frame.*/
         	    }
         	});
 
-        btnAgregar.setBounds(21, 324, 117, 29);
+        btnAgregar.setBounds(91, 526, 117, 40);
         Proveedor.add(btnAgregar);
         
         JButton btnListar = new JButton("Listar");
+        btnListar.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnListar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		DefaultTableModel model = (DefaultTableModel) table_Proveedores.getModel();
@@ -208,10 +216,11 @@ Create the frame.*/
                 }
             }
         });
-        btnListar.setBounds(21, 386, 117, 29);
+        btnListar.setBounds(21, 584, 117, 40);
         Proveedor.add(btnListar);
         
         JButton btnEliminar = new JButton("Eliminar");
+        btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnEliminar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (selectedRowIndex != -1) {
@@ -226,19 +235,73 @@ Create the frame.*/
                 }
             }
         });
-        btnEliminar.setBounds(21, 450, 117, 29);
+        btnEliminar.setBounds(168, 584, 117, 40);
         Proveedor.add(btnEliminar);
+        
+        JLabel lblNewLabel_1 = new JLabel("");
+        lblNewLabel_1.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/proveedor.png")));
+        lblNewLabel_1.setBounds(28, 44, 257, 284);
+        Proveedor.add(lblNewLabel_1);
+        
+        JLabel lblNewLabel_3 = new JLabel("");
+        lblNewLabel_3.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3.setBounds(0, 0, 225, 225);
+        Proveedor.add(lblNewLabel_3);
+        
+        JLabel lblNewLabel_3_1 = new JLabel("");
+        lblNewLabel_3_1.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_1.setBounds(91, 0, 225, 225);
+        Proveedor.add(lblNewLabel_3_1);
+        
+        JLabel lblNewLabel_3_2 = new JLabel("");
+        lblNewLabel_3_2.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_2.setBounds(0, 224, 225, 225);
+        Proveedor.add(lblNewLabel_3_2);
+        
+        JLabel lblNewLabel_3_2_1 = new JLabel("");
+        lblNewLabel_3_2_1.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_2_1.setBounds(91, 224, 225, 225);
+        Proveedor.add(lblNewLabel_3_2_1);
+        
+        JLabel lblNewLabel_3_2_2 = new JLabel("");
+        lblNewLabel_3_2_2.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_2_2.setBounds(0, 405, 225, 225);
+        Proveedor.add(lblNewLabel_3_2_2);
+        
+        JLabel lblNewLabel_3_2_2_1 = new JLabel("");
+        lblNewLabel_3_2_2_1.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_2_2_1.setBounds(91, 408, 225, 225);
+        Proveedor.add(lblNewLabel_3_2_2_1);
+        
+        JLabel lblNewLabel_3_2_2_2 = new JLabel("");
+        lblNewLabel_3_2_2_2.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_2_2_2.setBounds(0, 485, 225, 225);
+        Proveedor.add(lblNewLabel_3_2_2_2);
+        
+        JLabel lblNewLabel_3_2_2_3 = new JLabel("");
+        lblNewLabel_3_2_2_3.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_2_2_3.setBounds(91, 485, 225, 225);
+        Proveedor.add(lblNewLabel_3_2_2_3);
 
         JPanel Clientes = new JPanel();
         tabbedPane.addTab("Clientes", null, Clientes, null);
         Clientes.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("Nombres:");
+<<<<<<< HEAD
         lblNewLabel.setBounds(171, 61, 87, 16);
         Clientes.add(lblNewLabel);
         
         txtNombreCliente = new JTextField();
         txtNombreCliente.setBounds(233, 59, 86, 20);
+=======
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblNewLabel.setBounds(67, 375, 87, 16);
+        Clientes.add(lblNewLabel);
+        
+        txtNombreCliente = new JTextField();
+        txtNombreCliente.setBounds(154, 365, 123, 30);
+>>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
         Clientes.add(txtNombreCliente);
         txtNombreCliente.setColumns(10);
         txtNombreCliente.addKeyListener((KeyListener) new KeyAdapter() {
@@ -251,12 +314,22 @@ Create the frame.*/
         });
         
         JLabel lblNewLabel_2 = new JLabel("ID:");
+<<<<<<< HEAD
         lblNewLabel_2.setBounds(372, 62, 46, 14);
+=======
+        lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblNewLabel_2.setBounds(69, 414, 46, 14);
+>>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
         Clientes.add(lblNewLabel_2);
         
         txtIDCliente = new JTextField();
+        txtIDCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
         txtIDCliente.setColumns(10);
+<<<<<<< HEAD
         txtIDCliente.setBounds(403, 59, 86, 20);
+=======
+        txtIDCliente.setBounds(154, 406, 123, 30);
+>>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
         Clientes.add(txtIDCliente);
         txtIDCliente.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -274,9 +347,13 @@ Create the frame.*/
         	}
         });
         btnBuscarCliente.setForeground(new Color(51, 0, 255));
-        btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
+        btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnBuscarCliente.setBackground(new Color(255, 255, 255));
+<<<<<<< HEAD
         btnBuscarCliente.setBounds(517, 57, 89, 23);
+=======
+        btnBuscarCliente.setBounds(125, 456, 123, 47);
+>>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
         Clientes.add(btnBuscarCliente);
            
         
@@ -287,8 +364,63 @@ Create the frame.*/
         ));
         tableClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
+<<<<<<< HEAD
         scrollPaneClientes.setBounds(20, 98, 1328, 604);
         Clientes.add(scrollPaneClientes);
+=======
+        scrollPaneClientes.setBounds(364, 37, 984, 665);
+        Clientes.add(scrollPaneClientes);      
+>>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
+        
+        JLabel lblNewLabel_4 = new JLabel("");
+        lblNewLabel_4.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/cliente.png")));
+        lblNewLabel_4.setBounds(67, 77, 250, 250);
+        Clientes.add(lblNewLabel_4);
+        
+        JLabel lblNewLabel_5 = new JLabel("");
+        lblNewLabel_5.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/a.png")));
+        lblNewLabel_5.setBounds(125, 514, 120, 120);
+        Clientes.add(lblNewLabel_5);
+        
+        JLabel lblNewLabel_3_3 = new JLabel("");
+        lblNewLabel_3_3.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_3.setBounds(0, 0, 225, 225);
+        Clientes.add(lblNewLabel_3_3);
+        
+        JLabel lblNewLabel_3_3_1 = new JLabel("");
+        lblNewLabel_3_3_1.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_3_1.setBounds(137, 0, 225, 225);
+        Clientes.add(lblNewLabel_3_3_1);
+        
+        JLabel lblNewLabel_3_3_2 = new JLabel("");
+        lblNewLabel_3_3_2.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_3_2.setBounds(0, 220, 225, 225);
+        Clientes.add(lblNewLabel_3_3_2);
+        
+        JLabel lblNewLabel_3_3_3 = new JLabel("");
+        lblNewLabel_3_3_3.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_3_3.setBounds(137, 220, 225, 225);
+        Clientes.add(lblNewLabel_3_3_3);
+        
+        JLabel lblNewLabel_3_3_4 = new JLabel("");
+        lblNewLabel_3_3_4.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_3_4.setBounds(0, 443, 225, 225);
+        Clientes.add(lblNewLabel_3_3_4);
+        
+        JLabel lblNewLabel_3_3_5 = new JLabel("");
+        lblNewLabel_3_3_5.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_3_5.setBounds(135, 443, 225, 225);
+        Clientes.add(lblNewLabel_3_3_5);
+        
+        JLabel lblNewLabel_3_3_6 = new JLabel("");
+        lblNewLabel_3_3_6.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_3_6.setBounds(135, 491, 225, 225);
+        Clientes.add(lblNewLabel_3_3_6);
+        
+        JLabel lblNewLabel_3_3_7 = new JLabel("");
+        lblNewLabel_3_3_7.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/images.jpg")));
+        lblNewLabel_3_3_7.setBounds(0, 491, 225, 225);
+        Clientes.add(lblNewLabel_3_3_7);
         
         tableClientes.getSelectionModel().addListSelectionListener(e -> {
         	if(tableClientes.getSelectedRow() != -1) {

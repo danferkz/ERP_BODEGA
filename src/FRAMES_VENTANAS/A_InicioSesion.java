@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class A_InicioSesion extends JFrame {
 
@@ -51,9 +53,11 @@ public class A_InicioSesion extends JFrame {
 	 * Create the frame.
 	 */
 	public A_InicioSesion() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(A_InicioSesion.class.getResource("/IMAGENES/lazer.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 335, 500);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(78, 167, 180));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -107,7 +111,7 @@ public class A_InicioSesion extends JFrame {
 		contentPane.add(Contra);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(A_InicioSesion.class.getResource("/IMAGENES/login.png")));
+		lblNewLabel.setIcon(new ImageIcon(A_InicioSesion.class.getResource("/IMAGENES/loginnn.png")));
 		lblNewLabel.setBounds(30, 11, 250, 250);
 		contentPane.add(lblNewLabel);
 		

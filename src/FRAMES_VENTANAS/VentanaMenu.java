@@ -38,6 +38,7 @@ public class VentanaMenu extends JFrame {
 	
 
     public VentanaMenu() {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaMenu.class.getResource("/IMAGENES/lazer.png")));
     	setResizable(false);
         setTitle("Menú");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
