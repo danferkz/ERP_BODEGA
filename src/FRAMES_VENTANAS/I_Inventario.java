@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Comparator;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Hashtable;
+import java.util.Enumeration;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -28,6 +32,7 @@ import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.ArrayList;
 import CLASES.Creation;
 import CLASES.Metodo_BC;
 import CLASES.Return_DALC;
@@ -40,6 +45,13 @@ import CLASES.Creation;
 import CLASES.Productos_BE;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class I_Inventario extends JInternalFrame {
 
@@ -57,7 +69,9 @@ public class I_Inventario extends JInternalFrame {
     private int selectedRowIndex;
     private Metodo_BC modi = new Metodo_BC();
 	private Return_DALC especific = new Return_DALC();
-	private Creation Hash = new Creation();
+	private static Creation Hash = new Creation();
+	private static String relativePath = "Base de datos" + File.separator + "Inventario_re.txt";
+	private static String filePath = System.getProperty("user.dir") + File.separator + relativePath;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -97,8 +111,8 @@ public class I_Inventario extends JInternalFrame {
 			};
 
         JLabel lblCodigo = new JLabel("Código:");
-        lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblCodigo.setBounds(71, 146, 78, 20);
+        lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblCodigo.setBounds(32, 172, 78, 20);
         contentPane.add(lblCodigo);
 
         textFieldCodigo = new JTextField();
@@ -107,8 +121,8 @@ public class I_Inventario extends JInternalFrame {
         textFieldCodigo.setColumns(10);
 
         JLabel lblNombre = new JLabel("Nombre:");
-        lblNombre.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblNombre.setBounds(71, 205, 116, 20);
+        lblNombre.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblNombre.setBounds(32, 222, 116, 20);
         contentPane.add(lblNombre);
 
         textFieldNombre = new JTextField();
@@ -117,8 +131,8 @@ public class I_Inventario extends JInternalFrame {
         textFieldNombre.setColumns(10);
 
         JLabel lblCantidad = new JLabel("Cantidad:");
-        lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblCantidad.setBounds(71, 278, 100, 20);
+        lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblCantidad.setBounds(32, 266, 100, 20);
         contentPane.add(lblCantidad);
 
         textFieldCantidad = new JTextField();
@@ -127,8 +141,8 @@ public class I_Inventario extends JInternalFrame {
         textFieldCantidad.setColumns(10);
 
         JLabel lblPrecio = new JLabel("Precio:");
-        lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblPrecio.setBounds(71, 342, 100, 20);
+        lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblPrecio.setBounds(32, 311, 100, 20);
         contentPane.add(lblPrecio);
 
         textFieldPrecio = new JTextField();
