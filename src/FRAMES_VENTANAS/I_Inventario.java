@@ -395,5 +395,3 @@ public class I_Inventario extends JInternalFrame {
     
     
 }
-
-
