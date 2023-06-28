@@ -596,5 +596,6 @@ public class I_Ventas extends JInternalFrame {
 	        }
 	    }
 	 
+	
 	 
 }

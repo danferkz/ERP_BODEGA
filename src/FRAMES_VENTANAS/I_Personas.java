@@ -288,20 +288,20 @@ Create the frame.*/
         Clientes.setLayout(null);
         
         JLabel lblNewLabel = new JLabel("Nombres:");
-<<<<<<< HEAD
+
         lblNewLabel.setBounds(171, 61, 87, 16);
         Clientes.add(lblNewLabel);
         
         txtNombreCliente = new JTextField();
         txtNombreCliente.setBounds(233, 59, 86, 20);
-=======
+
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblNewLabel.setBounds(67, 375, 87, 16);
         Clientes.add(lblNewLabel);
         
         txtNombreCliente = new JTextField();
         txtNombreCliente.setBounds(154, 365, 123, 30);
->>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
+
         Clientes.add(txtNombreCliente);
         txtNombreCliente.setColumns(10);
         txtNombreCliente.addKeyListener((KeyListener) new KeyAdapter() {
@@ -314,22 +314,22 @@ Create the frame.*/
         });
         
         JLabel lblNewLabel_2 = new JLabel("ID:");
-<<<<<<< HEAD
+
         lblNewLabel_2.setBounds(372, 62, 46, 14);
-=======
+
         lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblNewLabel_2.setBounds(69, 414, 46, 14);
->>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
+
         Clientes.add(lblNewLabel_2);
         
         txtIDCliente = new JTextField();
         txtIDCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
         txtIDCliente.setColumns(10);
-<<<<<<< HEAD
+
         txtIDCliente.setBounds(403, 59, 86, 20);
-=======
+
         txtIDCliente.setBounds(154, 406, 123, 30);
->>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
+
         Clientes.add(txtIDCliente);
         txtIDCliente.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
@@ -349,11 +349,11 @@ Create the frame.*/
         btnBuscarCliente.setForeground(new Color(51, 0, 255));
         btnBuscarCliente.setFont(new Font("Tahoma", Font.BOLD, 16));
         btnBuscarCliente.setBackground(new Color(255, 255, 255));
-<<<<<<< HEAD
+
         btnBuscarCliente.setBounds(517, 57, 89, 23);
-=======
+
         btnBuscarCliente.setBounds(125, 456, 123, 47);
->>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
+
         Clientes.add(btnBuscarCliente);
            
         
@@ -364,13 +364,13 @@ Create the frame.*/
         ));
         tableClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPaneClientes = new JScrollPane(tableClientes);
-<<<<<<< HEAD
+
         scrollPaneClientes.setBounds(20, 98, 1328, 604);
         Clientes.add(scrollPaneClientes);
-=======
+
         scrollPaneClientes.setBounds(364, 37, 984, 665);
         Clientes.add(scrollPaneClientes);      
->>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
+
         
         JLabel lblNewLabel_4 = new JLabel("");
         lblNewLabel_4.setIcon(new ImageIcon(I_Personas.class.getResource("/IMAGENES/cliente.png")));

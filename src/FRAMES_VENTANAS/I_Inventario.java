@@ -89,10 +89,9 @@ public class I_Inventario extends JInternalFrame {
     public I_Inventario() {
     	setTitle("INVENTARIO");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1366, 768);
+        setBounds(100, 100, 1366, 848);
         contentPane = new JPanel();
-        contentPane.setForeground(new Color(255, 255, 255));
-        contentPane.setBackground(new Color(175, 207, 224));
+        contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         contentPane.setLayout(null);
         table = new JTable();
@@ -125,41 +124,41 @@ public class I_Inventario extends JInternalFrame {
 
         JLabel lblCodigo = new JLabel("Código:");
         lblCodigo.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblCodigo.setBounds(91, 323, 78, 20);
+        lblCodigo.setBounds(32, 172, 78, 20);
         contentPane.add(lblCodigo);
 
         textFieldCodigo = new JTextField();
-        textFieldCodigo.setBounds(172, 314, 116, 29);
+        textFieldCodigo.setBounds(172, 134, 150, 48);
         contentPane.add(textFieldCodigo);
         textFieldCodigo.setColumns(10);
 
         JLabel lblNombre = new JLabel("Nombre:");
         lblNombre.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblNombre.setBounds(90, 371, 116, 20);
+        lblNombre.setBounds(32, 222, 116, 20);
         contentPane.add(lblNombre);
 
         textFieldNombre = new JTextField();
-        textFieldNombre.setBounds(172, 362, 116, 29);
+        textFieldNombre.setBounds(172, 193, 150, 48);
         contentPane.add(textFieldNombre);
         textFieldNombre.setColumns(10);
 
         JLabel lblCantidad = new JLabel("Cantidad:");
         lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblCantidad.setBounds(91, 423, 100, 20);
+        lblCantidad.setBounds(32, 266, 100, 20);
         contentPane.add(lblCantidad);
 
         textFieldCantidad = new JTextField();
-        textFieldCantidad.setBounds(172, 414, 116, 29);
+        textFieldCantidad.setBounds(172, 266, 150, 48);
         contentPane.add(textFieldCantidad);
         textFieldCantidad.setColumns(10);
 
         JLabel lblPrecio = new JLabel("Precio:");
         lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblPrecio.setBounds(91, 470, 100, 20);
+        lblPrecio.setBounds(32, 311, 100, 20);
         contentPane.add(lblPrecio);
 
         textFieldPrecio = new JTextField();
-        textFieldPrecio.setBounds(172, 461, 116, 29);
+        textFieldPrecio.setBounds(172, 330, 150, 48);
         contentPane.add(textFieldPrecio);
         textFieldPrecio.setColumns(10);
 
@@ -219,11 +218,7 @@ public class I_Inventario extends JInternalFrame {
             }
         });
 
-<<<<<<< HEAD
-        btnAgregar.setBounds(28, 409, 120, 57);
-=======
-        btnAgregar.setBounds(115, 548, 137, 50);
->>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
+        btnAgregar.setBounds(32, 408, 116, 57);
         contentPane.add(btnAgregar);
 
 
@@ -267,7 +262,7 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnModificar.setBounds(32, 609, 137, 52);
+        btnModificar.setBounds(32, 477, 116, 57);
         contentPane.add(btnModificar);
 
 
@@ -290,7 +285,7 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnEliminar.setBounds(221, 609, 137, 56);
+        btnEliminar.setBounds(32, 545, 116, 57);
         contentPane.add(btnEliminar);
 
         JButton btnListar = new JButton("Listar");
@@ -314,7 +309,7 @@ public class I_Inventario extends JInternalFrame {
                 }
             }
         });
-        btnListar.setBounds(92, 758, 230, 71);
+        btnListar.setBounds(32, 613, 116, 57);
         contentPane.add(btnListar);
         
         JScrollPane scrollPane = new JScrollPane(table);
@@ -345,19 +340,10 @@ public class I_Inventario extends JInternalFrame {
         table.setFont(tableFont);
         
         JLabel lblNewLabel = new JLabel("");
-<<<<<<< HEAD
         lblNewLabel.setIcon(new ImageIcon(I_Inventario.class.getResource("/IMAGENES/I_inventario.png")));
         lblNewLabel.setBounds(64, 17, 250, 250);
-=======
-        lblNewLabel.setIcon(new ImageIcon(I_Inventario.class.getResource("/IMAGENES/inventario.png")));
-        lblNewLabel.setBounds(72, 17, 250, 250);
->>>>>>> 10ba654c820324e87b2159e5f0ee6f5dc576e45f
         contentPane.add(lblNewLabel);
-        
-        JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setIcon(new ImageIcon(I_Inventario.class.getResource("/IMAGENES/images.jpg")));
-        lblNewLabel_1.setBounds(72, 299, 225, 223);
-        contentPane.add(lblNewLabel_1);
+
         // Aplica el tamaño de fuente al renderizador de encabezado de la tabla
         tableHeader.setFont(tableHeaderFont);
 
