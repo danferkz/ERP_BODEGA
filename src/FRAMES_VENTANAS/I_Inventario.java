@@ -273,30 +273,6 @@ public class I_Inventario extends JInternalFrame {
         });
         btnEliminar.setBounds(32, 545, 116, 57);
         contentPane.add(btnEliminar);
-
-        JButton btnListar = new JButton("Listar");
-        btnListar.setFont(new Font("Tahoma", Font.BOLD, 16));
-        btnListar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                Object[][] rowData = new Object[model.getRowCount()][model.getColumnCount()];
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        rowData[i][j] = model.getValueAt(i, j);
-                    }
-                }
-
-                Arrays.sort(rowData, Comparator.comparingDouble(o -> (double) o[0]));
-
-                model.setRowCount(0); // Limpiar la tabla
-
-                for (Object[] row : rowData) {
-                    model.addRow(row);
-                }
-            }
-        });
-        btnListar.setBounds(32, 613, 116, 57);
-        contentPane.add(btnListar);
         
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(390, 17, 950, 648);
