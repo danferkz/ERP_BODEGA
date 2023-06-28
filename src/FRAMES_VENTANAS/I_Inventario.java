@@ -178,7 +178,7 @@ public class I_Inventario extends JInternalFrame {
                     JOptionPane.showConfirmDialog(null, "Rellene los espacios de producto o cantidad");
                 } else {
                     // Convertir a números solo si los campos no están vacíos
-                    double cantidad = Double.parseDouble(cantidadText);
+                    int cantidad = Integer.parseInt(cantidadText);
                     double precio = Double.parseDouble(precioText);
 
                     // Agregar la nueva fila a la tabla
@@ -190,30 +190,13 @@ public class I_Inventario extends JInternalFrame {
                     textFieldCantidad.setText("");
                     textFieldPrecio.setText("");
 
-                    // Realizar la acción adicional
-                    int quant = Integer.parseInt(cantidadText);
-                    double totalix = 0;
-                    int advertencia = 0;
-                    Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
-                    Enumeration<Integer> productos = hashtable.keys();
-                    while (productos.hasMoreElements()) {
-                        int cod = productos.nextElement();
-                        Productos_BE revision = hashtable.get(cod);
-                        if (revision != null) { // Add null check here
-                            String set = revision.getNombre();
-                            advertencia = revision.getCant();
-                            if (set.equals(nombre)) {
-                                precio = revision.getPrice();
-                                totalix = quant * precio;
-                            }
-                        }
-                    }
+                    
 
       
                     
                     // Agregar los datos ingresados a la hashtable universal
                     int codigoInt = Integer.parseInt(codigo);
-                    modi.addToUniversalHashtable(codigoInt, new Productos_BE(codigoInt, quant, nombre, precio));
+                    modi.addToUniversalHashtable(codigoInt, new Productos_BE(codigoInt, cantidad, nombre, precio));
                 }
             }
         });
@@ -249,9 +232,7 @@ public class I_Inventario extends JInternalFrame {
                     model.setValueAt(price, selectedRowIndex, 3);
 
                     // Actualizar los datos en la Hashtable
-                    int codigoInt = Integer.parseInt(codigo);
-                    Productos_BE productoActualizado = new Productos_BE(cod, cant, nombre, price);
-                    modi.addToUniversalHashtable(codigoInt, productoActualizado);
+                    modi.addToUniversalHashtable(cod, new Productos_BE(cod, cant, nombre, price));
 
                     // Limpiar los campos de texto y restablecer el índice de fila seleccionado
                     textFieldCodigo.setText("");
@@ -372,8 +353,8 @@ public class I_Inventario extends JInternalFrame {
                 Productos_BE produc1 = hashtable.get(m);
     			model.addRow(new Object[] {
     					produc1.getCod(),
-    	        		produc1.getCant(),
     	        		produc1.getNombre(),
+    	        		produc1.getCant(),
     	        		produc1.getPrice()
     					});
     		}

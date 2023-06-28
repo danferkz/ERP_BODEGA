@@ -262,6 +262,10 @@ public class I_Ventas extends JInternalFrame {
 							totalix,
 					});
 				    }
+				    items();
+					totalix();
+					textProduct.setText("");
+					textCant.setText("");
 				 }
 				}
 			});
@@ -273,6 +277,10 @@ public class I_Ventas extends JInternalFrame {
 			btnDelete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					model.removeRow(changfila);
+					items();
+					totalix();
+					textProduct.setText("");
+					textCant.setText("");
 				}
 			});
 			btnDelete.setBounds(1167, 99, 115, 23);
@@ -289,6 +297,10 @@ public class I_Ventas extends JInternalFrame {
 					model.setValueAt(nw2,changfila,2);
 					double nw3 = (double)model.getValueAt(changfila, 1) * nw2 ; 
 					model.setValueAt(nw3, changfila, 3);
+					items();
+					totalix();
+					textProduct.setText("");
+					textCant.setText("");
 				}
 			});
 			btnModify.setBounds(997, 99, 115, 23);
@@ -632,6 +644,5 @@ public class I_Ventas extends JInternalFrame {
 		 lbltotal.setText(tota);
 	 }
 	 
-	
 	 
 }
