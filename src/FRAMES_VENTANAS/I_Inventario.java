@@ -344,7 +344,12 @@ public class I_Inventario extends JInternalFrame {
     {
 
     	DefaultTableModel model = (DefaultTableModel) table.getModel();
-            
+       
+    	model.setRowCount(0);
+  	  
+  	  	table.setModel(model);
+    	
+    	
         Hashtable<Integer, Productos_BE> hashtable = Hash.getHashtable();
         	Enumeration<Integer> enumera = hashtable.keys();
 
@@ -358,6 +363,7 @@ public class I_Inventario extends JInternalFrame {
     	        		produc1.getPrice()
     					});
     		}
+    		table.setModel(model);
     		
     }
     

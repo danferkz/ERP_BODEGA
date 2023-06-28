@@ -1,5 +1,5 @@
-Luis,4332
-Marco,5332
-Aaron,3334
-Jairo,1551
-Andres,5145
+Luis,433
+Marco,533
+Aaron,333
+Jairo,155
+Andres,514

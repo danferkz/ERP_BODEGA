@@ -445,32 +445,29 @@ Create the frame.*/
   }
   
   private void buscar() {
+	    DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+	    int rowCount = model.getRowCount();
 
-	  	DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
-	  	int rowCount = model.getRowCount();
-	  	
-	  	String nameCorrect = txtNombreCliente.getText();
-	  	int idCorrect = Integer.parseInt(txtIDCliente.getText());
-	  	
-	  	for (int n = rowCount - 1; n >= 0; n--) {
+	    String nameCorrect = txtNombreCliente.getText();
+	    int idCorrect = Integer.parseInt(txtIDCliente.getText());
+
+	    for (int n = rowCount - 1; n >= 0; n--) {
 	        String determinante = (String) model.getValueAt(n, 0);
-	        if (!determinante.equals(nameCorrect)) {
+	        int deter = (int) model.getValueAt(n, 1);
+
+	        if (!determinante.equals(nameCorrect) || deter != idCorrect) {
 	            model.removeRow(n);
 	        }
 	    }
-	  	
-	  	for (int n = rowCount - 1; n >= 0; n--) {
-	        String determinante1 = (String) model.getValueAt(n, 1);
-	        if (!determinante1.equals(idCorrect)) {
-	            model.removeRow(n);
-	        }
-	    }
-	  	
-  }
+	}
   
   private void cargar() {
   
 	  DefaultTableModel model = (DefaultTableModel) tableClientes.getModel();
+	  
+	  model.setRowCount(0);
+	  
+	  tableClientes.setModel(model);
 	    
 	  Hashtable<Integer, Clientes_BE> hashtable = Hash.getHashtable3();
 	  Enumeration<Integer> cliente = hashtable.keys();
@@ -482,6 +479,7 @@ Create the frame.*/
 				  c.getID(),
 		  			});
 	 }
+	 tableClientes.setModel(model);
 			 
   }
 } 
