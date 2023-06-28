@@ -109,6 +109,7 @@ public class I_Ventas extends JInternalFrame {
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		DefaultTableModel model = new DefaultTableModel(
 			    new String[] {"Nombre", "Precio", "Cantidad", "Total"}, 0) {
 			    private static final long serialVersionUID = 1L;

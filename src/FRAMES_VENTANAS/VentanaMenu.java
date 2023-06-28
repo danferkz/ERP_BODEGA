@@ -2,6 +2,7 @@ package FRAMES_VENTANAS;
 
 import javax.swing.border.EmptyBorder;
 
+import CLASES.Clientes_BE;
 import CLASES.Creation;
 import CLASES.Metodo_BC;
 import CLASES.Return_DALC;
@@ -92,8 +93,8 @@ public class VentanaMenu extends JFrame {
 				}
             	ventasItem.show();
             }
-        });
-        
+        });   
+		
         almacenItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	I_Inventario  almacenItem = new I_Inventario();
