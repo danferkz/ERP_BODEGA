@@ -39,12 +39,15 @@ public class VentanaMenu extends JFrame {
 	
 
     public VentanaMenu() {
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaMenu.class.getResource("/IMAGENES/lazer.png")));
     	setResizable(false);
         setTitle("Menú");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1366, 768);
         setLocationRelativeTo(null);
         
+        modi.addToUniversalHashtable(1, new Productos_BE(1, 6, "Leche", 15));
+        						
         lectura();
         System.out.println(especific.accessUniversalHashtable(1).getNombre());
         System.out.print(especific.accessUniversalHashtable(1).getCant());
@@ -201,6 +204,6 @@ public class VentanaMenu extends JFrame {
         }
     }
     
-    
+  
     
 }

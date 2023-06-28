@@ -65,17 +65,15 @@ public class I_Ventas extends JInternalFrame {
 	private JButton btnRealizar;
 	private int changfila;
 	private int changcolum;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_5;
 	private Metodo_BC modi = new Metodo_BC();
 	private Return_DALC especific = new Return_DALC();
 	private Creation Hash = new Creation();
 	private String relativePath = "Base de datos" + File.separator + "Productos.txt";
 	private String filePath = System.getProperty("user.dir") + File.separator + relativePath;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_7;
 	
 
 	/**
@@ -102,7 +100,7 @@ public class I_Ventas extends JInternalFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 768);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(115, 186, 196));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		suggestionsModel = new DefaultListModel<>();
@@ -265,7 +263,7 @@ public class I_Ventas extends JInternalFrame {
 				 }
 				}
 			});
-			btnAdicionar.setBounds(667, 99, 115, 23);
+			btnAdicionar.setBounds(823, 99, 115, 23);
 			contentPane.add(btnAdicionar);
 			
 			JButton btnDelete = new JButton("Eliminar");
@@ -275,7 +273,7 @@ public class I_Ventas extends JInternalFrame {
 					model.removeRow(changfila);
 				}
 			});
-			btnDelete.setBounds(1068, 99, 115, 23);
+			btnDelete.setBounds(1167, 99, 115, 23);
 			contentPane.add(btnDelete);
 			
 			JButton btnModify = new JButton("Modificar");
@@ -291,7 +289,7 @@ public class I_Ventas extends JInternalFrame {
 					model.setValueAt(nw3, changfila, 3);
 				}
 			});
-			btnModify.setBounds(889, 99, 115, 23);
+			btnModify.setBounds(997, 99, 115, 23);
 			contentPane.add(btnModify);
 			
 			JLabel lblNew3 = new JLabel("ID del Cliente:");
@@ -392,16 +390,6 @@ public class I_Ventas extends JInternalFrame {
 			btnRegresar.setBounds(900, 630, 143, 32);
 			contentPane.add(btnRegresar);
 			
-			lblNewLabel = new JLabel("");
-			lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
-			lblNewLabel.setBounds(88, 78, 225, 121);
-			contentPane.add(lblNewLabel);
-			
-			lblNewLabel_1 = new JLabel("");
-			lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
-			lblNewLabel_1.setBounds(309, 78, 225, 121);
-			contentPane.add(lblNewLabel_1);
-			
 			lblNewLabel_2 = new JLabel("");
 			lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
 			lblNewLabel_2.setBounds(972, 103, 225, 82);
@@ -412,15 +400,15 @@ public class I_Ventas extends JInternalFrame {
 			lblNewLabel_3.setBounds(1191, 103, 225, 82);
 			contentPane.add(lblNewLabel_3);
 			
-			lblNewLabel_4 = new JLabel("");
-			lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
-			lblNewLabel_4.setBounds(88, 606, 225, 121);
-			contentPane.add(lblNewLabel_4);
+			lblNewLabel_6 = new JLabel("");
+			lblNewLabel_6.setIcon(new ImageIcon(I_Ventas.class.getResource("/IMAGENES/productos.png")));
+			lblNewLabel_6.setBounds(155, 5, 87, 87);
+			contentPane.add(lblNewLabel_6);
 			
-			lblNewLabel_5 = new JLabel("");
-			lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Usuario\\eclipse-workspace\\ERP_BODEGA (1)\\ERP_BODEGA\\src\\ICONOS\\descarga.png"));
-			lblNewLabel_5.setBounds(199, 606, 225, 121);
-			contentPane.add(lblNewLabel_5);
+			lblNewLabel_7 = new JLabel("");
+			lblNewLabel_7.setIcon(new ImageIcon(I_Ventas.class.getResource("/IMAGENES/cantidad.png")));
+			lblNewLabel_7.setBounds(366, 5, 87, 87);
+			contentPane.add(lblNewLabel_7);
 		
 			DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
 			renderer.setHorizontalAlignment(SwingConstants.CENTER); 
