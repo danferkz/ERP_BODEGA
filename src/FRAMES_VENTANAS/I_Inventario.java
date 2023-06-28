@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Comparator;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Hashtable;
+import java.util.Enumeration;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -28,6 +32,7 @@ import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.ArrayList;
 import CLASES.Creation;
 import CLASES.Metodo_BC;
 import CLASES.Return_DALC;
@@ -40,6 +45,13 @@ import CLASES.Creation;
 import CLASES.Productos_BE;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class I_Inventario extends JInternalFrame {
 
@@ -57,7 +69,9 @@ public class I_Inventario extends JInternalFrame {
     private int selectedRowIndex;
     private Metodo_BC modi = new Metodo_BC();
 	private Return_DALC especific = new Return_DALC();
-	private Creation Hash = new Creation();
+	private static Creation Hash = new Creation();
+	private static String relativePath = "Base de datos" + File.separator + "Inventario_re.txt";
+	private static String filePath = System.getProperty("user.dir") + File.separator + relativePath;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
