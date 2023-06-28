@@ -112,7 +112,7 @@ public class I_Inventario extends JInternalFrame {
         	        return columnTypes[columnIndex];
         	    }
         	};
-        	CARGA();
+        	
 
         
     	
@@ -327,7 +327,7 @@ public class I_Inventario extends JInternalFrame {
         scrollPane.setViewportView(table);
         table.setModel(model);
         
-        
+        CARGA();
         
         
 
@@ -375,7 +375,6 @@ public class I_Inventario extends JInternalFrame {
     	        		produc1.getCant(),
     	        		produc1.getNombre(),
     	        		produc1.getPrice()
-    	        		
     					});
     		}
     		
