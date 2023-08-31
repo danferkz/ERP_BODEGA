@@ -6,11 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import CLASES.Creation;
-import CLASES.Metodo_BC;
-import CLASES.Return_DALC;
-import CLASES.Productos_BE;
-import CLASES.Proveedores_BE;
+//import CLASES.Creation;
+//import CLASES.Metodo_BC;
+//import CLASES.Return_DALC;
+//import CLASES.Productos_BE;
+//import CLASES.Proveedores_BE;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -29,9 +29,11 @@ public class A_InicioSesion extends JFrame {
 	private JPanel contentPane;
 	private JTextField textUser;
 	private JPasswordField Contra;
-	private Metodo_BC modi = new Metodo_BC();
-	private Return_DALC especific = new Return_DALC();
-	private Creation Hash = new Creation();
+	//private Metodo_BC modi = new Metodo_BC();
+	//private Return_DALC especific = new Return_DALC();
+	//private Creation Hash = new Creation();
+	
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Launch the application.
@@ -67,20 +69,25 @@ public class A_InicioSesion extends JFrame {
 		btnInicio.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaMenu Cuerpo = new VentanaMenu();
-				
-				String usuario = "Paxo";
-				String contraseña = "0123";
-			
-				if (textUser.getText().equals(usuario) && Contra.getText().equals(contraseña)) {
-				    Cuerpo.setVisible(true);
-				    A_InicioSesion.this.dispose();
-				    // Additional actions if the password is correct
-				} else {
-					Cuerpo.setVisible(false);
-				    JOptionPane.showMessageDialog(null, "Usuario o codigo incorrectos");
-				}
-				
+			    VentanaMenu Cuerpo = new VentanaMenu();
+			    
+			    String usuario = "Paxo";
+			    char[] contrasenaCorrecta = "0123".toCharArray(); // Convierte la contraseña a un arreglo de caracteres
+
+			    char[] contrasenaIngresada = Contra.getPassword(); // Obtiene la contraseña ingresada como un arreglo de caracteres
+
+			    // Convierte el arreglo de caracteres a una cadena para compararla con el texto del campo de texto
+			    String contrasenaIngresadaStr = new String(contrasenaIngresada);
+
+			    // Compara el nombre de usuario y la contraseña como cadenas de texto
+			    if (textUser.getText().equals(usuario) && contrasenaIngresadaStr.equals(new String(contrasenaCorrecta))) {
+			        Cuerpo.setVisible(true);
+			        A_InicioSesion.this.dispose();
+			        // Acciones adicionales si la contraseña es correcta
+			    } else {
+			        Cuerpo.setVisible(false);
+			        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+			    }
 			}
 		});
 		btnInicio.setBounds(67, 397, 173, 38);
